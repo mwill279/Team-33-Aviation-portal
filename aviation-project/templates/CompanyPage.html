@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
+<style>
+    .card {
+
+        margin-bottom:5px;
+    }
+
+    #HoverCard:hover{
+
+        background-color:dodgerblue;
+        box-shadow: 4px 4px;
+
+    }
+
+</style>
+
     <div class="container" style="position: relative;text-align: center;color: white;">
         <img src="https://cdn.britannica.com/41/123141-050-E6229449/Air-New-Zealand-Boeing-747-400.jpg" alt="Banner" style="width:100%;">
         <div class="bottom-left" style="position: absolute;bottom: 8px; left: 16px;"><h1>COMPANY</h1></div>
@@ -22,28 +37,28 @@
         </ul>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="feed" role="tabpanel" aria-labelledby="nav-feed-tab">
-                <div class="card">
+                <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -53,7 +68,7 @@
             </div>
             <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
 
-                <div class="card">
+                <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Yo Some Job</h5>
                         <p class="card-text">Apply to this job dude.</p>
