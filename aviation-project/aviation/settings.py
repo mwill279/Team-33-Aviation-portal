@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 
     'crispy_forms',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'aviation.urls'
@@ -66,10 +69,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.linkedin.LinkedinOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 WSGI_APPLICATION = 'aviation.wsgi.application'
 
@@ -143,3 +156,7 @@ EMAIL_USE_TLS = True
 # this is a gmail account I temporarily created for this project
 EMAIL_HOST_USER = 'aviationjobboard@gmail.com'
 EMAIL_HOST_PASSWORD = 'ajbpass1029'
+
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86598zr5xlzp1g'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'fCzfd2ZIMxZAsgH5'
