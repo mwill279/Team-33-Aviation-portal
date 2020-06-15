@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container" style="top:50px; position:relative; ">
+
+    <h1 >Job Post Submission</h1>
+
+    <hr style="border: none; background-color: #333; color: #333; margin-bottom: 30px; height: 2px;">
+
+    <form>
+
+        <div class="form-group">
+            <label for="JobTitle">Job Title</label>
+            <input class="form-control" id="JobTitle" placeholder="e.g. Senior Manager">
+        </div>
+
+        <div class="form-group">
+            <label for="JobType">Job Type</label>
+            <select class="form-control" id="JobType">
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Internship</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="JobDescription">Job Description</label>
+            <textarea class="form-control" id="Job Description" rows="10"></textarea>
+        </div>
+
+        <button type ="submit" class="btn btn-success btn-lg float-right ">Submit</button>
+
+    </form>
+
+
+</div>
+    
+
+
+{% endblock %}

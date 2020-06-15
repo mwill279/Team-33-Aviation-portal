@@ -19,12 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from aviation_job_board.views import home_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view
 from users import views as user_views
 urlpatterns = [
     path('', home_view, name='home'),
+    path('company/',companypage_view, name='company_page'),
     path('admin/', admin.site.urls),
+    path('jobpost/', postjob_view, name='post_job'),
     path('register/', user_views.register, name='register'),
+    path('resume/', user_views.resume, name='resume'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
