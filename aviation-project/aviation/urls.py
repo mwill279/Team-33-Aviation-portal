@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from aviation_job_board.views import home_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view
 from users import views as user_views
 urlpatterns = [
     path('', home_view, name='home'),
+    path('company/',companypage_view, name='company_page'),
     path('admin/', admin.site.urls),
+    path('jobpost/', postjob_view, name='post_job'),
     path('register/', user_views.register, name='register'),
+    path('resume/', user_views.resume, name='resume'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
@@ -32,6 +35,7 @@ urlpatterns = [
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
+    path('oauth/', include('social_django.urls', namespace='social'))
 ]
 
 if settings.DEBUG:

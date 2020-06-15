@@ -1,3 +1,6 @@
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
 from django.db import models
 
 # Create your models here.
@@ -9,6 +12,10 @@ class Job(models.Model):
     description = models.TextField()
     posted = models.DateTimeField()
     deadline = models.DateTimeField()
-    requirements = models.ManyToManyField('Req', blank=True)
-class Req(models.Model):
-    skills = models.CharField(max_length=50)
+    now = datetime.now(timezone.utc)
+    
+    def open(self): 
+        return self.deadline > self.now and self.posted < self.now
+
+    def valid_dates(self):
+        return self.posted < self.deadline
