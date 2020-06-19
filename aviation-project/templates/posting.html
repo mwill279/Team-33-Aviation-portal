@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{%block content%}
+<h1> Job Postings </h1>
+<h2>{{ note }}</h2>
+
+<form action="{% url 'posting' %}" method="post">
+    {% csrf_token %}
+    <table>
+    {{ postingform.as_table }}
+    <table/>
+    {% comment %} {{ postingform.title.label_tag }}
+    {{ postingform.title }}
+    {{ postingform.title.errors }}
+
+    <label for= "{{postingform.jobtype.id_for_label }}"> Job Type: </label>
+    {{ postingform.jobtype }}
+    {{ postingform.jobtype.errors }}
+
+    {{ postingform.title.label_tag }}
+    {{ postingform.title }}
+    {{ postingform.title.errors }}
+
+    {{ postingform.title.label_tag }}
+    {{ postingform.title }}
+    {{ postingform.title.errors }}
+
+    {{ postingform.title.label_tag }}
+    {{ postingform.title }}
+    {{ postingform.title.errors }}
+
+    {{ postingform.title.label_tag }}
+    {{ postingform.title }}
+    {{ postingform.title.errors }} {% endcomment %}
+    
+    {% comment %} <label for="title">Title: </label>
+    <input id="title" type="text" name="title">
+
+    <label for="desciption">Desciption: </label>
+    <input id="desciption" type="text" name="desciption">
+
+    <label for="jobtype">Jobtype: </label>
+    <select id="jobtype" name="jobtype">
+        <option value="Internship">Internship</option>
+        <option value="Part_time">Part Time</option>
+        <option value="Full_time">Full Time</option>
+    </select> {% endcomment %}
+
+    <input type="submit" value="Submit"/>
+</form>
+
+{%endblock%}
