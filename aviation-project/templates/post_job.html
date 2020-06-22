@@ -26,6 +26,9 @@
                 <option>Full Time</option>
                 <option>Part Time</option>
                 <option>Internship</option>
+                {% for type in jobtype %}
+              <option value="{{ job }}">{{ job }}</option>
+              {% endfor %}
             </select>
         </div>
 
