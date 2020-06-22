@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\templates"
+    "\\media",
+    "\\static",
+    "\\templates",
+    "\\userProfile",
+    "\\userProfile\\templates",
+    "\\userProfile\\templates\\userProfile",
+    "\\users",
+    "\\users\\templates",
+    "\\users\\templates\\users"
   ],
-  "SelectedNode": "\\templates\\post_job.html",
+  "SelectedNode": "\\templates\\index.html",
   "PreviewInSolutionExplorer": false
 }
