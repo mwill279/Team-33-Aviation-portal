@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'sass_processor',
     'users.apps.UsersConfig',
 
     'crispy_forms',
@@ -162,3 +162,12 @@ EMAIL_HOST_PASSWORD = 'ajbpass1029'
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86598zr5xlzp1g'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'fCzfd2ZIMxZAsgH5'
+
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+
+)
