@@ -19,6 +19,8 @@ class DateTimeInput(forms.DateTimeInput):
     input_type = "datetime-local"
 
 class PostingForm(forms.ModelForm):
+
+    #jobtype = forms.ModelChoiceField(queryset=Jobtype.objects, empty_label=None,  widget=forms.RadioSelect)
     class Meta:
         model = Jobform
         fields = "__all__"

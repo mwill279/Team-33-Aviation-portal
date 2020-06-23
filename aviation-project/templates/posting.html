@@ -6,15 +6,16 @@
 <form action="{% url 'posting' %}" method="post">
     {% csrf_token %}
     <table>
-    {{ postingform.as_table }}
+    {% comment %} {{ postingform.as_table }} {% endcomment %}
+    <label for= "{{postingform.jobtype.id_for_label }}"> Job Type: </label>
+    {{ postingform.jobtype }}
+    {{ postingform.jobtype.errors }}
     <table/>
     {% comment %} {{ postingform.title.label_tag }}
     {{ postingform.title }}
     {{ postingform.title.errors }}
 
-    <label for= "{{postingform.jobtype.id_for_label }}"> Job Type: </label>
-    {{ postingform.jobtype }}
-    {{ postingform.jobtype.errors }}
+    
 
     {{ postingform.title.label_tag }}
     {{ postingform.title }}

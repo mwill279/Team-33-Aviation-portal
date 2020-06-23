@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h> JOB SEARCH </h>
+{% for results in results %}
+<a href="{% url 'job_detail' results.id %}"> 
+    <h1>{{results.title}} - {{results.jobtype}}</h1>
+</a>
+{%endfor%}
+
+{% endblock %}

@@ -23,11 +23,13 @@ from postjob import views as postjob_views
 
 from aviation_job_board.views import home_view, companypage_view, postjob_view
 from users import views as user_views
+from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
     path('company/',companypage_view, name='company_page'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
+    path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),
     path('profile/', user_views.profile, name='profile'),
@@ -39,6 +41,11 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('postjob/', postjob_views.posting, name='posting'),
+    path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
+    path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
+    path('fulltime/', postjob_views.fulltime, name='fulltime'),
+    path('parttime/', postjob_views.parttime, name='parttime'),
+    path('internship/', postjob_views.internship, name='internship'),
 ]
 
 if settings.DEBUG:

@@ -26,6 +26,9 @@
                 <option>Full Time</option>
                 <option>Part Time</option>
                 <option>Internship</option>
+                {% for type in jobtype %}
+              <option value="{{ job }}">{{ job }}</option>
+              {% endfor %}
             </select>
         </div>
 
@@ -33,6 +36,44 @@
             <label for="JobDescription">Job Description</label>
             <textarea class="form-control" id="Job Description" rows="10"></textarea>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="StartDate">Start Date</label>
+                    <input class="form-control" type="date" id="StartDate">
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="form-group">
+                    <label for="EndDate">End Date</label>
+                    <input class="form-control" type="date" id="EndDate">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="StartTime">Start Time</label>
+                    <input class="form-control" type="time" id="StartTime">
+                </div>
+            </div>
+            
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="EndTime">End Time</label>
+                    <input class="form-control" type="time" id="EndTime">
+                </div>
+            </div>
+
+            
+        </div>
+
+       
 
         <div class="form-group">
             <label for="Attachment">Attach File (optional)</label>
