@@ -8,7 +8,7 @@ admin.site.register(Jobtype)
 
 @admin.register(Jobform)
 class JobformAdmin(admin.ModelAdmin):
-    list_display = ['title', 'jobtype']
+    list_display = ['title']
 
 
 

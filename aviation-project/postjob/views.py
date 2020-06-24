@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import PostingForm
-from .models import Jobform
+from postjob.models import Jobform, Jobtype
 # Create your views here.
 
 def posting(request):
@@ -18,13 +18,35 @@ def posting(request):
 
 def jobsearch(request):
     results = Jobform.objects.all()
+    jobtypes = Jobtype.objects.all()
     search = request.GET.get('jobtitle')
+    searchtype = request.GET.get('jobtype')
+
+
 
     if search != '' and search is not None:
         results = results.filter(title__icontains=search)
 
+    if searchtype != '' and searchtype != 'Job Type':
+        results = results.filter(jobtype__name=searchtype)
+        
+    return render(request, 'jobsearch.html', {'results': results, 'jobtypes':jobtypes,})
 
-    return render(request, 'jobsearch.html', {'results': results,})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def fulltime(request):
     results = Jobform.objects.filter(jobtype=1)

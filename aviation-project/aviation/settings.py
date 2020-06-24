@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'social_django',
-    'listapp',
     'postjob',
 ]
 

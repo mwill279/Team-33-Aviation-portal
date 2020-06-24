@@ -18,7 +18,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from listapp import views as listapp_views
+
 from postjob import views as postjob_views
 
 from aviation_job_board.views import home_view, companypage_view, postjob_view
