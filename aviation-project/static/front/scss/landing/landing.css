@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box; }
+
+.container-fluid {
+  background-color: #2962ff;
+  height: 700px; }
+  .container-fluid .jobSearching {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 60px;
+    font-weight: 200; }
+  .container-fluid .uploadResume {
+    display: block;
+    border-style: none;
+    margin: 40px 40px;
+    padding: 16px;
+    padding-left: 35px;
+    padding-right: 35px;
+    background-color: #1de9b6;
+    border-radius: 40px; }
+    .container-fluid .uploadResume span {
+      color: white;
+      font-size: 25px; }
+  .container-fluid [data-tab-content] {
+    display: none; }
+  .container-fluid .active[data-tab-content] {
+    display: flex; }
+  .container-fluid .row {
+    margin-top: 60px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 17px;
+    padding: 2.5em;
+    flex-direction: row;
+    background-color: white;
+    transition: opacity 0.15s linear; }
+  .container-fluid .tab-content {
+    transition: opacity 0.15s linear; }
+  .container-fluid .searchBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%; }
+  .container-fluid .jobs {
+    padding-left: 35px;
+    margin-left: 25px;
+    justify-content: center;
+    align-items: center; }
+  .container-fluid .switchButtons {
+    position: relative;
+    margin-left: -15px;
+    top: 10%;
+    font-size: 18px; }
+    .container-fluid .switchButtons .findJob {
+      padding: 10px 30px;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: #1de9b6;
+      color: white;
+      margin-bottom: 0;
+      margin-right: 20px; }
+      .container-fluid .switchButtons .findJob:hover {
+        background: white;
+        background-color: #ffff;
+        transition: all 0.3s ease;
+        color: black; }
+      .container-fluid .switchButtons .findJob:focus {
+        border: none;
+        outline: none;
+        background: white;
+        color: black; }
+      .container-fluid .switchButtons .findJob:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 3;
+        font-size: 140%;
+        width: 60px; }
+    .container-fluid .switchButtons .candidate {
+      padding: 10px 30px;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: #ff6d00;
+      color: white;
+      margin-bottom: 1.5px; }
+      .container-fluid .switchButtons .candidate:hover {
+        background: white;
+        transition: all 0.3s ease;
+        color: black; }
+      .container-fluid .switchButtons .candidate:focus {
+        background: #e5690c;
+        border: none;
+        outline: none;
+        background: white;
+        color: black; }
+      .container-fluid .switchButtons .candidate:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 3;
+        font-size: 140%;
+        width: 60px; }
+  .container-fluid .searchIcon {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    color: #2962ff; }
+
+.industry .card {
+  border-style: none;
+  outline: none; }
+  .industry .card:hover {
+    background-color: #ff6d00;
+    transition: all 0.5s ease; }
+
+.industry #industries {
+  position: relative;
+  top: -5rem;
+  justify-content: center;
+  align-items: center; }
+
+.recentJobs {
+  height: 520px;
+  background-color: #fafafa; }
+  .recentJobs .h1Recent {
+    margin-left: 50px; }
+  .recentJobs .postJob {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px; }
+    .recentJobs .postJob .jobPosting {
+      margin-right: 20px;
+      padding: 10px 50px;
+      font-size: 1.5rem;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: #1de9b6;
+      color: white;
+      margin-bottom: 0;
+      margin-right: 20px; }
+  .recentJobs .card {
+    margin: 0 auto;
+    outline: none;
+    border-style: none;
+    border: none; }
+    .recentJobs .card .card-body {
+      justify-content: center;
+      align-items: center; }
+
+/*# sourceMappingURL=landing.css.map */
