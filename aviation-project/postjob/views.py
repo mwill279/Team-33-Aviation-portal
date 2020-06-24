@@ -33,33 +33,6 @@ def jobsearch(request):
     return render(request, 'jobsearch.html', {'results': results, 'jobtypes':jobtypes,})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def fulltime(request):
-    results = Jobform.objects.filter(jobtype=1)
-    return render(request, 'jobsearch.html', {'results': results,})
-
-def parttime(request):
-    results = Jobform.objects.filter(jobtype=2)
-    return render(request, 'jobsearch.html', {'results': results,})
-
-def internship(request):
-    results = Jobform.objects.filter(jobtype=3)
-    return render(request, 'jobsearch.html', {'results': results,})
-
 def job_detail(request, job_id):
     try:
         job = Jobform.objects.get(id=job_id)
