@@ -21,6 +21,7 @@ def jobsearch(request):
     jobtypes = Jobtype.objects.all()
     search = request.GET.get('jobtitle')
     searchtype = request.GET.get('jobtype')
+    searchzip = request.GET.get('zipcode')
 
 
 
@@ -29,6 +30,9 @@ def jobsearch(request):
 
     if searchtype != '' and searchtype != 'Job Type':
         results = results.filter(jobtype__name=searchtype)
+
+    if searchzip != '' and searchzip != '00000':
+        results = results.filter(zipcode=searchzip)
         
     return render(request, 'jobsearch.html', {'results': results, 'jobtypes':jobtypes,})
 

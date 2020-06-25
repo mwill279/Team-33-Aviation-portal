@@ -1,54 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 
-
 <div class="container" style="top:50px; position:relative; ">
 
     <h1 >Job Post Submission</h1>
 
     <hr style="border: none; background-color: #333; color: #333; margin-bottom: 30px; height: 2px;">
 
-    <form>
+    <form action="{% url 'post_job' %}" method="post">
+    {% csrf_token %}
 
         <div class="form-group">
             <label for="JobTitle">Job Title</label>
-            <input class="form-control" id="JobTitle" placeholder="e.g. Senior Manager">
+            {% comment %} <input class="form-control" id="JobTitle" placeholder="e.g. Senior Manager"> {% endcomment %}
+            {{ postingform.title }}
         </div>
 
         <div class="form-group">
-            <label for="Location">Location</label>
-            <input class="form-control" id="Location" placeholder="e.g. Miami, Florida">
+            <label for="Zipcode">Zip Code</label>
+            {{ postingform.zipcode }}
         </div>
 
         <div class="form-group">
             <label for="JobType">Job Type</label>
-            <select class="form-control" id="JobType">
-                <option>Full Time</option>
-                <option>Part Time</option>
-                <option>Internship</option>
-                {% for type in jobtype %}
-              <option value="{{ type }}">{{ type }}</option>
-              {% endfor %}
-            </select>
+            {{ postingform.jobtype }}
         </div>
 
         <div class="form-group">
             <label for="JobDescription">Job Description</label>
-            <textarea class="form-control" id="Job Description" rows="10"></textarea>
+            {{ postingform.description }}
         </div>
 
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="StartDate">Start Date</label>
-                    <input class="form-control" type="date" id="StartDate">
+                    <br>
+                    {{ postingform.postdate }}
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-group">
                     <label for="EndDate">End Date</label>
-                    <input class="form-control" type="date" id="EndDate">
+                    <br>
+                    {{ postingform.deadlinedate }}
                 </div>
             </div>
             
@@ -58,7 +54,8 @@
             <div class="col">
                 <div class="form-group">
                     <label for="StartTime">Start Time</label>
-                    <input class="form-control" type="time" id="StartTime">
+                    <br>
+                    {{ postingform.posttime }}
                 </div>
             </div>
             
@@ -66,7 +63,8 @@
             <div class="col">
                 <div class="form-group">
                     <label for="EndTime">End Time</label>
-                    <input class="form-control" type="time" id="EndTime">
+                    <br>
+                    {{ postingform.deadlinetime }}
                 </div>
             </div>
 

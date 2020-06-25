@@ -8,7 +8,7 @@ admin.site.register(Jobtype)
 
 @admin.register(Jobform)
 class JobformAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title','postdate', 'posttime', 'deadlinedate', 'deadlinetime', 'open']
 
 
 
