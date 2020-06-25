@@ -13,3 +13,6 @@ def companypage_view(request, *args, **kwargs):
 
 def postjob_view(request, *args, **kwargs):
     return render(request, "post_job.html", {})
+
+def chooseRegister_view(request, *args, **kwargs):
+    return render(request, "choose_register.html", {})

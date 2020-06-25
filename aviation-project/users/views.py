@@ -8,6 +8,9 @@ from pyresparser import ResumeParser
 from django.conf import settings
 import os
 # Create your views here.
+
+
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
