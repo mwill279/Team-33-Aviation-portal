@@ -15,7 +15,6 @@ def companypage_view(request, *args, **kwargs):
     return render(request, "CompanyPage.html", {})
 
 def postjob_view(request, *args, **kwargs):
-<<<<<<< HEAD
     if request.method == 'POST':
         filled_form = PostingForm(request.POST)
         if filled_form.is_valid():
@@ -26,9 +25,7 @@ def postjob_view(request, *args, **kwargs):
     else: 
         form = PostingForm()
         return render(request, 'post_job.html', {'postingform':form})
-=======
     return render(request, "post_job.html", {})
 
 def chooseRegister_view(request, *args, **kwargs):
     return render(request, "choose_register.html", {})
->>>>>>> 8314624e1f1cb52b302c6aaefecf9de943948f43
