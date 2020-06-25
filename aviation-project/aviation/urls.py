@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),
     path('profile/', user_views.profile, name='profile'),
+    path('choose_register/', chooseRegister_view, name='choose_register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name='password_reset'),
