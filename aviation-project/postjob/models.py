@@ -11,6 +11,7 @@ class Jobtype(models.Model):
 class Jobform(models.Model):
     title = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
+    #jobtype = models.ManyToManyField(Jobtype)
     description = models.TextField()
     #now = date.now(timezone.utc)
     # post = models.DateTimeField()

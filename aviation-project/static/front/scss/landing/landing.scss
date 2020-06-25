@@ -1,0 +1,229 @@
+$button-greenish-color: #1de9b6;
+$shadow-green: #0bcebc;
+$button-orange: #ff6d00;
+$shadow-orange: #e5690c;
+
+* {
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  background-color: #2962ff;
+  height: 700px;
+
+  .jobSearching {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 60px;
+    font-weight: 200;
+  }
+
+  .uploadResume {
+    display: block;
+    border-style: none;
+    margin: 40px 40px;
+    padding: 16px;
+    padding-left: 35px;
+    padding-right: 35px;
+    background-color: $button-greenish-color;
+    border-radius: 40px;
+    span {
+      // font: poppins;
+      color: white;
+      font-size: 25px;
+    }
+  }
+
+  [data-tab-content] {
+    display: none;
+  }
+
+  .active[data-tab-content] {
+    display: flex;
+  }
+
+  .row {
+    margin-top: 60px;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 17px;
+    padding: 2.5em;
+    flex-direction: row;
+    background-color: white;
+    transition: opacity 0.15s linear;
+
+    // height: 10v
+  }
+  .tab-content {
+    transition: opacity 0.15s linear;
+  }
+  .searchBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+  }
+
+  .jobs {
+    padding-left: 35px;
+    margin-left: 25px;
+    justify-content: center;
+    align-items: center;
+  }
+  .switchButtons {
+    // display: flex;
+    position: relative;
+    margin-left: -15px;
+    top: 10%;
+    font-size: 18px;
+
+    .findJob {
+      padding: 10px 30px;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: $button-greenish-color;
+      color: white;
+      margin-bottom: 0;
+      margin-right: 20px;
+
+      &:hover {
+        background: white;
+        background-color: #ffff;
+        transition: all 0.3s ease;
+        color: black;
+      }
+      &:focus {
+        border: none;
+        outline: none;
+        background: white;
+        color: black;
+      }
+
+      &:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 3;
+        font-size: 140%;
+        width: 60px;
+      }
+    }
+
+    .candidate {
+      padding: 10px 30px;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: $button-orange;
+      color: white;
+      margin-bottom: 1.5px;
+
+      &:hover {
+        background: white;
+        transition: all 0.3s ease;
+        color: black;
+      }
+      &:focus {
+        background: $shadow-orange;
+        border: none;
+        outline: none;
+        background: white;
+        color: black;
+      }
+
+      &:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 3;
+        font-size: 140%;
+        width: 60px;
+      }
+    }
+  }
+
+  .col-sm-1 {
+    // border-style: solid;
+  }
+
+  .searchIcon {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    color: #2962ff;
+  }
+}
+///////INDUSTRIES ////////
+
+.industry {
+  .card {
+    border-style: none;
+    outline: none;
+
+    &:hover {
+      background-color: $button-orange;
+      transition: all 0.5s ease;
+    }
+  }
+  #industries {
+    position: relative;
+    top: -5rem;
+    // left: 5%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+//////RECENT JOBS///////
+.recentJobs {
+  height: 520px;
+  background-color: #fafafa;
+
+  .h1Recent {
+    margin-left: 50px;
+  }
+  .postJob {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .jobPosting {
+      margin-right: 20px;
+
+      padding: 10px 50px;
+      font-size: 1.5rem;
+      border-style: none;
+      border-radius: 0.2rem;
+      background-color: $button-greenish-color;
+      color: white;
+      margin-bottom: 0;
+      margin-right: 20px;
+    }
+  }
+  .card {
+    margin: 0 auto;
+    outline: none;
+    border-style: none;
+    border: none;
+
+  .card-body {
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-primary {
+    // display: flex;
+    // flex-wrap: wrap-reverse;
+    
+
+  }
+
+}
+
+}

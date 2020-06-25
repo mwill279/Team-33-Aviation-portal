@@ -18,7 +18,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from listapp import views as listapp_views
+
 from postjob import views as postjob_views
 
 from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view
@@ -44,9 +44,6 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
-    path('fulltime/', postjob_views.fulltime, name='fulltime'),
-    path('parttime/', postjob_views.parttime, name='parttime'),
-    path('internship/', postjob_views.internship, name='internship'),
 ]
 
 if settings.DEBUG:
