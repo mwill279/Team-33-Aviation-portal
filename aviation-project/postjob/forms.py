@@ -34,7 +34,9 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': 'Deadline Time'
             }
         widgets = {
-            'description': forms.Textarea,
+            'title': forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. Senior Manager'}),
+            'description': forms.Textarea(attrs={'rows':10, 'cols':150}),
+            'zipcode': forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. 11111'}),
             # 'post': DateTimeInput(),
             # 'deadline': DateTimeInput(),
             'postdate': DateInput(),

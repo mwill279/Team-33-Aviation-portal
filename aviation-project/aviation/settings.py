@@ -42,9 +42,8 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'social_django',
-    'listapp',
     'postjob',
-    'events_app'
+    'events_app',
 ]
 
 MIDDLEWARE = [
@@ -93,13 +92,23 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ajb_db',
+        'USER': 'postgres',
+        'PASSWORD': 'password', #Put the password that you used for PostrgeSQL
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

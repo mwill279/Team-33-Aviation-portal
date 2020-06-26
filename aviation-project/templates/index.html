@@ -23,7 +23,31 @@
          </div>
          <div class="tab-content">
             <div class="row active" id="job" data-tab-content>
-               <div class="col-lg-5">
+
+                <form class="form-inline" method="GET" action="{%url 'jobsearch'%}">
+                    <div class="form-group">
+                        <label for = "jobtitle"></label>
+                        <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job">
+                    </div>
+
+                    <div class="form-group">
+                        <label for = "zipcode"></label>
+                        <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="Zip code">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobtype"></label>
+                        <select id="jobtype" class="form-control" name="jobtype">
+                            <option selected>Job Type</option>
+                            {% for jobtypes in jobtypes %}
+                                <option value="{{ jobtypes}}">{{ jobtypes }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button>
+                </form>
+               {% comment %} <div class="col-lg-5">
                   <input type="text" class="form-control" placeholder="Web Devloper" aria-label="Recipient's username" aria-describedby="basic-addon2">
                </div>
                <div class="col-lg-2">
@@ -34,7 +58,7 @@
                </div>
                <div class="col-sm-1">
                   <i class="fa fa-search searchIcon" aria-hidden="true"></i>
-               </div>
+               </div> {% endcomment %}
             </div>
             <div class="row" id="candidate" data-tab-content>
                <div class="col-lg-5">
@@ -182,7 +206,9 @@
 <section class="recentJobs">
    <div class='postJob'>
       <h1 class='h1Recent'>Recent Jobs</h1>
-      <button class="jobPosting"type="button"><span>Post a Job</span></button>
+        <form method="GET" action="{% url 'post_job' %}">
+            <button class="jobPosting"type="submit"><span>Post a Job</span></button>
+        </form>
    </div>
    <div class="card w-75">
       <div class="card-body">
