@@ -11,6 +11,9 @@ def home_view(request, *args, **kwargs):
     jobtypes = Jobtype.objects.all()
     return render(request, "index.html", {'jobtypes':jobtypes})
 
+def portal_view(request, *args, **kwargs):
+    return render(request, "profilePortal.html", {})
+
 def companypage_view(request, *args, **kwargs):
     return render(request, "CompanyPage.html", {})
 
