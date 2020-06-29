@@ -16,14 +16,40 @@
         border: none;
         border-bottom: 2px solid grey;
     }
+    .logIn {
+        margin-right: 10px;
+        border-radius: 0.2rem;
+        background-color: #1de9b6;
+        color: white;
+        border-style: none;
+    }
+        .logIn:hover {
+            
+            background:white;
+            background-color:blue;
+            transition: all 0.3s ease;
+            color: black;
+        }
+    .signUp {
+        border-style: none;
+        border-radius: 0.2rem;
+        background-color: #ff6d00;
+        color: white;
+    }
+        .signUp:hover {
+            background: white;
+            background-color:blue;
+            transition: all 0.3s ease;
+            color: black;
+        }
 </style>
 
-<div class="container">
+<div class="container-fluid" style="">
     <div class="row">
-        <div class="col-md" style=" height:911px; background: rgb(2,0,36);background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(43,43,184,1) 41%, rgba(0,212,255,1) 100%);">
+        <div class="col" style="max-width:50%;  height:911px; background: rgb(2,0,36);background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(43,43,184,1) 41%, rgba(0,212,255,1) 100%);">
 
         </div>
-        <div class="col-md">
+        <div class="col" style="max-width:500px; margin-top:150px;">
             <div class="content-section">
                 <form method="POST">
                     {% csrf_token %}
@@ -37,8 +63,8 @@
                     <div class="form-group">
                         <div class="container">
                             <div class="row">
-                                <button class="btn btn-outline-info  btn-lg col-lg" type="submit" style="margin-right:10px;">Log In</button>
-                                <a href="{% url 'choose_register' %}" class="btn btn-outline-info col-lg btn-lg">Sign Up</a>
+                                <button class="btn btn-outline-info  btn-lg col-lg logIn" type="submit">Log In</button>
+                                <a href="{% url 'register' %}" class="btn btn-outline-info col-lg btn-lg signUp">Sign Up</a>
                             </div>
                         </div>
                         

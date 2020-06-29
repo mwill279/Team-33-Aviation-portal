@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+	<form  method = "POST">
+		{%csrf_token%}
+        <b>Degree: </b>
+        <input type="text" name="title">
+        <br><br>
+        <b>Duration: </b>
+        <input type="text" name="duration">
+        <br><br>
+        <b>In which School:</b>
+        <input type="text" name="school">
+        <br><br>
+		<b>Major:</b>
+        <input type="text" name="major">
+        <br><br>
+		
+        <button type = "button">
+            <a href="{% url 'userProfile-home' %}"><b>Go Back</b></a><br/>
+        </button>
+        <button type="submit">
+            <a href="{% url 'userProfile-home' %}"><b>Submit</b></a><br/>
+        </button>
+	</form>
+{%for message in messages%}
+	<b>{{message}}</b>
+{%endfor%} 
+{% endblock content %}

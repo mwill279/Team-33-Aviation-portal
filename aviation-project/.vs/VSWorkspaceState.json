@@ -1,16 +1,17 @@
 {
   "ExpandedNodes": [
     "",
-    "\\media",
+    "\\aviation",
+    "\\aviation_job_board",
+    "\\aviation_portal",
     "\\static",
-    "\\templates",
-    "\\userProfile",
-    "\\userProfile\\templates",
-    "\\userProfile\\templates\\userProfile",
+    "\\static\\front",
+    "\\static\\front\\scss",
+    "\\static\\front\\scss\\landing",
     "\\users",
     "\\users\\templates",
     "\\users\\templates\\users"
   ],
-  "SelectedNode": "\\templates\\index.html",
+  "SelectedNode": "\\users\\templates\\users\\login.html",
   "PreviewInSolutionExplorer": false
 }
