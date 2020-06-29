@@ -162,22 +162,17 @@ $shadow-orange: #e5690c;
 }
 ///////INDUSTRIES ////////
 
-.industry {
-  .card {
-    border-style: none;
-    outline: none;
+.industries {
+  grid-column: center-start / center-end; 
+  display: grid;
+  // margin: 1rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-gap:.5rem; 
 
-    &:hover {
-      background-color: $button-orange;
-      transition: all 0.5s ease;
-    }
-  }
-  #industries {
-    position: relative;
-    top: -5rem;
-    // left: 5%;
-    justify-content: center;
-    align-items: center;
+  .industry{
+    background-color: grey;
+    padding: 7rem 1rem;
+    
   }
 }
 

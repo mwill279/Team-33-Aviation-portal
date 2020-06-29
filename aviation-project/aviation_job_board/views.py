@@ -8,6 +8,9 @@ from django.shortcuts import render
 def home_view(request, *args, **kwargs):
     return render(request, "index.html", {})
 
+def portal_view(request, *args, **kwargs):
+    return render(request, "profilePortal.html", {})
+
 def companypage_view(request, *args, **kwargs):
     return render(request, "CompanyPage.html", {})
 

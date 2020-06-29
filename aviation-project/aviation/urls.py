@@ -21,11 +21,12 @@ from django.conf.urls.static import static
 from listapp import views as listapp_views
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view
+from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
+    path('portal/', portal_view, name='portal_view'),
     path('company/',companypage_view, name='company_page'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
