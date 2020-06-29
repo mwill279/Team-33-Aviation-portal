@@ -1,5 +1,4 @@
 """aviation URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -44,6 +43,14 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
+	path('userprofile/', user_views.home, name = 'userProfile-home'),
+	path('about/', user_views.about, name = 'userProfile-about'),
+	path('signup/', user_views.signup, name = 'userProfile-signup'),
+	path('addwork/', user_views.addWorkingExperience, name = 'userProfile-addwork'),
+	path('addeducation/', user_views.addEducationExperience, name = 'userProfile-addeducation'),
+	path('signin/', user_views.signin, name = 'userProfile-signin'),
+	path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
+	path('upload/', user_views.upload, name = 'userProfile-upload')
 ]
 
 if settings.DEBUG:
