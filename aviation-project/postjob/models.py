@@ -1,5 +1,6 @@
 from django.db import models
-from datetime import date, time
+from django.core.validators import MinLengthValidator
+from datetime import date, time, datetime
 from datetime import timedelta
 from datetime import timezone
 # Create your models here.
@@ -11,16 +12,23 @@ class Jobtype(models.Model):
 class Jobform(models.Model):
     title = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
+    #jobtype = models.ManyToManyField(Jobtype)
     description = models.TextField()
-    #now = date.now(timezone.utc)
+    datenow = datetime.date(datetime.now())
+    timenow = datetime.time(datetime.now())
     # post = models.DateTimeField()
     # deadline = models.DateTimeField()
     postdate = models.DateField()
     posttime = models.TimeField()
     deadlinedate = models.DateField()
     deadlinetime = models.TimeField()
-    # def open(self): 
-    #     return self.deadline > self.now and self.posted < self.now
+    zipcode = models.CharField(max_length=5, validators=[MinLengthValidator(5)], default='00000')
+    def open(self):
+        if self.postdate == self.datenow:
+            return self.posttime <= self.timenow
+        if self.deadlinedate == self.datenow:
+            return self.deadlinetime >= self.timenow
+        return (self.deadlinedate > self.datenow and self.postdate < self.datenow)
 
     # def valid_dates(self):
     #     return self.posted < self.deadline

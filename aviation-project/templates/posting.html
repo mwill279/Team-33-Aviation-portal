@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {%block content%}
 <h1> Job Postings </h1>
-<h2>{{ note }}</h2>
+{% comment %} <h2>{{ note }}</h2> {% endcomment %}
 
 <form action="{% url 'posting' %}" method="post">
     {% csrf_token %}
-    <table>
+    <div class="form-group">
+                    <label for = "jobtitle"></label>
+                    <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job">
+                </div>
     {% comment %} {{ postingform.as_table }} {% endcomment %}
-    <label for= "{{postingform.jobtype.id_for_label }}"> Job Type: </label>
+    {% comment %} <label for= "{{postingform.jobtype.id_for_label }}"> Job Type: </label> {% endcomment %}
     {{ postingform.jobtype }}
-    {{ postingform.jobtype.errors }}
-    <table/>
+    {% comment %} {{ postingform.jobtype.errors }} {% endcomment %}
+    
     {% comment %} {{ postingform.title.label_tag }}
     {{ postingform.title }}
     {{ postingform.title.errors }}
