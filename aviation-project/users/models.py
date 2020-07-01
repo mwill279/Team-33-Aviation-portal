@@ -3,28 +3,37 @@ from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 # Create your models here.
-# class User(AbstractUser):
-#     is_user = models.BooleanField(default=False)
-#     is_comanyEmployer = models.BooleanField(default=False)
+
+
+
+class AJBUser(AbstractUser):
+	USER_TYPE_CHOICES = (
+		(1, 'job_seeker'),
+		(2, 'company_owner'),
+		(3, 'employee'),
+		(4, 'new_user'),
+	)
+user_type = models.PositiveSmallIntegerField(choices=AJBUser.USER_TYPE_CHOICES)
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(AJBUser, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'
 
-class Users (models.Model): 
-	Email = models.CharField(max_length = 40)
-	Username = models.CharField(max_length = 20)
-	name = models.CharField(max_length = 40, blank = True)
-	Address = models.CharField(max_length = 40, blank = True)
-	phoneNumber = models.CharField(max_length = 15, blank = True)
-	nickName = models.CharField(max_length = 20, blank = True)
-	password = models.CharField(max_length = 40, blank = True)
-	image = models.ImageField(upload_to = 'profile_image', default = 'default.png')
-	
+class Users (models.Model):
+	 Email = models.CharField(max_length = 40)
+	 Username = models.CharField(max_length = 20)
+	 name = models.CharField(max_length = 40, blank = True)
+	 Address = models.CharField(max_length = 40, blank = True)
+	 phoneNumber = models.CharField(max_length = 15, blank = True)
+	 nickName = models.CharField(max_length = 20, blank = True)
+	 password = models.CharField(max_length = 40, blank = True)
+	 image = models.ImageField(upload_to = 'profile_image', default = 'default.png')
+	 user_type = models.OneToOneField(AJBUser, on_delete=models.CASCADE)
+
 	
 class workExperience (models.Model):
 	job = models.CharField(max_length = 40)

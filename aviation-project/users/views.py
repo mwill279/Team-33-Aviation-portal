@@ -9,40 +9,55 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Users
+from .models import Users, AJBUser
 from .models import workExperience
 from .models import educationExperience
 from django.shortcuts import get_object_or_404
+from django import forms
+from django.views.generic import CreateView
+
 import datetime
 
 
 # Create your views here.
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            user = Users(Username = username, Email = email)
-            user.save()
-            messages.success(request, f'Account Successfully Created! You May Now Log In')
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+class JobSeekerSignUpView(CreateView):
+	model = User
+	form_class = UserRegisterForm
+	template_name = 'users/register.html'
 
+	def get_context_data(self, **kwargs):
+			kwargs['user_type'] = 'job_seeker'
+			return super().get_context_data(**kwargs)
+
+	def form_valid(self, form, **kwargs):
+		kwargs['user_type'] = 'job_seeker'
+		if self.request.method == 'POST':
+			form = UserRegisterForm(self.request.POST)
+			if form.is_valid():
+				form.save()
+				username = form.cleaned_data.get('username')
+				email = form.cleaned_data.get('email')
+				user = Users(Username=username, Email=email, user_type=AJBUser(1))
+				user.save()
+				messages.success(self.request, f'Account Successfully Created! You May Now Log In')
+				return redirect('login')
+		else:
+			form = UserRegisterForm()
+		return render(self.request, 'users/register.html', {'form': form})
+
+
+
+#####################################################################################################
+#####################################################################################################
+#####################################################################################################
+#####################################################################################################
+#####################################################################################################
 @login_required()
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        username = u_form.cleaned_data.get('username')
-        email = u_form.cleaned_data.get('email')
-        user = Users(Username = username, Email = email)
-        user.save()
 
         if u_form.is_valid():
-            
             u_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
@@ -53,23 +68,23 @@ def profile(request):
     context = {
         'u_form': u_form,
     }
-
     return render(request, 'users/profile.html', context)
+
 @login_required()
 def resume(request):
-    parsed_info = {}
-    if request.method == 'POST':
-        uploaded_file = request.FILES['resume']
-        if uploaded_file.name.endswith(".pdf") or uploaded_file.name.endswith(".docx"):
-            fs = FileSystemStorage(location = os.path.join(settings.MEDIA_ROOT, 'resumes'))
-            fs.save(uploaded_file.name, uploaded_file)
-            path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/'+ uploaded_file.name
-            parsed_info = ResumeParser(path).get_extracted_data()
-            print(parsed_info)
-            os.remove(path)
-        else:
-            print("Invalid Request")
-    return render(request, 'users/resume.html', parsed_info)
+	parsed_info = {}
+	if request.method == 'POST':
+		uploaded_file = request.FILES['resume']
+		if uploaded_file.name.endswith(".pdf") or uploaded_file.name.endswith(".docx"):
+			fs = FileSystemStorage(location = os.path.join(settings.MEDIA_ROOT, 'resumes'))
+			fs.save(uploaded_file.name, uploaded_file)
+			path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/'+ uploaded_file.name
+			parsed_info = ResumeParser(path).get_extracted_data()
+			print(parsed_info)
+			os.remove(path)
+		else:
+			print("Invalid Request")
+	return render(request, 'users/resume.html', parsed_info)
 
 @login_required()
 def home(request):
@@ -99,6 +114,37 @@ def home(request):
 	if request.method == 'POST' and 'deleteEducation' in request.POST:
 		obj= educations.get(duration = request.POST['duration'], title = request.POST['title'], school = request.POST['school'], Username = request.user.username).delete()
 	return render (request, 'userProfile/profile2.html', {'users': users, 'works': works, 'educations': educations})
+
+class CompanySignUpView(CreateView):
+	model = User
+	form_class = UserRegisterForm
+	template_name = 'users/company_register.html'
+
+	def form_valid(self, form):
+		if self.request.method == 'POST':
+			form = UserRegisterForm(self.request.POST)
+			if form.is_valid():
+				form.save()
+				username = form.cleaned_data.get('username')
+				email = form.cleaned_data.get('email')
+				user = Users(Username=username, Email=email)
+				user.save()
+				messages.success(self.request, f'Account Successfully Created! You May Now Log In')
+				return redirect('login')
+		else:
+			form = UserRegisterForm()
+		return render(self.request, 'users/company_register.html', {'form': form})
+
+	def get_context_data(self, **kwargs):
+			kwargs['user_type'] = 'company_owner'
+			return super().get_context_data(**kwargs)
+
+
+
+
+
+
+
 
 def changepassword(request):
 	if request.method == 'POST':
