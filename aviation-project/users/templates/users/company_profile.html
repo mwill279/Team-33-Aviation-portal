@@ -7,8 +7,16 @@
             <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
             <div class="media-body">
                 <h2 class="account-heading">{{ user.username }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
-				<a class= "btn btn-primary" type="submit" href = "{% url 'resume' %}">Upload Resume</a>
+                <p class="text-secondary">
+                    Company Name: <br>
+                    Company Email Address: {{ user.email }}<br>
+                    Company HQ Address: <br>
+                    CEO: <br>
+                    Founded: <br>
+                    Founders: <br>
+                    Number of Employees: <br>
+                    Company Description: <br>
+                </p>
             </div>
         </div>
         <form method="POST" enctype="multipart/form-data">

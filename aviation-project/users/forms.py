@@ -16,3 +16,17 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 
+class CompanyRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2', 'email']
+
+class CompanyUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']

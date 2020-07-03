@@ -56,9 +56,15 @@
             <a class="nav-link" href="#">Contact</a>
           </li>
           {% if user.is_authenticated %}
+          {% if request.user.groups.all.0.name == "jobseeker" %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'userProfile-home' %}">Profile</a>
             </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'company_profile' %}">Company Profile</a>
+            </li>
+          {% endif %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
@@ -75,6 +81,19 @@
     </div>
     
   </nav>
+<!-- CODE I (DANY)  WAS TESTING DELETE SOON-->
+<!--  <p>-->
+<!--    {{ user }}-->
+<!--    <br>-->
+<!--    {% for group in user.groups.all %}-->
+<!--      {{ group }}-->
+<!--    {% endfor %}-->
+<!--    <br>-->
+<!--    {{ a_filter }}-->
+<!--    {{ wtf }}-->
+<!--    <br>-->
+<!--    working {{ wtf }}-->
+<!--  </p>-->
     
   
 
