@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, CompanyRegisterForm, CompanyUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, CompanyRegisterForm, CompanyUpdateForm, CompanyProfileForm
 from django.core.files.storage import FileSystemStorage
 from pyresparser import ResumeParser
 from django.conf import settings
@@ -16,6 +16,7 @@ from django.shortcuts import get_object_or_404
 import datetime
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
+from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
@@ -47,16 +48,59 @@ def company_register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            # first_name = form.cleaned_data.get('name')
+            # phoneNumber = form.cleaned_data.get('phoneNumber')
+            # address = form.cleaned_data.get('address')
+            #company_description = form.cleaned_data.get('company_description')
+            # user = User(name=name, PhoneNumber=phoneNumber
+            #              , address=address, company_description=company_description)
 
             group = Group.objects.get(name='company_owner')
             user.groups.add(group)
 
             user.save()
-            messages.success(request, f'Account Successfully Created! You May Now Log In')
-            return redirect('login')
+            #cp.save()
+            messages.success(request, f'Account Successfully Created! You May Now Create Your Profile')
+            user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, user)
+            return redirect('company_profile_creator')
     else:
-        form = UserRegisterForm()
+        form = CompanyRegisterForm()
     return render(request, 'users/company_register.html', {'form': form})
+
+def addCompanyProfile(request):
+    cp_form = CompanyProfileForm(request.POST)
+    if request.method == 'POST':
+        cp_form = CompanyProfileForm(request.POST)
+        if cp_form.is_valid():
+            cp = cp_form.save()
+            name = cp_form.cleaned_data.get['name']
+            phoneNumber = cp_form.cleaned_data.get['phoneNumber']
+            address = cp_form.cleaned_data.get['address']
+            company_description = cp_form.cleaned_data.get['company_description']
+            #id = request.user.id
+            user = request.user
+            if user_id is not None:
+                request.session.delete('user_id')
+                comp = CompanyProfile.objects.get(user_id=user_id)
+            else:
+                comp = Client.objects.create(user=user)
+            company_profile = CompanyProfile.objects.get(name=name, phoneNumber=phoneNumber
+                         , address=address, company_description=company_description)
+            cp.save()
+            company_profile.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('company_profile')
+        else:
+            cp_form = CompanyProfileForm(request.POST)
+
+    context = {
+        'cp_form': cp_form,
+    }
+
+    return render(request, 'users/company_profile_creator.html', context)
 
 @login_required()
 @allowed_users(allowed_roles=['company_owner'])
@@ -65,14 +109,19 @@ def company_profile(request):
         u_form = UserUpdateForm(request.POST, instance=request.user)
         username = u_form.cleaned_data.get('username')
         email = u_form.cleaned_data.get('email')
-        user = Users(Username = username, Email = email)
+        first_name = form.cleaned_data.get('name')
+        phoneNumber = form.cleaned_data.get('phoneNumber')
+        address = form.cleaned_data.get('address')
+        company_description = form.cleaned_data.get('company_description')
+        user = Users(Username = username, Email = email, first_name=name, PhoneNumber=phoneNumber
+                     , Address=address, company_description=company_description)
         user.save()
 
         if u_form.is_valid():
-            
+
             u_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+            return redirect('company_profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -98,7 +147,7 @@ def resume(request):
             print("Invalid Request")
     return render(request, 'users/resume.html', parsed_info)
 
-@login_required()
+
 @login_required()
 @allowed_users(allowed_roles=['jobseeker'])
 def jobseeker_profile_view(request):
@@ -195,6 +244,9 @@ def addWorkingExperience(request):
             return redirect('/userprofile')
     else:
         return render (request, 'userProfile/addwork.html')
+
+
+
 
 def addEducationExperience(request): 
     if request.method == 'POST':
