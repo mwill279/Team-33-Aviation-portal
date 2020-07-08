@@ -144,8 +144,13 @@ def addWorkingExperience(request):
 		comment = request.POST['comment']
 		if request.user.is_authenticated:
 			name = request.user.username
-			works = workExperience(job = job, years = years, company = company, comment = comment, Username = name)
-			works.save()
+			findwork = workExperience.objects.filter(job = job, years = years, company = company, comment = comment, Username = name)
+			if not findwork.exists():
+				works = workExperience(job = job, years = years, company = company, comment = comment, Username = name)
+				works.save()
+			else:
+				messages.info(request, 'Already have a same record.')
+				return redirect('/addwork')
 			return redirect('/userprofile')
 	else: 
 		return render (request, 'userProfile/addwork.html')
@@ -158,8 +163,13 @@ def addEducationExperience(request):
 		major = request.POST['major']
 		if request.user.is_authenticated:
 			name = request.user.username
-			education = educationExperience(title = title, duration = duration, school = school, major = major, Username = name)
-			education.save()
+			findEducation = educationExperience.objects.filter(title = title, duration = duration, school = school, major = major, Username = name)
+			if not findEducation.exists():
+				education = educationExperience(title = title, duration = duration, school = school, major = major, Username = name)
+				education.save()
+			else: 
+				messages.info(request, 'Already have a same record.')
+				return redirect('/addeducation')
 			return redirect('/userprofile')
 	else: 
 		return render (request, 'userProfile/addeducation.html')
