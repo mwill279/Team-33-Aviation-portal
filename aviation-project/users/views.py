@@ -55,21 +55,51 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+
 @login_required()
 def resume(request):
     parsed_info = {}
-    if request.method == 'POST':
+    if request.method == 'POST' and 'upload' in request.POST:
         uploaded_file = request.FILES['resume']
         if uploaded_file.name.endswith(".pdf") or uploaded_file.name.endswith(".docx"):
-            fs = FileSystemStorage(location = os.path.join(settings.MEDIA_ROOT, 'resumes'))
-            fs.save(uploaded_file.name, uploaded_file)
-            path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/'+ uploaded_file.name
+            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'resumes'))
+            new_name = str(request.user.id) + uploaded_file.name
+            fs.save(new_name, uploaded_file)
+            path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/' + new_name
             parsed_info = ResumeParser(path).get_extracted_data()
-            print(parsed_info)
+            request.session['parsed_name'] = parsed_info.pop('name')
+            request.session['parsed_email'] = parsed_info.pop('email')
+            request.session['parsed_number'] = parsed_info.pop('mobile_number')
+            request.session['parsed_skills'] = parsed_info.pop('skills')
             os.remove(path)
+            return redirect('review')
         else:
             print("Invalid Request")
     return render(request, 'users/resume.html', parsed_info)
+
+
+def review(request):
+    if request.method == 'GET':
+        return render(request, 'users/review.html',context={'name': request.session.get('parsed_name'),
+                                                             'email': request.session.get('parsed_email'),
+                                                             'mobile_number': request.session.get('parsed_number'),
+                                                             'parsed_skills': request.session.get('parsed_skills')})
+    if request.method == 'POST' and 'save' in request.POST:
+
+        return redirect('userProfile-home')
+    elif request.method == 'POST' and 'delete' in request.POST:
+        skills = request.session.get('parsed_skills')
+        print(skills)
+        remove_skill = request.POST.get('delete')
+        skills.remove(remove_skill)
+        request.session['parsed_skills'] = skills
+        return redirect('review')
+    return render(request, 'users/review.html',  context={'name': request.session.get('parsed_name'),
+                                                             'email': request.session.get('parsed_email'),
+                                                             'mobile_number': request.session.get('parsed_number'),
+                                                             'parsed_skills': request.session.get('parsed_skills')})
+
 
 @login_required()
 def home(request):
