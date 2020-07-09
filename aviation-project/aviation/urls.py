@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """aviation URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -19,16 +19,17 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from listapp import views as listapp_views
+"""from listapp import views as listapp_views""" """listapp_views doesn't exist"""
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view
+from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view, chatRoom_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
     path('portal/', portal_view, name='portal_view'),
     path('company/',companypage_view, name='company_page'),
+    path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
     path('events/', events_view, name='event_list'),
@@ -44,14 +45,11 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
-    path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
-    path('fulltime/', postjob_views.fulltime, name='fulltime'),
-    path('parttime/', postjob_views.parttime, name='parttime'),
-    path('internship/', postjob_views.internship, name='internship'),
+    path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail')
+   
 ]
 
-if settings.DEBUG:
-=======
+
 """aviation URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -74,12 +72,13 @@ from django.conf.urls.static import static
 
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
     path('company/',companypage_view, name='company_page'),
+    path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
     path('events/', events_view, name='event_list'),
@@ -108,5 +107,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
->>>>>>> f26cc86c35c0e916c5e5d877c804793fcc2dd09a
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
