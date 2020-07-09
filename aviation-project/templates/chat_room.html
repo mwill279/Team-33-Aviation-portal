@@ -50,7 +50,7 @@
                 
                 <p style="margin-bottom:30px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
                 
-                <button class="btn" style="border: none; background-color:transparent; margin-left:90%; margin-bottom:20px;" onclick="CreateBox()"><i class="fas fa-reply"></i> Reply </button>
+                <button class="btn" id="BeginReply" style="border: none; background-color:transparent; margin-left:90%; margin-bottom:20px;" onclick="CreateBox(); this.onclick=CloseBox;"><i class="fas fa-reply"></i> Reply </button>
             </div>
         </div>
     </div>
@@ -63,7 +63,46 @@
         var x = document.createElement("textarea");
        
         x.setAttribute("style", "border-radius:5px; width:100%; height:400px; overflow-y: scroll;");
+        x.id = "ReplyBox";
         document.getElementById("Email Body").appendChild(x);
+
+        var y = document.createElement("button");
+
+        y.setAttribute("class", "btn btn-primary btn-lg");
+        y.setAttribute("style", "margin-left:90%; margin-top:20px;");
+        y.id = "ReplyButton";
+        y.textContent = "Reply";
+
+
+        y.addEventListener('click', function () {
+            DoReply(x);
+
+        });
+
+        document.getElementById("Email Body").appendChild(y);
+
+    }
+
+    function DoReply(x) {
+
+        var y = document.createElement("p");
+        y.textContent = x.textContent;
+        document.getElementById("ReplyBox").remove();
+        document.getElementById("ReplyButton").remove();
+
+        document.getElementById("Email Body").appendChild(y);
+
+
+        document.getElementById("BeginReply").onclick = CreateBox;
+
+
+    }
+
+    function CloseBox() {
+
+        document.getElementById("ReplyBox").remove();
+        document.getElementById("ReplyButton").remove();
+        document.getElementById("BeginReply").onclick = CreateBox;
 
     }
 
