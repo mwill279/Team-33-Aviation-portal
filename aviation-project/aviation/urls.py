@@ -36,6 +36,7 @@ urlpatterns = [
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),
+    path('review/', user_views.review, name='review'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
