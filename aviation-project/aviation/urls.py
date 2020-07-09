@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 """from listapp import views as listapp_views""" """listapp_views doesn't exist"""
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view, chatRoom_view
+from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view, chatRoom_view, searchpage_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
+    path('search/', searchpage_view, name='search_page'),
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),
@@ -72,7 +73,7 @@ from django.conf.urls.static import static
 
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, searchpage_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
@@ -81,6 +82,7 @@ urlpatterns = [
     path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_view, name='post_job'),
+    path('search/', searchpage_view, name='search_page'),
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),
