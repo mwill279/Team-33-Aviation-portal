@@ -9,7 +9,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Users
+from .models import Users, CompanyProfile
 from .models import workExperience
 from .models import educationExperience
 from django.shortcuts import get_object_or_404
@@ -75,22 +75,22 @@ def addCompanyProfile(request):
     if request.method == 'POST':
         cp_form = CompanyProfileForm(request.POST)
         if cp_form.is_valid():
-            cp = cp_form.save()
-            name = cp_form.cleaned_data.get['name']
-            phoneNumber = cp_form.cleaned_data.get['phoneNumber']
-            address = cp_form.cleaned_data.get['address']
-            company_description = cp_form.cleaned_data.get['company_description']
-            #id = request.user.id
-            user = request.user
-            if user_id is not None:
-                request.session.delete('user_id')
-                comp = CompanyProfile.objects.get(user_id=user_id)
-            else:
-                comp = Client.objects.create(user=user)
-            company_profile = CompanyProfile.objects.get(name=name, phoneNumber=phoneNumber
-                         , address=address, company_description=company_description)
-            cp.save()
-            company_profile.save()
+            name = cp_form.cleaned_data['name']
+            phoneNumber = cp_form.cleaned_data['phoneNumber']
+            address = cp_form.cleaned_data['address']
+            company_description = cp_form.cleaned_data['company_description']
+            id = request.user.id
+            #user = request.user
+            #if user_id is not None:
+            #    request.session.delete('user_id')
+            #    comp = CompanyProfile.objects.get(user_id=user_id)
+            #else:
+            #    comp = Client.objects.create(user=user)
+            #company_profile = CompanyProfile.objects.get(name=name, phoneNumber=phoneNumber
+            #             , address=address, company_description=company_description)
+            #cp.save()
+            #company_profile.save()
+            CompanyProfile.objects.filter(user_id = id).update(name = name, phoneNumber=phoneNumber, address=address,company_description=company_description)
             messages.success(request, f'Your account has been updated!')
             return redirect('company_profile')
         else:
