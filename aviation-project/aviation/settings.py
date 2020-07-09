@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
-        'HOST': 'localhost',
+        'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
