@@ -4,14 +4,10 @@
     "\\aviation",
     "\\aviation_job_board",
     "\\aviation_portal",
-    "\\static",
-    "\\static\\front",
-    "\\static\\front\\scss",
-    "\\static\\front\\scss\\landing",
-    "\\users",
-    "\\users\\templates",
-    "\\users\\templates\\users"
+    "\\aviation_portal\\migrations",
+    "\\aviation_portal\\migrations\\__pycache__",
+    "\\templates"
   ],
-  "SelectedNode": "\\users\\templates\\users\\login.html",
+  "SelectedNode": "\\aviation_job_board\\views.py",
   "PreviewInSolutionExplorer": false
 }

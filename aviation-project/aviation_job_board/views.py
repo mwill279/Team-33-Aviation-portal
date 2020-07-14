@@ -57,6 +57,12 @@ def portal_view(request, *args, **kwargs):
 def companypage_view(request, *args, **kwargs):
     return render(request, "CompanyPage.html", {})
 
+def chatRoom_view(request, *args, **kwargs):
+    return render(request, "chat_room.html", {})
+
+def searchpage_view(request, *args, **kwargs):
+    return render(request, "search.html", {})
+
 def postjob_view(request, *args, **kwargs):
     if request.method == 'POST':
         filled_form = PostingForm(request.POST)

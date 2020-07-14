@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Parsed Information:</legend>
+            <label for ="name">Full Name: </label><br>
+            <input type = "text" name = "name" value = {{name}}><br>
+            <label for ="email">Email: </label><br>
+            <input type = "text" name = "email" value = {{email}}><br>
+            <label for = "phone">Phone Number:</label><br>
+            <input type = "text" name = "phone" value = {{mobile_number}}><br><br>
+        </fieldset>
+    <fieldset class = "form-group">
+        <legend class="border-bottom mb-4">Parsed Skills:</legend>
+
+            {% for skills in parsed_skills %}
+            <br>
+            {% csrf_token %}
+            <label for="delete">{{skills|safe}}</label>
+            <button class= "btn btn-secondary" type="submit" name="delete" value="{{skills}}"><b>DEL</b></button>
+            <br>
+            {% endfor %}
+    </fieldset>
+    <button class= "btn btn-primary" type="submit" name="save"><b>Save</b></button>
+</form>
+
+
+{% endblock content %}
+

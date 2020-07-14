@@ -134,21 +134,51 @@ def company_profile(request):
     }
 
     return render(request, 'users/company_profile.html', context)
+
 @login_required()
 def resume(request):
     parsed_info = {}
-    if request.method == 'POST':
+    if request.method == 'POST' and 'upload' in request.POST:
         uploaded_file = request.FILES['resume']
         if uploaded_file.name.endswith(".pdf") or uploaded_file.name.endswith(".docx"):
-            fs = FileSystemStorage(location = os.path.join(settings.MEDIA_ROOT, 'resumes'))
-            fs.save(uploaded_file.name, uploaded_file)
-            path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/'+ uploaded_file.name
+            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'resumes'))
+            new_name = str(request.user.id) + uploaded_file.name
+            fs.save(new_name, uploaded_file)
+            path = os.path.join(settings.MEDIA_ROOT, 'resumes') + '/' + new_name
             parsed_info = ResumeParser(path).get_extracted_data()
-            print(parsed_info)
+            request.session['parsed_name'] = parsed_info.pop('name')
+            request.session['parsed_email'] = parsed_info.pop('email')
+            request.session['parsed_number'] = parsed_info.pop('mobile_number')
+            request.session['parsed_skills'] = parsed_info.pop('skills')
             os.remove(path)
+            return redirect('review')
         else:
             print("Invalid Request")
     return render(request, 'users/resume.html', parsed_info)
+
+
+
+def review(request):
+    if request.method == 'GET':
+        return render(request, 'users/review.html',context={'name': request.session.get('parsed_name'),
+                                                             'email': request.session.get('parsed_email'),
+                                                             'mobile_number': request.session.get('parsed_number'),
+                                                             'parsed_skills': request.session.get('parsed_skills')})
+    if request.method == 'POST' and 'save' in request.POST:
+
+        return redirect('userProfile-home')
+    elif request.method == 'POST' and 'delete' in request.POST:
+        skills = request.session.get('parsed_skills')
+        print(skills)
+        remove_skill = request.POST.get('delete')
+        skills.remove(remove_skill)
+        request.session['parsed_skills'] = skills
+        return redirect('review')
+    return render(request, 'users/review.html',  context={'name': request.session.get('parsed_name'),
+                                                             'email': request.session.get('parsed_email'),
+                                                             'mobile_number': request.session.get('parsed_number'),
+                                                             'parsed_skills': request.session.get('parsed_skills')})
+
 
 
 @login_required()
@@ -233,8 +263,7 @@ def changepassword(request):
         return render(request, 'userProfile/changepassword.html')
 
 
-
-def addWorkingExperience(request): 
+def addWorkingExperience(request):
     if request.method == 'POST':
         job = request.POST['job']
         years = request.POST['years']
@@ -242,16 +271,20 @@ def addWorkingExperience(request):
         comment = request.POST['comment']
         if request.user.is_authenticated:
             name = request.user.username
-            works = workExperience(job = job, years = years, company = company, comment = comment, Username = name)
-            works.save()
+            findwork = workExperience.objects.filter(job=job, years=years, company=company, comment=comment,
+                                                     Username=name)
+            if not findwork.exists():
+                works = workExperience(job=job, years=years, company=company, comment=comment, Username=name)
+                works.save()
+            else:
+                messages.info(request, 'Already have a same record.')
+                return redirect('/addwork')
             return redirect('/userprofile')
     else:
-        return render (request, 'userProfile/addwork.html')
+        return render(request, 'userProfile/addwork.html')
 
 
-
-
-def addEducationExperience(request): 
+def addEducationExperience(request):
     if request.method == 'POST':
         title = request.POST['title']
         duration = request.POST['duration']
@@ -259,13 +292,18 @@ def addEducationExperience(request):
         major = request.POST['major']
         if request.user.is_authenticated:
             name = request.user.username
-            education = educationExperience(title = title, duration = duration, school = school, major = major, Username = name)
-            education.save()
+            findEducation = educationExperience.objects.filter(title=title, duration=duration, school=school,
+                                                               major=major, Username=name)
+            if not findEducation.exists():
+                education = educationExperience(title=title, duration=duration, school=school, major=major,
+                                                Username=name)
+                education.save()
+            else:
+                messages.info(request, 'Already have a same record.')
+                return redirect('/addeducation')
             return redirect('/userprofile')
     else:
-        return render (request, 'userProfile/addeducation.html')
-
-
+        return render(request, 'userProfile/addeducation.html')
 
 def about(request):
     return render (request, 'userProfile/profile2.html')

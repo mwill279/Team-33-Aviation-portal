@@ -102,10 +102,10 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ajb_db6',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'danydb1270', #Put the password that you used for PostrgeSQL
-        'HOST': 'localhost',
+        'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
+        'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
