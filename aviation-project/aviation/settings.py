@@ -181,3 +181,5 @@ STATICFILES_FINDERS = (
     'sass_processor.finders.CssFinder',
 
 )
+
+#LOGIN_REDIRECT_URL = 'userProfile-home'

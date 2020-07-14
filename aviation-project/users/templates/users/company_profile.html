@@ -8,14 +8,14 @@
             <div class="media-body">
                 <h2 class="account-heading">{{ user.username }}</h2>
                 <p class="text-secondary">
-                    Company Name: {{ user.first_name}}<br>
+                    Company Name: {{ company_profile.name}}<br>
                     Company Email Address: {{ user.email }}<br>
-                    Company HQ Address: <br>
+                    Company HQ Address: {{ company_profile.address }}<br>
                     CEO: <br>
                     Founded: <br>
                     Founders: <br>
                     Number of Employees: <br>
-                    Company Description: {{ request.user.company_description }}<br>
+                    Company Description: {{ company_profile.company_description }}<br>
                 </p>
             </div>
         </div>

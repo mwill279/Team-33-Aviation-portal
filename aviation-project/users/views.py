@@ -126,8 +126,11 @@ def company_profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
 
+
+    company_profile = CompanyProfile.objects.get(user_id=request.user.id)
     context = {
         'u_form': u_form,
+        'company_profile': company_profile,
     }
 
     return render(request, 'users/company_profile.html', context)

@@ -22,6 +22,7 @@ from postjob import views as postjob_views
 
 from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, base_view
 from users import views as user_views
+#from users.decorators import
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
