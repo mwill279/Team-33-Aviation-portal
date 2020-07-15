@@ -24,9 +24,8 @@
         border-style: none;
     }
         .logIn:hover {
-            
-            background:white;
-            background-color:blue;
+            background: white;
+            background-color: dodgerblue;
             transition: all 0.3s ease;
             color: black;
         }
@@ -38,7 +37,7 @@
     }
         .signUp:hover {
             background: white;
-            background-color:blue;
+            background-color: dodgerblue;
             transition: all 0.3s ease;
             color: black;
         }
@@ -64,13 +63,10 @@
                         <div class="container">
                             <div class="row">
                                 <button class="btn btn-outline-info  btn-lg col-lg logIn" type="submit">Log In</button>
-                                <a href="{% url 'register' %}" class="btn btn-outline-info col-lg btn-lg signUp">Sign Up</a>
+                                <a href="{% url 'choose_register' %}" class="btn btn-outline-info col-lg btn-lg signUp">Sign Up</a>
                             </div>
                         </div>
-                        
-                       
-
-
+                    
                     </div>
 
                 </form>

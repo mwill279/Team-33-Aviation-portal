@@ -113,18 +113,14 @@
     margin-left: 30px;
     color: #2962ff; }
 
-.industry .card {
-  border-style: none;
-  outline: none; }
-  .industry .card:hover {
-    background-color: #ff6d00;
-    transition: all 0.5s ease; }
-
-.industry #industries {
-  position: relative;
-  top: -5rem;
-  justify-content: center;
-  align-items: center; }
+.industries {
+  grid-column: center-start / center-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-gap: .5rem; }
+  .industries .industry {
+    background-color: grey;
+    padding: 7rem 1rem; }
 
 .recentJobs {
   height: 520px;

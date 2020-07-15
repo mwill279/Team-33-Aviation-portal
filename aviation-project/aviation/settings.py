@@ -134,9 +134,9 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ajb_db',
+        'NAME': 'new_ajb',
         'USER': 'postgres',
-        'PASSWORD': 'password', #Put the password that you used for PostrgeSQL
+        'PASSWORD': 'danydb1270', #Put the password that you used for PostrgeSQL
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -199,7 +199,7 @@ EMAIL_USE_TLS = True
 
 # this is a gmail account I temporarily created for this project
 EMAIL_HOST_USER = 'aviationjobboard@gmail.com'
-EMAIL_HOST_PASSWORD = 'ajbpass1029'
+EMAIL_HOST_PASSWORD = '' #I temporarily removed the password
 
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86598zr5xlzp1g'
@@ -213,3 +213,5 @@ STATICFILES_FINDERS = (
     'sass_processor.finders.CssFinder',
 
 )
+
+#LOGIN_REDIRECT_URL = 'userProfile-home'

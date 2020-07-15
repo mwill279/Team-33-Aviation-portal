@@ -12,8 +12,25 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
+	# name = models.CharField(max_length=40, blank=True)
+	# phoneNumber = models.CharField(max_length=15, blank=True)
+	# address = models.CharField(max_length=40, blank=True)
+	# company_description = models.TextField()
+
     def __str__(self):
         return f'{self.user.username} Profile'
+
+
+class CompanyProfile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+	name = models.CharField('Company Name', max_length=40, blank=True)
+	phoneNumber = models.CharField(max_length=15, blank=True)
+	address = models.CharField('Address', max_length=40, blank=True)
+	company_description = models.CharField('Company\'s Description', max_length=500, blank=True)
+
+	def __str__(self):
+		return f'{self.user.username} CompanyProfile'
 
 class Users (models.Model): 
 	Email = models.CharField(max_length = 40)
