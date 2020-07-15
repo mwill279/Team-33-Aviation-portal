@@ -105,31 +105,45 @@ def addCompanyProfile(request):
 @login_required()
 @allowed_users(allowed_roles=['company_owner'])
 def company_profile(request):
+    u_form = UserUpdateForm(instance=request.user)
+    cp_Update_form = CompanyUpdateForm(instance=request.user.companyprofile)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        username = u_form.cleaned_data.get('username')
-        email = u_form.cleaned_data.get('email')
-        first_name = form.cleaned_data.get('name')
-        phoneNumber = form.cleaned_data.get('phoneNumber')
-        address = form.cleaned_data.get('address')
-        company_description = form.cleaned_data.get('company_description')
-        user = Users(Username = username, Email = email, first_name=name, PhoneNumber=phoneNumber
-                     , Address=address, company_description=company_description)
-        user.save()
-
-        if u_form.is_valid():
-
+        cp_Update_form = CompanyUpdateForm(request.POST, request.FILES, instance=request.user.companyprofile)
+        if u_form.is_valid() and cp_Update_form.is_valid():
+            #username = u_form.cleaned_data.get('username')
+            #email = u_form.cleaned_data.get('email')
+            # first_name = form.cleaned_data.get('name')
+            # phoneNumber = form.cleaned_data.get('phoneNumber')
+            # address = form.cleaned_data.get('address')
+            # company_description = form.cleaned_data.get('company_description')
+            #user = CompanyProfile(Username=username, Email=email)
+            #user.save()
             u_form.save()
+            cp_Update_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('company_profile')
-
     else:
         u_form = UserUpdateForm(instance=request.user)
+        cp_Update_form = CompanyUpdateForm(instance=request.user.companyprofile)
+
+
+    # if request.method == 'POST':
+    #     cp_Update_form = CompanyUpdateForm(request.POST, instance=request.CompanyProfile)
+    #     if cp_Update_form():
+    #         name = cp_form.cleaned_data['name']
+    #         phoneNumber = cp_form.cleaned_data['phoneNumber']
+    #         address = cp_form.cleaned_data['address']
+    #         company_description = cp_form.cleaned_data['company_description']
+    #         company_profile = CompanyProfile(name=name, phoneNumber=phoneNumber
+    #                     , address=address, company_description=company_description)
+
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
     context = {
         'u_form': u_form,
+        'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
     }
 
