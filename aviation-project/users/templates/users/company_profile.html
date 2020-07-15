@@ -16,7 +16,7 @@
 </style>
 
     <div class="container" style="position: relative;text-align: center;color: white;">
-        <img src="https://cdn.britannica.com/41/123141-050-E6229449/Air-New-Zealand-Boeing-747-400.jpg" alt="Banner" style="width:100%;">
+        <img src={{ company_profile.banner.url }} alt="Banner" width="770" height="320">
         <div class="container" style="background-color:lightgrey; border-style:none;  position:relative; z-index:200; height:110px; top:-70px;">
             <div class="row">
 
@@ -31,7 +31,11 @@
                 </div>
 
 
-                <div style="position: absolute;bottom: 8px;right: 30px;"><button type="button" class="btn btn-success btn-lg">Add Job</button></div>
+                <div style="position: absolute;bottom: 8px;right: 30px;">
+                    <form action="{% url 'posting' %}">
+                    <button type="submit" class="btn btn-success btn-lg">Add Job</button>
+                    </form>
+                </div>
 
             </div>
 

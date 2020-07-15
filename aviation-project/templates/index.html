@@ -14,13 +14,43 @@
 </head>
 <div class="container-fluid">
    <div class="searchBox">
-      <h1 class= 'display-4 text-center jobSearching'>Job searching just got easier</h1>
+       {% if request.user.groups.all.0.name == "jobseeker" %}
+       <h1 class= 'display-4 text-center jobSearching'>Search for Jobs</h1>
       <button class='uploadResume'type="button"><span>Upload Resume</span></button>
+       {% elif request.user.groups.all.0.name == "company_owner" %}
+       <h1 class= 'display-4 text-center jobSearching'>Find Candidates</h1>
+       <button class='uploadResume'type="button"><span>Post a Job</span></button>
+       {% else %}
+       <h1 class= 'display-4 text-center jobSearching'>Job & Candidate <br> searching just got easier</h1>
+       <button class='uploadResume'type="button"><span>Upload Resume/Post Job</span></button>
+       {% endif %}
       <div class="container">
          <div class='switchButtons'>
+             {% if request.user.groups.all.0.name == "jobseeker" %}
             <button data-tab-target="#job" class="findJob"type="button"><span>Find a Job</span></button>
+             {% elif request.user.groups.all.0.name == "company_owner" %}
             <button data-tab-target="#candidate" class='candidate'type="button"><span>Find a Candidate</span></button>
+             {% else %}
+             <button data-tab-target="#job" class="findJob"type="button"><span>Find a Job</span></button>
+             <button data-tab-target="#candidate" class='candidate'type="button"><span>Find a Candidate</span></button>
+             {% endif %}
          </div>
+          {% if request.user.groups.all.0.name == "company_owner" %}
+          <div class="row active" id="candidate" data-tab-content>
+               <div class="col-lg-5">
+                  <input type="text" class="form-control" placeholder="John Smith" aria-label="Recipient's username" aria-describedby="basic-addon2">
+               </div>
+               <div class="col-lg-3">
+                  <input type="text" class="form-control" placeholder="Category" aria-label="Recipient's username" aria-describedby="basic-addon2">
+               </div>
+               <div class="col-lg-3">
+                  <input type="text" class="form-control" placeholder="Location" aria-label="Recipient's username" aria-describedby="basic-addon2">
+               </div>
+               <div class="col-sm-1">
+                  <i class="fa fa-search searchIcon" aria-hidden="true"></i>
+               </div>
+            </div>
+          {% else %}
          <div class="tab-content">
             <div class="row active" id="job" data-tab-content>
 
@@ -75,6 +105,7 @@
                </div>
             </div>
          </div>
+          {% endif %}
       </div>
    </div>
 </div>
