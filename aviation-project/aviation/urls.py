@@ -27,7 +27,7 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('company/',companypage_view, name='company_page'),
     path('admin/', admin.site.urls),
-    path('jobpost/', postjob_view, name='post_job'),
+    path('jobpost/', postjob_views.posting, name='post_job'),
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
     path('resume/', user_views.resume, name='resume'),

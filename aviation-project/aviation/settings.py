@@ -25,6 +25,11 @@ SECRET_KEY = 'rrx$k-_mbwtli=dl)t9!0ec8lp++m5c31lle1k06rch1mxad0l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#Mapbox Key
+MAPBOX_KEY = "pk.eyJ1IjoiYXZpYXRpb25qb2IiLCJhIjoiY2tjNThtZng4MGY5bjJzb2Jvanh3NTJmcSJ9.Nc9VDVv6ySpVKyXRGvBCqg"
+
+GOOGLE_MAPS_API_KEY = "AIzaSyCnsDSxDFykyo-hbESQOuY7A7wnavW-7Ps"
+
 ALLOWED_HOSTS = []
 
 
@@ -39,11 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'users.apps.UsersConfig',
+    'mapbox_location_field',
+    'django_google_maps',
 
     'crispy_forms',
     'social_django',
     'postjob',
     'events_app',
+    'background_task',
 ]
 
 MIDDLEWARE = [
@@ -99,12 +107,36 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 #     }
 # }
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'gis',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
+#         'HOST': 'ajbdb.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'ajb_db',
         'USER': 'postgres',
-        'PASSWORD': 'mjwpass', #Put the password that you used for PostrgeSQL
+        'PASSWORD': 'password', #Put the password that you used for PostrgeSQL
         'HOST': 'localhost',
         'PORT': '5432',
     }
