@@ -384,9 +384,10 @@ def upload(request):
 
     return render(request,'userProfile/upload.html')
 
+@login_required
 def redirect(request):
     if(request.user.groups.filter(name= 'jobseeker').exists()):
         return redirect('jobsearch')
     else:
         return redirect('company_profile')
-    return redirect('home')
+
