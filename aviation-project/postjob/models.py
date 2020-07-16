@@ -1,8 +1,6 @@
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from datetime import date, time, datetime, timezone
-from mapbox_location_field.models import LocationField, AddressAutoHiddenField
 from django_google_maps import fields as map_fields
 
 class Jobtype(models.Model):
@@ -16,7 +14,6 @@ class Searchaddress(models.Model):
     geolocation = map_fields.GeoLocationField(max_length=100)
 
 class Jobform(models.Model):
-    # company_id = models.IntegerField()
     title = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
     description = models.TextField()
@@ -29,9 +26,6 @@ class Jobform(models.Model):
 
     deadlinedate = models.DateField()
     deadlinetime = models.TimeField()
-    
-    # location = LocationField()
-    # address = AddressAutoHiddenField()
 
     address = map_fields.AddressField(max_length=200)
     geolocation = map_fields.GeoLocationField(max_length=100)
