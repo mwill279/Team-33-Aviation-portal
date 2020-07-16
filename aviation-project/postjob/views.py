@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from postjob.forms import PostingForm, SearchForm
 from postjob.models import Jobform, Jobtype, Searchaddress
 from datetime import timedelta, date, datetime
+import math
 # Create your views here.
 
 def posting(request):
@@ -26,15 +27,30 @@ def posting(request):
         form = PostingForm()
         return render(request, 'post_job.html', {'postingform':form,})
 
+def calculate_miles(search_lat, search_lon, lat, lon):
+    earth_radius = 6371
+    dlat = deg2rad(lat - search_lat)
+    dlon = deg2rad(lon - search_lon)
+    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(deg2rad(search_lat)) * math.cos(deg2rad(lat)) * math.sin(dlon/2) * math.sin(dlon/2)
+
+    b = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+    return (earth_radius * b) * 0.621
+
+def deg2rad(deg):
+    return deg * (math.pi/180)
+
 def jobsearch(request):
     results = Jobform.objects.all()
     jobtypes = Jobtype.objects.all()
     search = request.GET.get('jobtitle')
     searchtype = request.GET.get('jobtype')
     searchaddress = request.GET.get('address')
+    searchgeo = request.GET.get('geolocation')
     auth_req = request.GET.get('work_auth')
     minimum = request.GET.get('min_sal')
     duration = request.GET.get('posted_dur')
+    distance = request.GET.get('distance')
     today = date.today()
     form = SearchForm()
 
@@ -47,19 +63,27 @@ def jobsearch(request):
     if searchtype != '' and searchtype != 'Job Type':
         results = results.filter(jobtype__name=searchtype)
 
-    if searchaddress != '' and searchaddress is not None:
-        results = results.filter(address__icontains=searchaddress)
+    # if searchaddress != '' and searchaddress is not None:
+    #     results = results.filter(address__icontains=searchaddress)
 
     if minimum != '' and minimum is not None:
         results = results.filter(salary_max__gte = minimum)
 
-    if duration != '' and duration is not None:
-        
-        listjobs = [r.id for r in results if date.today() - r.postdate <= 5]
+    if duration != 'on' and duration is not None:
+        listjobs = [r.id for r in results if date.today() - r.postdate <= timedelta(days=int(duration))]
+        results = results.filter(id__in=listjobs)
+    
+    if distance != 'on' and distance is not None and searchgeo != '' and searchgeo is not None:
+        geosearch = searchgeo.split(",")
+        searchlat = float(geosearch[0])
+        searchlon = float(geosearch[1])
+
+        listjobs = [r.id for r in results if calculate_miles(searchlat, searchlon, float(str(r.geolocation).split(",")[0]), float(str(r.geolocation).split(",")[1])) <= float(distance)]
         results = results.filter(id__in=listjobs)
 
         
     return render(request, 'jobsearch.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form})
+
 
 
 def job_detail(request, job_id):

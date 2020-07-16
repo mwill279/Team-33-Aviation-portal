@@ -1,3 +1,4 @@
+
 """aviation URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -20,18 +21,25 @@ from django.conf.urls.static import static
 
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, searchpage_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
     path('company/',companypage_view, name='company_page'),
+    path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
     path('jobpost/', postjob_views.posting, name='post_job'),
+    path('search/', searchpage_view, name='search_page'),
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
+    path('company_register', user_views.company_register, name='company_register'),
+    path('company_profile_creator/', user_views.addCompanyProfile, name='company_profile_creator'),
+    path('company_profile/', user_views.company_profile, name='company_profile'),
+    path('choose_register/', chooseRegister_view, name='choose_register'),
     path('resume/', user_views.resume, name='resume'),
-    path('profile/', user_views.profile, name='profile'),
+    path('review/', user_views.review, name='review'),
+ #   path('profile/', user_views.jobseeker_profile_view, name='profile'),
     path('choose_register/', chooseRegister_view, name='choose_register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
@@ -43,7 +51,7 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
-    path('userprofile/', user_views.home, name = 'userProfile-home'),
+    path('userprofile/', user_views.jobseeker_profile_view, name = 'userProfile-home'),
     path('about/', user_views.about, name = 'userProfile-about'),
     path('signup/', user_views.signup, name = 'userProfile-signup'),
     path('addwork/', user_views.addWorkingExperience, name = 'userProfile-addwork'),
@@ -54,4 +62,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
