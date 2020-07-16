@@ -385,7 +385,13 @@ def upload(request):
     return render(request,'userProfile/upload.html')
 
 
+def test(request):
+    if request.user.groups.exists():
+        group = request.user.groups.all()[0].name
+    if group == 'jobseeker':
+        redirect('jobsearch')
 
+    redirect('company_profile')
 
 
 

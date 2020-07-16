@@ -57,7 +57,8 @@ urlpatterns = [
     path('addeducation/', user_views.addEducationExperience, name = 'userProfile-addeducation'),
     path('signin/', user_views.signin, name = 'userProfile-signin'),
     path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
-    path('upload/', user_views.upload, name = 'userProfile-upload')
+    path('upload/', user_views.upload, name = 'userProfile-upload'),
+    path('test/', user_views.test, name='test')
 ]
 
 if settings.DEBUG:
