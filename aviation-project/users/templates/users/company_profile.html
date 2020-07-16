@@ -55,15 +55,14 @@
         </ul>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
-
+            {% for job in jobs%}
                 <div class="card" id="HoverCard">
                     <div class="card-body">
-                        <h5 class="card-title">Yo Some Job</h5>
-                        <p class="card-text">Apply to this job dude.</p>
-
+                        <h5 class="card-title">{{ job.title }}</h5>
+                        <p class="card-text">{{ job.description }}</p>
                     </div>
                 </div>
-
+            {% endfor %}
             </div>
             <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="nav-about-tab">
                 <div class="card">
@@ -91,6 +90,7 @@
         </div>
         </form>
     </div>
-
-
+<div>
+    <a href="{% url 'password_reset' %}" >Change Password?</a>
+</div>
 {% endblock %}

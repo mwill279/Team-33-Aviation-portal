@@ -36,3 +36,15 @@ class PostingForm(forms.ModelForm):
         model = Jobform
         fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']
 
+class UpdateJobForm(forms.ModelForm):
+    title = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. Senior Manager'}),
+    description = forms.Textarea(attrs={'rows': 10, 'cols': 150}),
+    zipcode = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. 11111'}),
+    postdate = DateInput(),
+    posttime = TimeInput(),
+    deadlinedate = DateInput(),
+    deadlinetime = TimeInput(),
+
+    class Meta:
+        model = Jobform
+        fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']

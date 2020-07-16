@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+{% if user.is_authenticated %}
+{% if request.user.groups.all.0.name == "company_owner" %}
 <div class="container" style="top:50px; position:relative; ">
 
     <h1 >Job Post Submission</h1>
@@ -19,6 +21,11 @@
     </form>
 </div>
     </div>
+{% else %}
+    <h1>You are not allowed to view this page. <br>
+        This page is only for company owners</h1>
+{% endif %}
+{% endif %}
     
 
 

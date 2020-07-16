@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import PostingForm
+from .forms import PostingForm, UpdateJobForm
 from postjob.models import Jobform, Jobtype
 # Create your views here.
 

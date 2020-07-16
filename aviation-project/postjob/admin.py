@@ -4,11 +4,11 @@ from .models import Jobtype, Jobform
 
 
 admin.site.register(Jobtype)
-#admin.site.register(Jobform)
+admin.site.register(Jobform)
 
-@admin.register(Jobform)
-class JobformAdmin(admin.ModelAdmin):
-    list_display = ['title','postdate', 'posttime', 'deadlinedate', 'deadlinetime', 'open']
+# @admin.register(Jobform)
+# class JobformAdmin(admin.ModelAdmin):
+#     list_display = ['title','postdate', 'posttime', 'deadlinedate', 'deadlinetime', 'open']
 
 
 

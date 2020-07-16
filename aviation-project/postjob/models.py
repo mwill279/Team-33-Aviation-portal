@@ -11,7 +11,7 @@ class Jobtype(models.Model):
         return self.name
 
 class Jobform(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
     #jobtype = models.ManyToManyField(Jobtype)

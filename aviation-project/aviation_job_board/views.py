@@ -9,7 +9,7 @@ from postjob.forms import PostingForm
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from users.models import User, Users
-from postjob.models import Jobform
+from postjob.models import Jobform, Jobtype
 
 # Create your views here.
 
@@ -70,6 +70,7 @@ def postjob_view(request, *args, **kwargs):
     if request.method == 'POST':
         pj_form = PostingForm(request.POST)
         if pj_form.is_valid():
+            #jobs = Jobform()
             title = pj_form.cleaned_data['title']
             description = pj_form.cleaned_data['description']
             #zipcode = pj_form.cleaned_data['zipcode']
@@ -77,8 +78,10 @@ def postjob_view(request, *args, **kwargs):
             posttime = pj_form.cleaned_data['posttime']
             deadlinedate = pj_form.cleaned_data['deadlinedate']
             deadlinetime = pj_form.cleaned_data['deadlinetime']
-            id = request.user.id
-            Jobform.objects.filter(user_id=id).update(title=title, description=description, postdate=postdate, posttime=posttime, deadlinedate=deadlinedate, deadlinetime=deadlinetime)
+            jobtype = pj_form.cleaned_data['jobtype']
+            user = request.user
+            Jobform.objects.create(user=user, jobtype=jobtype, title=title, description=description, postdate=postdate, posttime=posttime, deadlinedate=deadlinedate, deadlinetime=deadlinetime)
+            #jobs.save()
             #message.success(request, f'Your job has been posted!')
             #pj_form.save()
             return redirect('company_profile')

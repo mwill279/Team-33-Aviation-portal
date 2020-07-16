@@ -16,10 +16,14 @@
    <div class="searchBox">
        {% if request.user.groups.all.0.name == "jobseeker" %}
        <h1 class= 'display-4 text-center jobSearching'>Search for Jobs</h1>
-      <button class='uploadResume'type="button"><span>Upload Resume</span></button>
+       <form action="{% url 'resume' %}">
+      <button class='uploadResume'type="submit"><span>Upload Resume</span></button>
+       </form>
        {% elif request.user.groups.all.0.name == "company_owner" %}
        <h1 class= 'display-4 text-center jobSearching'>Find Candidates</h1>
-       <button class='uploadResume'type="button"><span>Post a Job</span></button>
+       <form action="{% url 'posting' %}">
+       <button class='uploadResume'type="submit"><span>Post a Job</span></button>
+       </form>
        {% else %}
        <h1 class= 'display-4 text-center jobSearching'>Job & Candidate <br> searching just got easier</h1>
        <button class='uploadResume'type="button"><span>Upload Resume/Post Job</span></button>

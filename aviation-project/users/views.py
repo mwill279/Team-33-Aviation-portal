@@ -17,6 +17,7 @@ import datetime
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
+from postjob.models import Jobform, Jobtype
 
 
 # Create your views here.
@@ -141,10 +142,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
+    jobs = Jobform.objects.filter(user=request.user)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
+        'jobs': jobs
     }
 
     return render(request, 'users/company_profile.html', context)
