@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 from django.http import HttpResponse
@@ -8,6 +9,7 @@ from postjob.forms import PostingForm
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from users.models import User, Users
+from postjob.models import Jobform
 
 # Create your views here.
 
@@ -64,17 +66,29 @@ def searchpage_view(request, *args, **kwargs):
     return render(request, "search.html", {})
 
 def postjob_view(request, *args, **kwargs):
+    pj_form = PostingForm(request.POST)
     if request.method == 'POST':
-        filled_form = PostingForm(request.POST)
-        if filled_form.is_valid():
-            filled_form.save()
-            note = '%s Posting submitted!!' %(filled_form.cleaned_data['title'],)
-            new_form = PostingForm()
-            return render(request, 'post_job.html', {'postingform':new_form, 'note':note})
-    else: 
-        form = PostingForm()
-        return render(request, 'post_job.html', {'postingform':form})
-    return render(request, "post_job.html", {})
+        pj_form = PostingForm(request.POST)
+        if pj_form.is_valid():
+            title = pj_form.cleaned_data['title']
+            description = pj_form.cleaned_data['description']
+            #zipcode = pj_form.cleaned_data['zipcode']
+            postdate = pj_form.cleaned_data['postdate']
+            posttime = pj_form.cleaned_data['posttime']
+            deadlinedate = pj_form.cleaned_data['deadlinedate']
+            deadlinetime = pj_form.cleaned_data['deadlinetime']
+            id = request.user.id
+            Jobform.objects.filter(user_id=id).update(title=title, description=description, postdate=postdate, posttime=posttime, deadlinedate=deadlinedate, deadlinetime=deadlinetime)
+            #message.success(request, f'Your job has been posted!')
+            #pj_form.save()
+            return redirect('company_profile')
+        else:
+            pj_form = PostingForm(request.POST)
+
+    context = {
+        'pj_form': pj_form,
+    }
+    return render(request, "post_job.html", context)
 
 def chooseRegister_view(request, *args, **kwargs):
     return render(request, "choose_register.html", {})

@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 from postjob import views as postjob_views
 
-from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, searchpage_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, searchpage_view, postjob_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
@@ -47,7 +47,7 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
     path('oauth/', include('social_django.urls', namespace='social')),
-    path('postjob/', postjob_views.posting, name='posting'),
+    path('postjob/', postjob_view, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
     path('userprofile/', user_views.jobseeker_profile_view, name = 'userProfile-home'),

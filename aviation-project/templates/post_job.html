@@ -1,89 +1,24 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container" style="top:50px; position:relative; ">
 
     <h1 >Job Post Submission</h1>
 
-    <hr style="border: none; background-color: #333; color: #333; margin-bottom: 30px; height: 2px;">
-
-    <form action="{% url 'post_job' %}" method="post">
-    {% csrf_token %}
-
+    <div class = "col-md-8">
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ pj_form|crispy }}
+        </fieldset>
         <div class="form-group">
-            <label for="JobTitle">Job Title</label>
-            {% comment %} <input class="form-control" id="JobTitle" placeholder="e.g. Senior Manager"> {% endcomment %}
-            {{ postingform.title }}
+            <button class="btn btn-outline-info" type="submit">Done</button>
         </div>
-
-        <div class="form-group">
-            <label for="Zipcode">Zip Code</label>
-            {{ postingform.zipcode }}
-        </div>
-
-        <div class="form-group">
-            <label for="JobType">Job Type</label>
-            {{ postingform.jobtype }}
-        </div>
-
-        <div class="form-group">
-            <label for="JobDescription">Job Description</label>
-            {{ postingform.description }}
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="StartDate">Start Date</label>
-                    <br>
-                    {{ postingform.postdate }}
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="form-group">
-                    <label for="EndDate">End Date</label>
-                    <br>
-                    {{ postingform.deadlinedate }}
-                </div>
-            </div>
-            
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="StartTime">Start Time</label>
-                    <br>
-                    {{ postingform.posttime }}
-                </div>
-            </div>
-            
-
-            <div class="col">
-                <div class="form-group">
-                    <label for="EndTime">End Time</label>
-                    <br>
-                    {{ postingform.deadlinetime }}
-                </div>
-            </div>
-
-            
-        </div>
-
-       
-
-        <div class="form-group">
-            <label for="Attachment">Attach File (optional)</label>
-            <input type="file" class="Attachment" id="Attachment">
-        </div>
-
-        <button type="submit" class="btn btn-success btn-lg float-right ">Submit</button>
-
     </form>
-
-
 </div>
+    </div>
     
 
 

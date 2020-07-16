@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from datetime import date, time, datetime
 from datetime import timedelta
 from datetime import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 class Jobtype(models.Model):
     name = models.CharField(max_length=50)
@@ -10,6 +11,7 @@ class Jobtype(models.Model):
         return self.name
 
 class Jobform(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
     #jobtype = models.ManyToManyField(Jobtype)
