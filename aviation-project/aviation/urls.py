@@ -58,7 +58,7 @@ urlpatterns = [
     path('signin/', user_views.signin, name = 'userProfile-signin'),
     path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
     path('upload/', user_views.upload, name = 'userProfile-upload'),
-    path('redirect/', user_views.test, name = 'redirect')
+    path('redirect/', user_views.redirect, name = 'redirect')
 ]
 
 if settings.DEBUG:
