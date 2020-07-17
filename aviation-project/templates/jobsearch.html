@@ -83,7 +83,7 @@
 </form>
 {{ PostingForm.media.js }}
 {% for results in results %}
-{% comment %} {% if results.open %} {% endcomment %}
+{% if results.open %}
 <a href="{% url 'job_detail' results.id %}">
    <h1>{{results.title}} - {{results.jobtype}}: {{results.salary_min}} - {{results.salary_max}}</h1>
 </a>
