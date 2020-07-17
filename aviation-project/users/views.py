@@ -388,6 +388,6 @@ def upload(request):
 def redirect(request):
     if(request.user.groups.filter(name= 'jobseeker').exists()):
         return redirect('jobsearch')
-    else:
+    elif(request.user.groups.filter(name= 'company_owner').exists()):
         return redirect('company_profile')
-
+    return redirect('home')
