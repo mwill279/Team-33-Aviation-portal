@@ -17,6 +17,10 @@ import datetime
 
 
 # Create your views here.
+
+def applicationStatus_view(request, *args, **kwargs):
+    return render(request, "userprofile/applicationStatus.html", {})
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
