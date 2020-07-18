@@ -1,7 +1,6 @@
 import json
 from django.contrib import admin
 from .models import Jobtype, Jobform
-from mapbox_location_field.admin import MapAdmin
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
@@ -9,7 +8,6 @@ from django_google_maps import fields as map_fields
 
 
 admin.site.register(Jobtype)
-# admin.site.register(Jobform, MapAdmin)
 #admin.site.register(Jobform)
 
 @admin.register(Jobform)

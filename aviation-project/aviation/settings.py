@@ -25,9 +25,6 @@ SECRET_KEY = 'rrx$k-_mbwtli=dl)t9!0ec8lp++m5c31lle1k06rch1mxad0l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#Mapbox Key
-MAPBOX_KEY = "pk.eyJ1IjoiYXZpYXRpb25qb2IiLCJhIjoiY2tjNThtZng4MGY5bjJzb2Jvanh3NTJmcSJ9.Nc9VDVv6ySpVKyXRGvBCqg"
-
 GOOGLE_MAPS_API_KEY = "AIzaSyCnsDSxDFykyo-hbESQOuY7A7wnavW-7Ps"
 
 ALLOWED_HOSTS = []
@@ -44,14 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'users.apps.UsersConfig',
-    'mapbox_location_field',
     'django_google_maps',
 
     'crispy_forms',
     'social_django',
     'postjob',
     'events_app',
-    'background_task',
 ]
 
 MIDDLEWARE = [
