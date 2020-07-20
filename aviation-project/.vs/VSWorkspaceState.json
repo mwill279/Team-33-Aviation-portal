@@ -1,13 +1,18 @@
 {
   "ExpandedNodes": [
     "",
-    "\\aviation",
-    "\\aviation_job_board",
     "\\aviation_portal",
     "\\aviation_portal\\migrations",
     "\\aviation_portal\\migrations\\__pycache__",
-    "\\templates"
+    "\\templates",
+    "\\userProfile",
+    "\\userProfile\\templates",
+    "\\userProfile\\templates\\userProfile",
+    "\\users",
+    "\\users\\templates",
+    "\\users\\templates\\userProfile",
+    "\\users\\templates\\users"
   ],
-  "SelectedNode": "\\aviation_job_board\\views.py",
+  "SelectedNode": "\\users\\templates\\users\\review.html",
   "PreviewInSolutionExplorer": false
 }
