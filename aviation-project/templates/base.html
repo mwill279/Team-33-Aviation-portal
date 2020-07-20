@@ -4,6 +4,11 @@
 <html lang="en">
 <head>
 
+  {% load mapbox_location_field_tags %}
+  
+  {% location_field_includes %}
+  {% include_jquery %}
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -41,6 +46,11 @@
                       <span class="sr-only">(current)</span>
                   </a>
               </li>
+              {% if request.user.groups.all.0.name != "employer" %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'search_page' %}">Search</a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                   <a class="nav-link" href="{% url 'event_list' %}">Events</a>
               </li>
@@ -57,9 +67,15 @@
                   <a class="nav-link" href="#">Contact</a>
               </li>
               {% if user.is_authenticated %}
-              <li class="nav-item">
+              {% if request.user.groups.all.0.name == "jobseeker" %}
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'userProfile-home' %}">Profile</a>
-              </li>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'company_profile' %}">Company Profile</a>
+                </li>
+              {% endif %}
               <li class="nav-item">
                   <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
@@ -103,7 +119,6 @@
                   <a class="btn nav-link" href="{% url 'inbox' %}"><i class="fas fa-envelope" style="color: #fff; font-size:24px; "></i></a>
               </li> <!--delete after testing-->
               {% endif %}
-
           </ul>
       </div>
     </div>

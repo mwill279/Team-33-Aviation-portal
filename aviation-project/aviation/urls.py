@@ -1,6 +1,5 @@
 
 """aviation URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -52,27 +51,6 @@ urlpatterns = [
    
 ]
 
-
-"""aviation URL Configuration
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-
 from postjob import views as postjob_views
 
 from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, searchpage_view
@@ -83,14 +61,18 @@ urlpatterns = [
     path('company/',companypage_view, name='company_page'),
     path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
-    path('jobpost/', postjob_view, name='post_job'),
+    path('jobpost/', postjob_views.posting, name='post_job'),
     path('search/', searchpage_view, name='search_page'),
     path('events/', events_view, name='event_list'),
     path('register/', user_views.register, name='register'),
+    path('company_register', user_views.company_register, name='company_register'),
+    path('company_profile_creator/', user_views.addCompanyProfile, name='company_profile_creator'),
+    path('company_profile/', user_views.company_profile, name='company_profile'),
+    path('choose_register/', chooseRegister_view, name='choose_register'),
     path('appStatus/', user_views.applicationStatus_view, name='application_status'),
     path('resume/', user_views.resume, name='resume'),
     path('review/', user_views.review, name='review'),
-    path('profile/', user_views.profile, name='profile'),
+ #   path('profile/', user_views.jobseeker_profile_view, name='profile'),
     path('choose_register/', chooseRegister_view, name='choose_register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
@@ -102,7 +84,7 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
-    path('userprofile/', user_views.home, name = 'userProfile-home'),
+    path('userprofile/', user_views.jobseeker_profile_view, name = 'userProfile-home'),
     path('about/', user_views.about, name = 'userProfile-about'),
     path('signup/', user_views.signup, name = 'userProfile-signup'),
     path('addwork/', user_views.addWorkingExperience, name = 'userProfile-addwork'),
