@@ -92,3 +92,12 @@ def job_detail(request, job_id):
     except Job.DoesNotExist:
         raise Http404('Job not found')
     return render(request, 'job_detail.html', {'job': job,})
+
+
+def searchpage(request, *args, **kwargs):
+    results = Jobform.objects.all()
+    return render(request, "search.html", {'results': results})
+
+
+
+
