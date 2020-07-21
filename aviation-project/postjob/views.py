@@ -40,6 +40,15 @@ def calculate_miles(search_lat, search_lon, lat, lon):
 def deg2rad(deg):
     return deg * (math.pi/180)
 
+def jobPostCount(querySet):
+    size = len(querySet)
+    if size == 0:
+        return "No Jobs Found"
+    elif size == 1:
+        return "1 Job Found"
+    else:
+        return "{} Jobs Found".format(size)
+
 def jobsearch(request):
     results = Jobform.objects.all()
     jobtypes = Jobtype.objects.all()
@@ -96,7 +105,7 @@ def job_detail(request, job_id):
 
 def searchpage(request, *args, **kwargs):
     results = Jobform.objects.all()
-    return render(request, "search.html", {'results': results})
+    return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
 
 
 
