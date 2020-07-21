@@ -20,6 +20,10 @@ from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
+
+def applicationStatus_view(request, *args, **kwargs):
+    return render(request, "userprofile/applicationStatus.html", {})
+
 @unauthenticated_user
 def register(request):
     if request.method == 'POST':

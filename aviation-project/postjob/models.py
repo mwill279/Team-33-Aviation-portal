@@ -16,6 +16,7 @@ class Searchengine(models.Model):
 
 class Jobform(models.Model):
     title = models.CharField(max_length=100)
+    company = models.CharField(max_length=100)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
     description = models.TextField()
 
@@ -43,6 +44,15 @@ class Jobform(models.Model):
         if self.deadlinedate == self.datenow:
             return self.deadlinetime >= self.timenow
         return (self.deadlinedate > self.datenow and self.postdate < self.datenow)
+    
+    def age(self):
+        diff = datetime.now().date() - self.postdate
+        if diff == 0:
+            return "today"
+        elif diff == 1:
+            return "1 day"
+        else:
+            return "{} days".format(diff.days)
 
 
             
