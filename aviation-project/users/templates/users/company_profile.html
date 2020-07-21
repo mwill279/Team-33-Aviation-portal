@@ -8,9 +8,10 @@
         margin-bottom:5px;
     }
 
-    #HoverCard:hover {
+    .HoverCard:hover {
         background-color: #ff6d00;
         transition: all 0.5s ease;
+        cursor:pointer;
     }
 
 </style>
@@ -48,17 +49,30 @@
             <li class="nav-item">
                 <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
             </li>
+            
         </ul>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
-
-                <div class="card" id="HoverCard">
-                    <div class="card-body">
-                        <h5 class="card-title">Yo Some Job</h5>
-                        <p class="card-text">Apply to this job dude.</p>
-
+                <div class="accordian" id="Accordian1">
+                    <div class="card HoverCard">
+                        <div class="card-header " id="heading1" data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">
+                            <h5 class="card-title">Yo Some Job</h5>
+                            <p class="card-text">Apply to this job dude.</p>
+                        </div>
+                        <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#Accordian1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="https://pbs.twimg.com/profile_images/1067242179955896320/mKdx6PgL_400x400.jpg" style="height:40px; margin-right:10px;">
+                                        Application for <b>Senior Database Admin</b> at <b>Lockheed</b>
+                                        <button class="btn btn-warning" style="float:right;" data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">In Review</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
 
             </div>
             <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="nav-about-tab">
@@ -71,6 +85,7 @@
                     </div>
                 </div>
             </div>
+           
         </div>
     </div>
 
