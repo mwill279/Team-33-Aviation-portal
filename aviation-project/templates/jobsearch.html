@@ -87,6 +87,6 @@
 <a href="{% url 'job_detail' results.id %}">
    <h1>{{results.title}} - {{results.jobtype}}: {{results.salary_min}} - {{results.salary_max}}</h1>
 </a>
-{% comment %} {%endif%} {% endcomment %}
+{%endif%}
 {%endfor%}
 {% endblock %}
