@@ -18,12 +18,19 @@ $(function() {
 
 
     // Indicate selection for the "Distance" filter option
+    // $(".dropdown2 a").click(function() {
+    //     $(".menuHeader2").text($(this).text());
+    //     $(".menuHeader2").val($(this).text());
+    //     $(".menuHeader2").parent().addClass("headerActive");
+    //     $(".dot2").addClass("dotActive");
+    // });
+
     $(".dropdown2 a").click(function() {
-        $(".menuHeader2").text($(this).text());
-        $(".menuHeader2").val($(this).text());
-        $(".menuHeader2").parent().addClass("headerActive");
-        $(".dot2").addClass("dotActive");
-    });
+            $(".menuHeader2").text($(this).text());
+            $(".menuHeader2").val($(this).text());
+            $(".menuHeader2").parent().addClass("headerActive");
+            $(".dot2").addClass("dotActive");
+        });
 
     // Indicate selection for the "Date Posted" filter option
     $(".dropdown3 a").click(function() {

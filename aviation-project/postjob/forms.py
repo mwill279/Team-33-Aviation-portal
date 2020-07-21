@@ -1,6 +1,6 @@
 import json
 from django import forms
-from .models import Jobform, Searchaddress
+from .models import Jobform, Searchengine
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
@@ -35,12 +35,13 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': TimeInput(),
             'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
             'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
+            'jobtype': forms.CheckboxSelectMultiple,
             }
 
 class SearchForm(forms.ModelForm):
     
     class Meta:
-        model = Searchaddress
+        model = Searchengine
         fields = "__all__"
         widgets = {
             'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
