@@ -1,5 +1,6 @@
 from csv import DictReader
 from datetime import date, time, datetime, timezone
+from users.models import CompanyProfile
 
 from django.core.management import BaseCommand
 
@@ -69,7 +70,8 @@ class Command(BaseCommand):
 
             form.address = row['Address']
 
+            raw_company = row['Company name']
+            submit_company = CompanyProfile.objects.get(name=raw_company)
+            form.company_id = submit_company.id
+
             form.save()
-
-    
-

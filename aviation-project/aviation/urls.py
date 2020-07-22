@@ -94,7 +94,6 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     
     # JOB SEARCH PATHS
-    path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
     
     

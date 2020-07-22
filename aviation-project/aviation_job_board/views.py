@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from postjob.models import Jobtype
-from postjob.forms import PostingForm, SearchForm
+from postjob.forms import PostingForm
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from users.models import User, Users
@@ -42,7 +42,7 @@ def base_view(request):
 
 def home_view(request):
     jobtypes = Jobtype.objects.all()
-    form = SearchForm()
+    form = PostingForm()
     return render(request, "index.html", {'jobtypes':jobtypes, 'PostingForm':form})
 
     context = {
