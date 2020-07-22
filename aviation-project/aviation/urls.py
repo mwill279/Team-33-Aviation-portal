@@ -56,7 +56,7 @@ urlpatterns = [
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
     
     path('trysearch/', user_views.trysearch, name='trysearch'),
-	path('applyjob/', user_views.applyjob, name='applyjob'),
+    path('applyjob/', user_views.applyjob, name='applyjob'),
    
 ]
 
@@ -111,7 +111,7 @@ urlpatterns = [
     path('upload/', user_views.upload, name = 'userProfile-upload'),
     
     path('trysearch/', user_views.trysearch, name='trysearch'),
-	path('applyjob/', user_views.applyjob, name='applyjob'),
+    path('applyjob/', user_views.applyjob, name='applyjob'),
     
 ]
 
