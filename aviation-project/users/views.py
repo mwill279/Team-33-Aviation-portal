@@ -12,12 +12,14 @@ from django.contrib.auth.models import User, auth
 from .models import Users, CompanyProfile
 from .models import workExperience
 from .models import educationExperience
+from .models import applicationStatus
 from django.shortcuts import get_object_or_404
 import datetime
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 
+from postjob.models import Jobform
 
 # Create your views here.
 
@@ -227,13 +229,27 @@ def jobseeker_profile_view(request):
 		obj= works.get(comment = request.POST['comments'], job = request.POST['job'], company = request.POST['company'], Username = request.user.username).delete()
 	if request.method == 'POST' and 'deleteEducation' in request.POST:
 		obj= educations.get(duration = request.POST['duration'], title = request.POST['title'], school = request.POST['school'], Username = request.user.username).delete()
-	return render (request, 'userProfile/profile2.html', {'users': users, 'works': works, 'educations': educations})
+	applications = applicationStatus.objects.filter(username = request.user.username)
+	return render (request, 'userProfile/profile2.html', {'users': users, 'works': works, 'educations': educations, 'applications': applications})
 
 
 
+def trysearch(request):
+    jobs = Jobform.objects.all()
+    if request.method == 'POST' and 'apply' in request.POST:
+        title = request.POST['name']
+        jobtype = request.POST['type']
+        description = request.POST['description']
+        username = request.user.username
+        application = applicationStatus(title = title, jobtype = jobtype, description = description, username = username)
+        application.save()
+    return render(request, 'trysearch.html', {'jobs': jobs})
 
-
-
+@login_required()
+@allowed_users(allowed_roles=['jobseeker'])
+def applyjob(request):
+    applications = applicationStatus.objects.filter(username = request.user.username)
+    return render(request, 'applyjob.html')
 
 
 ######################################################################################################################################################################################
