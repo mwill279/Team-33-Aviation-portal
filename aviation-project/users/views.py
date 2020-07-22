@@ -18,6 +18,8 @@ from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 from postjob.models import Jobform, Jobtype
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 
 # Create your views here.
@@ -384,10 +386,10 @@ def upload(request):
 
     return render(request,'userProfile/upload.html')
 
-@login_required
-def redirect(request):
-    if(request.user.groups.filter(name= 'jobseeker').exists()):
-        return redirect('jobsearch')
-    elif(request.user.groups.filter(name= 'company_owner').exists()):
-        return redirect('company_profile')
-    return redirect('home')
+#
+# def redirect(request):
+#     if(request.user.groups.filter(name= 'jobseeker').exists()):
+#         return HttpResponseRedirect('jobsearch')
+#     elif(request.user.groups.filter(name= 'company_owner').exists()):
+#         return HttpResponseRedirect('company_profile')
+#     return HttpResponseRedirect('home')

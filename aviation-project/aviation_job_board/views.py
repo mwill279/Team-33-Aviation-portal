@@ -10,7 +10,7 @@ from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from users.models import User, Users
 from postjob.models import Jobform, Jobtype
-
+from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
 # from django import template
@@ -45,6 +45,11 @@ def base_view(request):
     return render(request, "base.html", context=context)
 
 def home_view(request):
+    if (request.user.groups.filter(name='jobseeker').exists()):
+        return redirect('search_page')
+    elif (request.user.groups.filter(name='company_owner').exists()):
+        return redirect('company_profile')
+
     jobtypes = Jobtype.objects.all()
 
     context = {

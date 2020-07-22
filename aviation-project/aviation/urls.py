@@ -34,7 +34,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('company_register', user_views.company_register, name='company_register'),
     path('company_profile_creator/', user_views.addCompanyProfile, name='company_profile_creator'),
-    path('company_profile/', user_views.company_profile, name='company_profile'),
+    path('company_profile', user_views.company_profile, name='company_profile'),
     path('choose_register/', chooseRegister_view, name='choose_register'),
     path('resume/', user_views.resume, name='resume'),
     path('review/', user_views.review, name='review'),
@@ -58,7 +58,7 @@ urlpatterns = [
     path('signin/', user_views.signin, name = 'userProfile-signin'),
     path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
     path('upload/', user_views.upload, name = 'userProfile-upload'),
-    path('redirect/', user_views.redirect, name = 'redirect')
+    #path('redirect/', user_views.redirect, name = 'redirect')
 ]
 
 if settings.DEBUG:

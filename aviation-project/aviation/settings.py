@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ajb_db',
+        'NAME': 'new_ajb_db',
         'USER': 'postgres',
-        'PASSWORD': '123miles', #Put the password that you used for PostrgeSQL
+        'PASSWORD': 'danydb1270', #Put the password that you used for PostrgeSQL
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -154,7 +154,6 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'redirect'
 LOGIN_URL = 'login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -182,4 +181,4 @@ STATICFILES_FINDERS = (
 
 )
 
-#LOGIN_REDIRECT_URL = 'userProfile-home'
+LOGIN_REDIRECT_URL = 'home'
