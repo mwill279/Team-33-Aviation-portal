@@ -3,7 +3,12 @@ from django.utils.translation import gettext_lazy as _
 from datetime import date, time, datetime, timezone
 from django_google_maps import fields as map_fields
 from users.models import CompanyProfile
-
+from django.core.validators import MinLengthValidator
+from datetime import date, time, datetime
+from datetime import timedelta
+from datetime import timezone
+from django.contrib.auth.models import User
+# Create your models here.
 class Jobtype(models.Model):
     name = models.CharField(max_length=50)
 
@@ -11,6 +16,7 @@ class Jobtype(models.Model):
         return self.name
 
 class Jobform(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)

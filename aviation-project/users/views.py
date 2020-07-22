@@ -18,6 +18,9 @@ import datetime
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
+from postjob.models import Jobform, Jobtype
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 from postjob.models import Jobform
 
@@ -147,10 +150,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
+    jobs = Jobform.objects.filter(user=request.user)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
+        'jobs': jobs
     }
 
     return render(request, 'users/company_profile.html', context)
@@ -401,11 +406,10 @@ def upload(request):
 
     return render(request,'userProfile/upload.html')
 
-
-
-
-
-
-    '''
-        complete your profile before accessing.
-    '''
+#
+# def redirect(request):
+#     if(request.user.groups.filter(name= 'jobseeker').exists()):
+#         return HttpResponseRedirect('jobsearch')
+#     elif(request.user.groups.filter(name= 'company_owner').exists()):
+#         return HttpResponseRedirect('company_profile')
+#     return HttpResponseRedirect('home')

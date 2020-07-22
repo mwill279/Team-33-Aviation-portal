@@ -18,15 +18,13 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-"""from listapp import views as listapp_views""" """listapp_views doesn't exist"""
 from postjob import views as postjob_views
-
-from aviation_job_board.views import home_view,portal_view, companypage_view, postjob_view, chatRoom_view
+from aviation_job_board.views import home_view, companypage_view, postjob_view, chooseRegister_view, chatRoom_view, postjob_view
 from users import views as user_views
 from events_app.views import events_view
 urlpatterns = [
     path('', home_view, name='home'),
-    path('portal/', portal_view, name='portal_view'),
+    #path('portal/', portal_view, name='portal_view'),
     path('company/',companypage_view, name='company_page'),
     path('inbox/',chatRoom_view, name='inbox'),
     path('admin/', admin.site.urls),
@@ -80,7 +78,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('company_register', user_views.company_register, name='company_register'),
     path('company_profile_creator/', user_views.addCompanyProfile, name='company_profile_creator'),
-    path('company_profile/', user_views.company_profile, name='company_profile'),
+    path('company_profile', user_views.company_profile, name='company_profile'),
     path('choose_register/', chooseRegister_view, name='choose_register'),
     path('appStatus/', user_views.applicationStatus_view, name='application_status'),
     path('resume/', user_views.resume, name='resume'),
@@ -97,6 +95,8 @@ urlpatterns = [
     path('postjob/', postjob_views.posting, name='posting'),
     
     # JOB SEARCH PATHS
+    # path('postjob/', postjob_view, name='posting'),
+    path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
     path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
     
     
@@ -108,10 +108,8 @@ urlpatterns = [
     path('signin/', user_views.signin, name = 'userProfile-signin'),
     path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
     path('upload/', user_views.upload, name = 'userProfile-upload'),
-    
     path('trysearch/', user_views.trysearch, name='trysearch'),
     path('applyjob/', user_views.applyjob, name='applyjob'),
-    
 ]
 
 if settings.DEBUG:
