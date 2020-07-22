@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from datetime import date, time, datetime, timezone
 from django_google_maps import fields as map_fields
+from users.models import CompanyProfile
 
 class Jobtype(models.Model):
     name = models.CharField(max_length=50)
@@ -9,12 +10,9 @@ class Jobtype(models.Model):
     def __str__(self):
         return self.name
 
-class Searchaddress(models.Model):
-    address = map_fields.AddressField(max_length=200)
-    geolocation = map_fields.GeoLocationField(max_length=100)
-
 class Jobform(models.Model):
     title = models.CharField(max_length=100)
+    company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     jobtype = models.ForeignKey(Jobtype, on_delete=models.CASCADE)
     description = models.TextField()
 
@@ -42,6 +40,15 @@ class Jobform(models.Model):
         if self.deadlinedate == self.datenow:
             return self.deadlinetime >= self.timenow
         return (self.deadlinedate > self.datenow and self.postdate < self.datenow)
+    
+    def age(self):
+        diff = datetime.now().date() - self.postdate
+        if diff == 0:
+            return "today"
+        elif diff == 1:
+            return "1 day"
+        else:
+            return "{} days".format(diff.days)
 
 
             

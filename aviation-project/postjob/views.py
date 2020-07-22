@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from postjob.forms import PostingForm, SearchForm
-from postjob.models import Jobform, Jobtype, Searchaddress
+from postjob.forms import PostingForm
+from postjob.models import Jobform, Jobtype
 from datetime import timedelta, date, datetime
 import math
 # Create your views here.
@@ -40,10 +40,19 @@ def calculate_miles(search_lat, search_lon, lat, lon):
 def deg2rad(deg):
     return deg * (math.pi/180)
 
+def jobPostCount(querySet):
+    size = len(querySet)
+    if size == 0:
+        return "No Jobs Found"
+    elif size == 1:
+        return "1 Job Found"
+    else:
+        return "{} Jobs Found".format(size)
+
 def jobsearch(request):
     results = Jobform.objects.all()
     jobtypes = Jobtype.objects.all()
-    search = request.GET.get('jobtitle')
+    search = request.GET.get('title')
     searchtype = request.GET.get('jobtype')
     searchaddress = request.GET.get('address')
     searchgeo = request.GET.get('geolocation')
@@ -52,7 +61,7 @@ def jobsearch(request):
     duration = request.GET.get('posted_dur')
     distance = request.GET.get('distance')
     today = date.today()
-    form = SearchForm()
+    form = PostingForm(request.GET)
 
     if auth_req == "on":
         results = results.filter(US_author_required = True)
@@ -82,9 +91,7 @@ def jobsearch(request):
         results = results.filter(id__in=listjobs)
 
         
-    return render(request, 'jobsearch.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form})
-
-
+    return render(request, 'search.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form})
 
 def job_detail(request, job_id):
     try:
@@ -92,3 +99,12 @@ def job_detail(request, job_id):
     except Job.DoesNotExist:
         raise Http404('Job not found')
     return render(request, 'job_detail.html', {'job': job,})
+
+
+def searchpage(request, *args, **kwargs):
+    results = Jobform.objects.all()
+    return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
+
+
+
+

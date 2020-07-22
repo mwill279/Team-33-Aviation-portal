@@ -7,20 +7,19 @@
       <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job">
    </div>
    <div class="form-group">
-      <div id="locationField">
+      
          <label for = "address"></label>
-         {% comment %} <input id="autocomplete" placeholder="City, state, or zip code" onFocus="geolocate()" type="text"/> {% endcomment %}
          {{ PostingForm.address }}
          <label for = "geolocation">{{ PostingForm.geolocation }}</label>
          
-      </div>
    </div>
    <div class="form-group">
       <label for="jobtype"></label>
       <select id="jobtype" class="form-control" name="jobtype">
          <option selected>Job Type</option>
+         
          {% for jobtypes in jobtypes %}
-         <option value="{{ jobtypes}}">{{ jobtypes }}</option>
+         <option value="{{ jobtypes}}" type="checkbox">{{ jobtypes }}</option>
          {% endfor %}
       </select>
    </div>
@@ -78,15 +77,16 @@
             <label for="distance">25</label>
             <input type="radio" id="distance" name="distance" value = 25>
          </div>
+
    </div>
    <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button>
 </form>
-{{ PostingForm.media.js }}
+{{PostingForm.media.js}}
 {% for results in results %}
 {% if results.open %}
 <a href="{% url 'job_detail' results.id %}">
    <h1>{{results.title}} - {{results.jobtype}}: {{results.salary_min}} - {{results.salary_max}}</h1>
 </a>
-{% comment %} {%endif%} {% endcomment %}
+{%endif%}
 {%endfor%}
 {% endblock %}

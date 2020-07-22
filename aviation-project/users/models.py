@@ -57,3 +57,11 @@ class educationExperience (models.Model):
 	school = models.CharField(max_length = 40)
 	major = models.CharField(max_length = 40)
 	Username = models.CharField(max_length = 20)
+
+class applicationStatus (models.Model):
+	title = models.CharField(max_length=100)
+	jobtype = models.CharField(max_length=100)
+	description = models.CharField(max_length=100)
+	username = models.CharField(max_length = 20)
+	STATUS_CHOICE = [('AC', 'Accepted'), ('RJ', 'Rejected'), ('PR', 'Pending')]
+	status = models.CharField(max_length=2, choices = STATUS_CHOICE, default = 'PR')

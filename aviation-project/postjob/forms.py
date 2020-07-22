@@ -1,6 +1,6 @@
 import json
 from django import forms
-from .models import Jobform, Searchaddress
+from .models import Jobform
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
@@ -27,7 +27,7 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': 'Deadline Time'
             }
         widgets = {
-            'title': forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. Senior Manager'}),
+            'title': forms.TextInput(attrs={'size':20, 'placeholder': 'e.g. Title'}),
             'description': forms.Textarea(attrs={'rows':10, 'cols':150}),
             'postdate': DateInput(),
             'posttime': TimeInput(),
@@ -35,14 +35,5 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': TimeInput(),
             'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
             'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
+            'jobtype': forms.CheckboxSelectMultiple,
             }
-
-class SearchForm(forms.ModelForm):
-    
-    class Meta:
-        model = Searchaddress
-        fields = "__all__"
-        widgets = {
-            'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
-            'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
-        }

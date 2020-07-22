@@ -126,13 +126,33 @@
                            <a class="dropdown-item" href="#">Relevant</a>
                            <a class="dropdown-item" href="#">Recent</a>
                         </div>
-                        <div style="display: inline; position: relative; right: -25px ">7 Jobs found </div>
+                        <div style="display: inline; position: relative; right: -25px ">{{count}}</div>
                      </div>
                   </div>
                </div>
                <div class="row" style="">
                   <div class="col-md-12" style="padding:0px">
                      <div class="list-group card-group " style="">
+                            {% for result in results%}
+
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                               <div class="d-flex w-100 justify-content-between">
+                                  <div class="d-flex">
+                                     <div class="my-auto" >
+                                        <img src="https://cdn.iconscout.com/icon/free/png-256/codepen-15-896368.png" class="" alt="quixote" style="width: 70px; height: 70px; ">
+                                     </div>
+                                     <div style="margin-left: 20px; padding-top: 10px">
+                                        <h6>{{result.company.name}}</h6>
+                                        <h4 style="font-weight: bold">{{result.title}}</h4>
+                                        <h6>{{result.address}}</h6>
+                                     </div>
+                                  </div>
+                                  <small>{{result.age}}</small>
+                               </div>
+                            </a>
+
+                            {% endfor %}
+                         <!--
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                            <div class="d-flex w-100 justify-content-between">
                               <div class="d-flex">
@@ -223,6 +243,7 @@
                               <small>4 days ago</small>
                            </div>
                         </a>
+                        -->
                      </div>
                   </div>
                </div>

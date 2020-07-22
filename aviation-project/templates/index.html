@@ -23,23 +23,21 @@
          </div>
          <div class="tab-content">
             <div class="row active" id="job" data-tab-content>
-               <form class="form-inline" method="GET" action="{%url 'jobsearch'%}" novalidate>
+               <form class="form-inline" method="GET" action="{%url 'search_page'%}" novalidate>
                   <div class="form-group">
-                     <label for = "jobtitle"></label>
-                     <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job">
+                     {{PostingForm.title}}
                   </div>
                   <div class="form-group">
                      <div id="locationField">
-					 	<label for = "address"></label>
-                        {% comment %} <input id="autocomplete" placeholder="City, state, or zip code" onFocus="geolocate()" type="text"/> {% endcomment %}
                         {{ PostingForm.address }}
                         {{ PostingForm.geolocation }}
+                        {{ PostingForm.media.js }}
                      </div>
                   </div>
                   <div class="form-group">
                      <label for="jobtype"></label>
                      <select id="jobtype" class="form-control" name="jobtype">
-                        <option selected>Job Type</option>
+                        <option checkbox>Job Type</option>
                         {% for jobtypes in jobtypes %}
                         <option value="{{ jobtypes}}">{{ jobtypes }}</option>
                         {% endfor %}
@@ -47,7 +45,7 @@
                   </div>
                   <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button>
                </form>
-               {{ PostingForm.media.js }}
+               
             </div>
             <div class="row" id="candidate" data-tab-content>
                <div class="col-lg-5">
