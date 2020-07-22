@@ -18,7 +18,7 @@ import datetime
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
-
+import psycopg2
 from postjob.models import Jobform
 
 # Create your views here.
@@ -176,6 +176,96 @@ def resume(request):
             print("Invalid Request")
     return render(request, 'users/resume.html', parsed_info)
 
+def ParseSkills(request, skills):
+    skill_len = len(skills)
+    count = 0
+    connection = psycopg2.connect(user=settings.DATABASES['default']['USER'],
+                                  password=settings.DATABASES['default']['PASSWORD'],
+                                  host=settings.DATABASES['default']['HOST'],
+                                  port=settings.DATABASES['default']['PORT'],
+                                  database=settings.DATABASES['default']['NAME'])
+    user = Users.objects.get(Username = request.user.username)
+    try:
+        cursor = connection.cursor()
+        postgres_relational_query = """INSERT INTO users_users_skills (USERS_ID, SKILL_ID) VALUES (%s,%s)"""
+        postgres_insert_query = """INSERT INTO users_skill (SKILL_NAME) VALUES (%s)"""
+        postgres_select_query = """SELECT id FROM users_skill WHERE skill_name = (%s)"""
+        for i in range(skill_len):
+            cursor.execute(postgres_select_query, (skills[i],))
+            in_table = cursor.fetchone()
+            if (in_table is not None):
+                skill_insert = (user.id, (in_table[0]))
+                cursor.execute(postgres_relational_query, skill_insert)
+                count = count + 1
+            else:
+                cursor.execute(postgres_insert_query, (skills[i],))
+                connection.commit()
+                cursor.execute(postgres_select_query, (skills[i],))
+                in_table = cursor.fetchone()
+                skill_insert = (user.id, (in_table[0]))
+                cursor.execute(postgres_relational_query, skill_insert)
+                count = count + 1
+            connection.commit()
+    except (Exception, psycopg2.Error)as error:
+        if connection:
+            print("Failed to insert", error)
+    finally:
+        if(connection):
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print(count, "Record inserted")
+    return
+def getSkills(request):
+    postgres_select_query = """SELECT skill_id FROM users_users_skills WHERE users_id = (%s)"""
+    connection = psycopg2.connect(user=settings.DATABASES['default']['USER'],
+                                  password=settings.DATABASES['default']['PASSWORD'],
+                                  host=settings.DATABASES['default']['HOST'],
+                                  port=settings.DATABASES['default']['PORT'],
+                                  database=settings.DATABASES['default']['NAME'])
+    user = Users.objects.get(Username=request.user.username)
+    skills = []
+    try:
+        cursor = connection.cursor()
+        cursor.execute(postgres_select_query,(user.id,))
+        skill_ids = cursor.fetchall()
+        skill_len = len(skill_ids)
+        for i in range(skill_len):
+            skills.append((Skill.objects.get(id = skill_ids[i][0])).skill_name)
+    except (Exception, psycopg2.Error)as error:
+        if connection:
+            print("Connection failed", error)
+    finally:
+        if(connection):
+
+            cursor.close()
+            connection.close()
+    return skills
+def removeSkill(users_id, skill):
+    postgres_delete_query = """DELETE FROM users_users_skills WHERE users_id = %s AND skill_id = %s"""
+    postgres_select_query = """SELECT id FROM users_skill WHERE skill_name = (%s)"""
+    connection = psycopg2.connect(user=settings.DATABASES['default']['USER'],
+                                  password=settings.DATABASES['default']['PASSWORD'],
+                                  host=settings.DATABASES['default']['HOST'],
+                                  port=settings.DATABASES['default']['PORT'],
+                                  database=settings.DATABASES['default']['NAME'])
+    try:
+        cursor = connection.cursor()
+        cursor.execute(postgres_select_query, (skill,))
+        in_table = cursor.fetchone()
+        delete = (users_id, in_table[0],)
+        print(delete)
+        cursor.execute(postgres_delete_query,(users_id, in_table[0]))
+        print(cursor.statusmessage)
+
+    except (Exception, psycopg2.Error)as error:
+        if connection:
+            print("Connection failed", error)
+    finally:
+        if(connection):
+            connection.commit()
+            cursor.close()
+            connection.close()
 
 
 def review(request):
@@ -185,7 +275,7 @@ def review(request):
                                                              'mobile_number': request.session.get('parsed_number'),
                                                              'parsed_skills': request.session.get('parsed_skills')})
     if request.method == 'POST' and 'save' in request.POST:
-
+        ParseSkills(request, request.session['parsed_skills'])
         return redirect('userProfile-home')
     elif request.method == 'POST' and 'delete' in request.POST:
         skills = request.session.get('parsed_skills')
@@ -204,33 +294,45 @@ def review(request):
 @login_required()
 @allowed_users(allowed_roles=['jobseeker'])
 def jobseeker_profile_view(request):
-	users = Users.objects.filter(Username = request.user.username)
-	print(request.user.username)
-	print(request.user.email)
-	if not users.exists():
-		print(request.user.username)
-		print('111')
-		user = Users(Username = request.user.username, Email = request.user.email)
-		user.save()
-	users = Users.objects.filter(Username = request.user.username)
-	works = workExperience.objects.filter(Username = request.user.username)
-	educations = educationExperience.objects.filter(Username = request.user.username)
-	if request.method == 'POST' and 'editProfile' in request.POST:
-		fullname = request.POST['name']
-		nickname = request.POST['nickname']
-		email = request.POST['email']
-		phone = request.POST['phone']
-		address = request.POST['address']
-		thisuser = Users.objects.filter(Username = request.user.username).update(name = fullname, nickName = nickname, Email = email, phoneNumber = phone, Address = address)
-		thatuser = User.objects.get(username = request.user.username, password = request.user.password)
-		thatuser.email = email
-		thatuser.save()
-	if request.method == 'POST' and 'deleteWork' in request.POST:
-		obj= works.get(comment = request.POST['comments'], job = request.POST['job'], company = request.POST['company'], Username = request.user.username).delete()
-	if request.method == 'POST' and 'deleteEducation' in request.POST:
-		obj= educations.get(duration = request.POST['duration'], title = request.POST['title'], school = request.POST['school'], Username = request.user.username).delete()
-	applications = applicationStatus.objects.filter(username = request.user.username)
-	return render (request, 'userProfile/profile2.html', {'users': users, 'works': works, 'educations': educations, 'applications': applications})
+    users = Users.objects.filter(Username = request.user.username)
+    print(request.user.username)
+    print(request.user.email)
+    if not users.exists():
+        print(request.user.username)
+        print('111')
+        user = Users(Username = request.user.username, Email = request.user.email)
+        user.save()
+    users = Users.objects.filter(Username = request.user.username)
+    works = workExperience.objects.filter(Username = request.user.username)
+    educations = educationExperience.objects.filter(Username = request.user.username)
+    skills = getSkills(request)
+    if request.method == 'POST' and 'editProfile' in request.POST:
+        fullname = request.POST['name']
+        nickname = request.POST['nickname']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        thisuser = Users.objects.filter(Username = request.user.username).update(name = fullname, nickName = nickname, Email = email, phoneNumber = phone, Address = address)
+        thatuser = User.objects.get(username = request.user.username, password = request.user.password)
+        thatuser.email = email
+        thatuser.save()
+    if request.method == 'POST' and 'deleteWork' in request.POST:
+        obj= works.get(comment = request.POST['comments'], job = request.POST['job'], company = request.POST['company'], Username = request.user.username).delete()
+    if request.method == 'POST' and 'deleteEducation' in request.POST:
+        obj= educations.get(duration = request.POST['duration'], title = request.POST['title'], school = request.POST['school'], Username = request.user.username).delete()
+    if request.method == 'POST' and 'deleteSkill' in request.POST:
+        id = (Users.objects.get(Username = request.user.username)).id
+        print(id)
+        print(request.POST.get('deleteSkill'))
+        removeSkill(id,request.POST.get('deleteSkill'))
+        skills = getSkills(request)
+        redirect('userProfile-home')
+    if request.method == 'POST' and 'submitSkill' in request.POST:
+        ParseSkills(request, [request.POST['newSkill']])
+        skills = getSkills(request)
+        redirect('userProfile-home')
+    applications = applicationStatus.objects.filter(username = request.user.username)
+    return render (request, 'userProfile/profile2.html', {'users': users, 'works': works, 'educations': educations, 'applications': applications, 'skills': skills})
 
 
 
