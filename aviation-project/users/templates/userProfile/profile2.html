@@ -35,6 +35,9 @@
 					<a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="work" aria-selected="false"><b>Working Experiences</b></a>
 				</li>
 				<li class="list-group-item list-group-item-action">
+					<a class="nav-link" id="skill-tab" data-toggle="tab" href="#skills" role="tab" aria-controls="skills" aria-selected="false"><b>Skills</b></a>
+				</li>
+				<li class="list-group-item list-group-item-action">
 					<a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false"><b>Update Profile</b></a>
 				</li>
 				<li class="list-group-item list-group-item-action">
@@ -105,7 +108,49 @@
 						</div>
 					</div>
 				</div>
-				
+
+				<div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skill-tab">
+					<div class ="row">
+						<div class="col-md-12">
+
+							<h4>Skills</h4>
+							<a onclick ="toggle_visibility('addField')"class="btn btn-primary" name = 'addSkill' style= "text-decoration: none; color: black"><b>Add Skill</b></a>
+							<div id="addField" style = "display:none">
+								<form method = 'POST'>
+									{% csrf_token %}
+									<label for="newSkill">Skill: </label>
+									<input type="text" id ="newSkill" name="newSkill">
+									<button type = "submit" class = "btn btn-secondary" name ='submitSkill'>Add</button>
+								</form>
+							</div>
+							<hr>
+						</div>
+					</div>
+					{%for skill in skills%}
+					<form method = 'POST' enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-12">
+										<h4>{{skill|safe}}</h4>
+									</div>
+								</div>
+								<div class = "row">
+										<div class="form-group row">
+											<div class="offset-8 col-8">
+												<button type="submit" class="btn btn-primary" name = 'deleteSkill' value='{{skill}}'>
+													<a style="text-decoration: none; color: white"><b>Delete</b></a><br/>
+												</button>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					{%endfor%}
+				</div>
+
 				<div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
 					<div class="row">
 						<div class="col-md-12">
@@ -295,6 +340,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="tab-pane fade" id="applications" role="tabpanel" aria-labelledby="app-tab">
 					<div class="card" style="overflow-y:auto; max-height:700px;">
 						<div class="card-body">
@@ -408,4 +454,15 @@
 	</div>
 </div>
 {%endfor%}
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
 {% endblock content %}
