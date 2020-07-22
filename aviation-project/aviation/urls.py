@@ -53,7 +53,10 @@ urlpatterns = [
     # JOB SEARCH PATHS
     path('postjob/', postjob_views.posting, name='posting'),
     path('jobsearch/', postjob_views.jobsearch, name='jobsearch'),
-    path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail')
+    path('jobsearch/<int:job_id>/', postjob_views.job_detail, name='job_detail'),
+    
+    path('trysearch/', user_views.trysearch, name='trysearch'),
+	path('applyjob/', user_views.applyjob, name='applyjob'),
    
 ]
 
@@ -105,7 +108,11 @@ urlpatterns = [
     path('addeducation/', user_views.addEducationExperience, name = 'userProfile-addeducation'),
     path('signin/', user_views.signin, name = 'userProfile-signin'),
     path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
-    path('upload/', user_views.upload, name = 'userProfile-upload')
+    path('upload/', user_views.upload, name = 'userProfile-upload'),
+    
+    path('trysearch/', user_views.trysearch, name='trysearch'),
+	path('applyjob/', user_views.applyjob, name='applyjob'),
+    
 ]
 
 if settings.DEBUG:
