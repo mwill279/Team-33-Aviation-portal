@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'users.apps.UsersConfig',
     'django_google_maps',
-
+    'mapbox_location_field',
     'crispy_forms',
     'social_django',
     'postjob',

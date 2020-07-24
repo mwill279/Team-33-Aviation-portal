@@ -2,16 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from postjob.models import Jobtype
+from postjob.models import Jobtype, Jobform
 from postjob.forms import PostingForm
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
-from users.models import User, Users
-from postjob.models import Jobform, Jobtype
-from django.http import HttpResponse, HttpResponseRedirect
-# Create your views here.
+from users.models import User, Users, applicationStatus
+
 
 # from django import template
 #
@@ -64,7 +62,15 @@ def portal_view(request, *args, **kwargs):
     return render(request, "profilePortal.html", {})
 
 def companypage_view(request, *args, **kwargs):
-    return render(request, "CompanyPage.html", {})
+    jobs = Jobform.objects.all()
+    if request.method == 'POST' and 'apply' in request.POST:
+        title = request.POST['name']
+        jobtype = request.POST['type']
+        description = request.POST['description']
+        username = request.user.username
+        application = applicationStatus(title = title, jobtype = jobtype, description = description, username = username)
+        application.save()
+    return render(request, "CompanyPage.html", {'jobs': jobs})
 
 def chatRoom_view(request, *args, **kwargs):
     return render(request, "chat_room.html", {})

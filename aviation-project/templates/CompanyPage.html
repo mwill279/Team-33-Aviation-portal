@@ -84,6 +84,41 @@
             </div>
             <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
 
+                {%for job in jobs%}
+                {%csrf_token%}
+
+                <div class="card" id="HoverCard">
+                    <div class="card-body">
+                        <form method='post' id=1>
+                            {%csrf_token%}
+                            
+                            <div class="row">
+                                <div class="col">
+                                    {{job.title}}
+
+                                    <h5 class="card-title"><input class="form-control here" type="hidden" name="name" value="{{job.title}}"></h5>
+                                    {{job.jobtype}}
+
+                                    <p class="card-text"><input class="form-control here" type="hidden" name="type" value="{{job.jobtype}}"></p>
+                                    {{job.description}}
+
+                                    <p class="card-text"><input class="form-control here" type="hidden" name="description" value="{{job.description}}"></p>
+                                </div>
+
+                                <div class="col ml auto">
+                                    <button type="submit" style="margin-top:40px; float:right" class="btn btn-primary" , name='apply'>
+                                        <a><b>Apply</b></a>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        
+
+                    </div>
+                </div>
+
+                {%endfor%}
+
                 <div class="card" id="HoverCard">
                     <div class="card-body">
                         <h5 class="card-title">Yo Some Job</h5>

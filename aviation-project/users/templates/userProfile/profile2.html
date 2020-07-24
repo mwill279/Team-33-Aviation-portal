@@ -8,6 +8,32 @@
 
 {%for user in users%}
 
+<script>
+
+	var x = 0;
+
+	
+
+	function accordianString() {
+
+		x++;
+
+		
+
+		document.getElementById("header0").setAttribute("id", "header" + String(x));
+
+
+        document.getElementById("button0").setAttribute("aria-controls", "collapse" + String(x));
+        document.getElementById("button0").setAttribute("data-target", "#collapse" + String(x));
+        document.getElementById("button0").setAttribute("id", "button" + String(x));
+
+        document.getElementById("collapse0").setAttribute("aria-labelledby", "heading" + String(x));
+
+        document.getElementById("collapse0").setAttribute("id", "collapse" + String(x));
+	}
+	
+</script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-3 ">
@@ -351,51 +377,74 @@
 								</div>
 							</div>
 							
-							<div class="accordian" id="Accordian1">
+							<div class="accordian" id="Accordian0" onload="accordianString()">
 								{%for application in applications%}
 								{%if application.username == user.Username%}
-                                <div class="card app-status">
-                                    <div class="card-header" id="heading1">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img src="https://pbs.twimg.com/profile_images/1067242179955896320/mKdx6PgL_400x400.jpg" style="height:40px; margin-right:10px;">
-                                                Application for <b>{{application.title}}</b> at <b>Company Name Here</b>
-                                                <button class="btn btn-warning" style="float:right;" data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">In Review</button>
-                                            </div>
-                                        </div>
-                                    </div>
-									<div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#Accordian1">
+
+
+
+								<div class="card app-status">
+									<div class="card-header" id="heading0">
+										<div class="row">
+											<div class="col-md-12">
+												<img src="https://pbs.twimg.com/profile_images/1067242179955896320/mKdx6PgL_400x400.jpg" style="height:40px; margin-right:10px;">
+												Application for <b>{{application.title}}</b> at <b>Company Name Here</b>
+												<button class="btn btn-warning" id="button0" style="float:right;" data-toggle="collapse" data-target="#collapse{getX()}" aria-controls="collapse{getX()}">In Review</button>
+											</div>
+										</div>
+									</div>
+									<div id="collapse0" class="collapse" aria-labelledby="heading" data-parent="#Accordian0">
 										<div class="card-body">
 											<div class="form-group row">
-												<label class="col-4 col-form-label"><b>Job Type</b></label> 
+												<label class="col-4 col-form-label"><b>Job Type</b></label>
 												<div class="col-8">
 													<p>{{application.jobtype}}</p>
 												</div>
 											</div>
 											<div class="form-group row">
-												<label class="col-4 col-form-label"><b>Description </b></label> 
+												<label class="col-4 col-form-label"><b>Description </b></label>
 												<div class="col-8">
 													<p>{{application.description}}</p>
 												</div>
 											</div>
 											<div class="form-group row">
-												<label class="col-4 col-form-label"><b>applier </b></label> 
+												<label class="col-4 col-form-label"><b>applier </b></label>
 												<div class="col-8">
 													<p>{{application.username}}</p>
 												</div>
 											</div>
 											<div class="form-group row">
-												<label class="col-4 col-form-label"><b>status </b></label> 
+												<label class="col-4 col-form-label"><b>status </b></label>
 												<div class="col-8">
 													<p>{{application.status}}</p>
 												</div>
 											</div>
 										</div>
 									</div>
-                                </div>
+								</div>
 								<br>
-							
+
+								
+
+								<script>
+									x++;
+
+
+
+									document.getElementById("heading0").setAttribute("id", "header" + String(x));
+
+
+                                    document.getElementById("button0").setAttribute("aria-controls", "collapse" + String(x));  									
+									document.getElementById("button0").setAttribute("data-target", "#collapse" + String(x));
+									document.getElementById("button0").setAttribute("id", "button" + String(x));
+
+									document.getElementById("collapse0").setAttribute("aria-labelledby", "heading" + String(x));
+
+									document.getElementById("collapse0").setAttribute("id", "collapse" + String(x));
+								</script>
+
 								{%endif%}
+
 								{%endfor%}
 							</div>
 							
@@ -408,5 +457,7 @@
 		</div>
 	</div>
 </div>
+
+
 {%endfor%}
 {% endblock content %}
