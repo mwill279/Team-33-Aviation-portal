@@ -10,6 +10,7 @@ from django_google_maps import fields as map_fields
 admin.site.register(Jobtype)
 #admin.site.register(Jobform)
 
+
 @admin.register(Jobform)
 class JobformAdmin(admin.ModelAdmin): formfield_overrides = {
     map_fields.AddressField: { 'widget':
@@ -24,3 +25,6 @@ class JobformAdmin(admin.ModelAdmin): formfield_overrides = {
 }
 # class JobformAdmin(admin.ModelAdmin):
 #     list_display = ['title','postdate', 'posttime', 'deadlinedate', 'deadlinetime', 'open', 'datenow', 'timenow']
+# @admin.register(Jobform)
+# class JobformAdmin(admin.ModelAdmin):
+#     list_display = ['title','postdate', 'posttime', 'deadlinedate', 'deadlinetime', 'open']

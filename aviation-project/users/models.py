@@ -7,6 +7,11 @@ from django.contrib.auth.models import User, AbstractUser
 #     is_user = models.BooleanField(default=False)
 #     is_comanyEmployer = models.BooleanField(default=False)
 
+class Skill(models.Model):
+    skill_name = models.CharField(max_length = 25, unique = True)
+
+    def __str__(self):
+        return f'{self.skill_name} skill entry'
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -24,6 +29,7 @@ class Profile(models.Model):
 class CompanyProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+	banner = models.ImageField(default='boeing_logo.jpg', upload_to='company_logos')
 	name = models.CharField('Company Name', max_length=40, blank=True)
 	phoneNumber = models.CharField(max_length=15, blank=True)
 	address = models.CharField('Address', max_length=40, blank=True)
@@ -41,7 +47,7 @@ class Users (models.Model):
 	nickName = models.CharField(max_length = 20, blank = True)
 	password = models.CharField(max_length = 40, blank = True)
 	image = models.ImageField(upload_to = 'profile_image', default = 'default.png')
-	
+	skills = models.ManyToManyField(Skill)
 	
 class workExperience (models.Model):
 	job = models.CharField(max_length = 40)

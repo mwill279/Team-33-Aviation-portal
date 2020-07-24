@@ -25,7 +25,6 @@ class CompanyRegisterForm(UserCreationForm):
         fields = ['username', 'password1', 'password2', 'email']
 
 class CompanyUpdateForm(forms.ModelForm):
-
     name = forms.CharField(label='Company Name', max_length=30)
     phoneNumber = forms.CharField(label='Phone Number', max_length=15)
     address = forms.CharField(label='Address', max_length=40)
@@ -33,7 +32,7 @@ class CompanyUpdateForm(forms.ModelForm):
 
     class Meta:
         model = CompanyProfile
-        fields = ['name', 'phoneNumber', 'address',
+        fields = ['image', 'banner', 'name', 'phoneNumber', 'address',
                   'company_description']
 
 class CompanyProfileForm(forms.ModelForm):

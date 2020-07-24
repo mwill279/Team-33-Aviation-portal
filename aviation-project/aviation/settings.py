@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'users.apps.UsersConfig',
     'django_google_maps',
-
+    'mapbox_location_field',
     'crispy_forms',
     'social_django',
     'postjob',
@@ -132,7 +132,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
-        'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
+        'HOST': 'ajbdb.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -181,7 +181,6 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -209,4 +208,4 @@ STATICFILES_FINDERS = (
 
 )
 
-#LOGIN_REDIRECT_URL = 'userProfile-home'
+LOGIN_REDIRECT_URL = 'home'

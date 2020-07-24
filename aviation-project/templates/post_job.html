@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-
+{% if user.is_authenticated %}
+{% if request.user.groups.all.0.name == "company_owner" %}
 <div class="container" style="top:50px; position:relative; ">
 
     <h1 >Job Post Submission</h1>
@@ -117,7 +119,25 @@
 {{ postingform.media.js }}
 
 
-</div>
+
+<!--    <div class = "col-md-8">-->
+<!--<div class="content-section">-->
+<!--    <form method="POST">-->
+<!--        {% csrf_token %}-->
+<!--        <fieldset class="form-group">-->
+<!--            {{ pj_form|crispy }}-->
+<!--        </fieldset>-->
+<!--        <div class="form-group">-->
+<!--            <button class="btn btn-outline-info" type="submit">Done</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--    </div>-->
+{% else %}
+    <h1>You are not allowed to view this page. <br>
+        This page is only for company owners</h1>
+{% endif %}
+{% endif %}
     
 
 

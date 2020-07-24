@@ -36,3 +36,33 @@ class PostingForm(forms.ModelForm):
             'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
             'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
             }
+
+#
+#     #jobtype = forms.ModelChoiceField(queryset=Jobtype.objects, empty_label=None,  widget=forms.RadioSelect)
+#
+#     title = forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. Senior Manager'}),
+#     description = forms.Textarea(attrs={'rows':10, 'cols':150}),
+#     zipcode = forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. 11111'}),
+#     # 'post': DateTimeInput(),
+#     # 'deadline': DateTimeInput(),
+#     postdate = DateInput(),
+#     posttime = TimeInput(),
+#     deadlinedate = DateInput(),
+#     deadlinetime = TimeInput(),
+#
+#     class Meta:
+#         model = Jobform
+#         fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']
+
+class UpdateJobForm(forms.ModelForm):
+    title = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. Senior Manager'}),
+    description = forms.Textarea(attrs={'rows': 10, 'cols': 150}),
+    zipcode = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. 11111'}),
+    postdate = DateInput(),
+    posttime = TimeInput(),
+    deadlinedate = DateInput(),
+    deadlinetime = TimeInput(),
+
+    class Meta:
+        model = Jobform
+        fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']
