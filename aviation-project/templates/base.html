@@ -43,7 +43,7 @@
               </li>
               {% if request.user.groups.all.0.name != "employer" %}
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'search_page' %}">Search</a>
+                  <a class="nav-link" href="{% url 'search_page'%}">Search</a>
               </li>
               {% endif %}
               <li class="nav-item">
