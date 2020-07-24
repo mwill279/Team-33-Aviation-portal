@@ -21,7 +21,6 @@ def posting(request):
                 new_form = PostingForm()
                 return render(request, 'post_job.html', {'postingform':new_form, 'note':note})
             else:
-                form = PostingForm()
                 return render(request, 'post_job.html', {'postingform':filled_form, 'error':error})
     else: 
         form = PostingForm()
@@ -49,11 +48,19 @@ def jobPostCount(querySet):
     else:
         return "{} Jobs Found".format(size)
 
+
 def jobsearch(request):
     results = Jobform.objects.all()
     jobtypes = Jobtype.objects.all()
     search = request.GET.get('title')
-    searchtype = request.GET.get('jobtype')
+
+    fulltime = request.GET.get('Full-Time')
+    parttime = request.GET.get('Part-Time')
+    internship = request.GET.get('Internship')
+    contract = request.GET.get('Contract')
+    temporary = request.GET.get('Temporary')
+    job_id = request.GET.get('job')
+
     searchaddress = request.GET.get('address')
     searchgeo = request.GET.get('geolocation')
     auth_req = request.GET.get('work_auth')
@@ -62,6 +69,22 @@ def jobsearch(request):
     distance = request.GET.get('distance')
     today = date.today()
     form = PostingForm(request.GET)
+    
+    if fulltime == 'on' or parttime == 'on' or internship == 'on' or contract == 'on' or temporary == 'on':
+        if fulltime is None :
+            results = results.exclude(jobtype__name = 'FullTime')
+
+        if parttime is None:
+            results = results.exclude(jobtype__name = 'PartTime')
+
+        if internship is None:
+            results = results.exclude(jobtype__name = 'Internship')
+
+        if contract is None:
+            results = results.exclude(jobtype__name = 'Contract')
+    
+        if temporary is None:
+            results = results.exclude(jobtype__name = 'Temporary')
 
     if auth_req == "on":
         results = results.filter(US_author_required = True)
@@ -69,8 +92,6 @@ def jobsearch(request):
     if search != '' and search is not None:
         results = results.filter(title__icontains=search)
 
-    if searchtype != '' and searchtype != 'Job Type':
-        results = results.filter(jobtype__name=searchtype)
 
     # if searchaddress != '' and searchaddress is not None:
     #     results = results.filter(address__icontains=searchaddress)
@@ -89,14 +110,16 @@ def jobsearch(request):
 
         listjobs = [r.id for r in results if calculate_miles(searchlat, searchlon, float(str(r.geolocation).split(",")[0]), float(str(r.geolocation).split(",")[1])) <= float(distance)]
         results = results.filter(id__in=listjobs)
-
-        
-    return render(request, 'search.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form})
+    if job_id is not None:
+        job = Jobform.objects.get(id = job_id)
+    else:
+        job = results.order_by("id")[0]
+    return render(request, 'search.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form, "count":jobPostCount(results),'job': job,})
 
 def job_detail(request, job_id):
     try:
         job = Jobform.objects.get(id=job_id)
-    except Job.DoesNotExist:
+    except job.DoesNotExist:
         raise Http404('Job not found')
     return render(request, 'job_detail.html', {'job': job,})
 

@@ -34,7 +34,7 @@
                         {{ PostingForm.media.js }}
                      </div>
                   </div>
-                  <div class="form-group">
+                  {% comment %} <div class="form-group">
                      <label for="jobtype"></label>
                      <select id="jobtype" class="form-control" name="jobtype">
                         <option checkbox>Job Type</option>
@@ -42,7 +42,7 @@
                         <option value="{{ jobtypes}}">{{ jobtypes }}</option>
                         {% endfor %}
                      </select>
-                  </div>
+                  </div> {% endcomment %}
                   <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button>
                </form>
             </div>

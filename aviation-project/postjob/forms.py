@@ -35,7 +35,6 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': TimeInput(),
             'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
             'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
-            'jobtype': forms.CheckboxSelectMultiple,
             }
 
 #

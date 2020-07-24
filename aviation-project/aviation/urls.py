@@ -71,7 +71,7 @@ urlpatterns = [
     path('jobpost/', postjob_views.posting, name='post_job'),
     
     # JOB SEARCH PATH
-    path('search/', postjob_views.searchpage, name='search_page'),
+    path('search/', postjob_views.jobsearch, name='search_page'),
     
     
     path('events/', events_view, name='event_list'),
