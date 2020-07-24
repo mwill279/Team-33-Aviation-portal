@@ -1,23 +1,139 @@
-{% extends "base.html" %}
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% block content %}
+<!-- {%load static %} -->
+{% load sass_tags %}
+
 <head>
-   <link href="{% sass_src 'front/scss/landing/landing.scss' %}" rel="stylesheet" type="text/css" />
-   <script src='../static/front/js/landing.js' defer></script>
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="{% sass_src '../static/front/scss/nav/nav.scss' %}" rel="stylesheet" type="text/css" />
+  {% comment %} <script src="../static/front/js/landing.js" defer></script> {% endcomment %}
+  <script src='../static/front/js/nav.js'defer ></script>
 </head>
 
-<div class="expandToggle" id ="expandToggle" >
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Messages</a></li>
-        <li><a href="#">Settings</a></li>
+  <!-- Navigation -->
+   
+  <nav class="navbar navbar-expand-lg navbar-light static-top">
+  <button id="toggle" class="navbar-toggle collapsed toggle">
+    {% comment %} <i class="fa fa-bars fa-2x"></i> {% endcomment %}
+     <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="container">
+      
+      {% comment %} <a class="navbar-brand" href="#">Aviation Job Board</a> {% endcomment %}
+      {% comment %} <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon"></span>
+      </button>  {% endcomment %}
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'event_list' %}">Events</a>
+          </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">Forum</a>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li> {% endcomment %}
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'userProfile-home' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}" style="padding: .5rem 2rem; color: white; 
+              background-color: #1de9b6; border-radius: 2px; font-size: 18px; display: flex;
+              justify-content: center; align-content: center; align-items: center" >Login</a>
+            </li>
+            <li class="nav-item" style="margin-top: -1.1px">
+              <a class="nav-link" href="{% url 'choose_register' %}" style="padding: 0.5rem 2rem; background-color: #ff6d00; 
+              color: white; font-size: 18px; border-radius: 2px; margin-left: 20px; ">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    
+  
+  </nav>
+
+  <div class="container-fluid" style="height: 100%;">
+  <div class = "sideNav">
+  {% comment %} <section>
+        <div class="navToggle"  style="display: flex; flex-direction: row ">
+          <ul>
+            <li>
+              
+            </li>
+            <li>
+            </li>
+            <li>
+            </li>
+            <li>
+            </li>
+            <li>
+            </li>
+          </ul>
+          
+        </div>
+  </section> {% endcomment %}
+    <section class='expandToggle' style="display: flex; flex-direction: row ">
+
+      <ul id="expandToggle">
+        <li>
+        <i class="fa fa-home icon" aria-hidden="true"></i>
+          <a href="#"><span>Home</span></a>
+        </li>
+        <li>
+         <i class="fa fa-tachometer icon" aria-hidden="true"></i>
+          <a href="#"><span>Profile</span></a>
+        </li>
+        <li>
+          <i class="fa fa-envelope icon" aria-hidden="true"></i>
+          <a href="#"><span>Messages</span></a>
+
+        </li>
+        <li>
+          <i class="fa fa-cogs icon" aria-hidden="true"></i>
+          <a href="#"><span>Settings</span></a>
+        </li>
+        <li>
+          <i class="fa fa-building icon" aria-hidden="true"></i>
+          <a href="#"><span>Company</span></a>
+        </li>
       </ul>
     </div>
+  </section>
 
-<div class="expandToggle" id ="expandToggle" >
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Messages</a></li>
-        <li><a href="#">Settings</a></li>
-      </ul>
-    </div> 
+    </div>
+      
+  <!-- Bootstrap core JavaScript -->
+  {% comment %} <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script> {% endcomment %}
+
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="'alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+   {% endif %}
+
+ 
+  {% endblock %}

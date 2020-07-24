@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ajb_db',
+        'NAME': 'aviation',
         'USER': 'postgres',
         'PASSWORD': 'password', #Put the password that you used for PostrgeSQL
         'HOST': 'localhost',
@@ -181,3 +181,5 @@ STATICFILES_FINDERS = (
     'sass_processor.finders.CssFinder',
 
 )
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

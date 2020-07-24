@@ -24,15 +24,13 @@ class Users (models.Model):
 	nickName = models.CharField(max_length = 20, blank = True)
 	password = models.CharField(max_length = 40, blank = True)
 	image = models.ImageField(upload_to = 'profile_image', default = 'default.png')
-	
-	
+
 class workExperience (models.Model):
 	job = models.CharField(max_length = 40)
 	years = models.CharField(max_length = 20)
 	company = models.CharField(max_length = 30)
 	comment = models.CharField(max_length = 150)
 	Username = models.CharField(max_length = 20)
-
 	
 class educationExperience (models.Model):
 	title = models.CharField(max_length = 40)

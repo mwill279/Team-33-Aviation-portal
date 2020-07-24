@@ -1,40 +1,48 @@
 body {
-  margin: 0;
   transition: transform 0.3s ease; }
 
+.navbar {
+  background-color: #2962ff; }
+
 #expandToggle.show-nav {
-  transform: translateX(-200px); }
+  transition: transform 0.25s ease;
+  width: 10%; }
+
+.sideNav ul li:hover, .navToggle ul li:hover {
+  background-color: #1F52DD;
+  padding-left: -20px; }
 
 .expandToggle {
-  background-color: black;
-  border-right: 2px solid rgba(200, 200, 200, 0.1);
-  color: black;
+  margin-left: -16px;
   position: fixed;
-  width: 200px;
-  height: 100%;
-  z-index: 100; }
+  height: 100%; }
   .expandToggle ul {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    list-style-type: none;
-    margin: 0;
-    background-color: black; }
+    height: 100%;
+    background-color: #2962ff;
+    transition: transform 0.25s ease;
+    width: 200px;
+    list-style-type: none; }
+    .expandToggle ul .icon {
+      color: white;
+      margin-right: 20px; }
+      .expandToggle ul .icon span {
+        font-size: 17px !important;
+        font-family: 'Lato', sans-serif; }
   .expandToggle ul li {
-    border-bottom: 2px solid rgba(200, 200, 200, 0.1);
-    padding: 20px; }
-  .expandToggle ul li:first-of-type {
-    border-top: 2px solid rgba(200, 200, 200, 0.1); }
+    padding-top: 20px;
+    padding-bottom: 20px; }
   .expandToggle ul li a {
     color: #fff;
     text-decoration: none; }
   .expandToggle ul li a:hover {
-    text-decoration: underline; }
+    text-decoration: none; }
 
 .toggle {
-  position: absolute;
+  background-color: white;
+  position: fixed;
+  z-index: 1000;
   top: 20px;
-  left: 20px; }
+  left: 200px; }
 
 .container {
   padding: 15px;
