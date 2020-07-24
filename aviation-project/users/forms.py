@@ -32,7 +32,7 @@ class CompanyUpdateForm(forms.ModelForm):
 
     class Meta:
         model = CompanyProfile
-        fields = ['image', 'banner', 'name', 'phoneNumber', 'address',
+        fields = ['image', 'name', 'phoneNumber', 'address',
                   'company_description']
 
 class CompanyProfileForm(forms.ModelForm):

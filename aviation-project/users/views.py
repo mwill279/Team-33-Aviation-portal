@@ -148,12 +148,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
-    jobs = Jobform.objects.filter(user=request.user)
+    # jobs = Jobform.objects.filter(user=request.user)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
-        'jobs': jobs
+        # 'jobs': jobs
     }
 
     return render(request, 'users/company_profile.html', context)
