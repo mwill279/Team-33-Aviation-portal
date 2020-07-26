@@ -9,7 +9,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Users, CompanyProfile
+from .models import Users, CompanyProfile, Skill
 from .models import workExperience
 from .models import educationExperience
 from .models import applicationStatus
