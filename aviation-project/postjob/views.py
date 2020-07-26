@@ -142,9 +142,9 @@ def searchpage(request, *args, **kwargs):
 	
 	return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
 
-def userviewcompany(request):
+def userviewcompany(request, company_id):
 	print("username:      ", request.session.get('companyUsername'))
-	company = cp.objects.get(name = request.session.get('companyUsername'))
+	company = cp.objects.get(id = company_id)
 	request.session['companyUsername'] = None
 	return render(request, "userViewCompany.html", {'company': company})
 

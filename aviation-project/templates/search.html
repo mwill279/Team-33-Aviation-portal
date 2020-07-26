@@ -235,11 +235,10 @@
                   <div class="col-md-8 my-auto" align="center">
                      <button type="button" class="btn btn-info" style="margin: 10px">Apply Now</button>
                      <button type="button" class="btn btn-info" style="margin: 10px">Favorite</button>
+
+                     
 					 
-					 <input type="hidden" name="companyUsername" value = "{{job.company.name}}">
-                     <button type="submit" class="btn btn-info" style="margin: 10px">
-						<a href="{% url 'userviewcompany' %}" style="text-decoration: none; color: white">Company Page</a><br/>
-					 </button>
+                     <a href = "{%url 'userviewcompany' job.company.id%}" class="btn btn-info" style="margin: 10px; text-decoration: none; color: white">Company Page</a><br/>
                   </div>
                </div>
                <div class="row">

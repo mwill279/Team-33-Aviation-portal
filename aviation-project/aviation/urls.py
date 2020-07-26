@@ -116,7 +116,7 @@ urlpatterns = [
     path('trysearch/', user_views.trysearch, name='trysearch'),
     path('applyjob/', user_views.applyjob, name='applyjob'),
     
-    path('userviewcompany/',postjob_views.userviewcompany, name='userviewcompany'),
+    path('userviewcompany/<int:company_id>',postjob_views.userviewcompany, name='userviewcompany'),
 ]
 
 if settings.DEBUG:
