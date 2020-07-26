@@ -1,6 +1,6 @@
 {% extends "searchBase.html" %}
 {% block content %}
-<script>  
+<script>
 </script>
 <form method="GET" action="{%url 'search_page'%}" novalidate>
 <nav class="navbar navbar-light bg-white" style="margin-bottom: 40px">
@@ -37,16 +37,15 @@
                      </button>
                      <div class="dropdown-menu dropdown1" aria-labelledby="dropdownMenuButton">
                         <div>
-                           <input class="jobTypeChk" id="fullTimeChk" type="checkbox" aria-label="Checkbox for following text input" name="Full-Time" >
-                           <a class="jobTypeChkLabel">Full-Time</a>
+                           <input class="jobTypeChk" id="fullTimeChk" type="checkbox" aria-label="Checkbox for following text input" name="Full-Time">
+                           <a  class="jobTypeChkLabel">Full-Time</a>
                         </div>
-                        <div id="secondOption" >
+                        <div id="secondOption">
                            <input class="jobTypeChk" id="partTimeChk" type="checkbox" aria-label="Checkbox for following text input" name="Part-Time">
                            <a  class="jobTypeChkLabel">Part-Time</a>
                         </div>
                         <div class="otherOption">
                            <input class="jobTypeChk" id="internChk" type="checkbox" aria-label="Checkbox for following text input" name="Internship">
-                           
                            <a  class="jobTypeChkLabel">Internship</a>
                         </div>
                         <div class="otherOption">
@@ -69,18 +68,18 @@
                      <div class="dropdown-menu dropdown2" aria-labelledby="dropdownMenuButton">
 
                         <div>
-                           <input type="radio" id='myCheckbox' aria-label="Checkbox for following text input" name="distance" value = 5>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 5>
                            <a  class="jobTypeChkLabel">5 miles</a>
                         </div>
 
                         <div>
-                           <input type="radio"  aria-label="Checkbox for following text input" name="distance" value = 10>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 10>
                            <a  class="jobTypeChkLabel">10 miles</a>
                         </div>
                         
                         
                         <div>
-                           <input type="radio"  aria-label="Checkbox for following text input" name="distance" value = 15>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 15>
                            <a  class="jobTypeChkLabel">15 miles</a>
                         </div>
                         <div>
@@ -88,15 +87,15 @@
                            <a  class="jobTypeChkLabel">20 miles</a>
                         </div>
                         <div>
-                           <input type="radio"  aria-label="Checkbox for following text input" name="distance" value = 25>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 25>
                            <a  class="jobTypeChkLabel">25 miles</a>
                         </div>
                         <div>
-                           <input type="radio"  aria-label="Checkbox for following text input" name="distance" value = 50>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 50>
                            <a  class="jobTypeChkLabel">50 miles</a>
                         </div>
                         <div>
-                           <input type="radio"  aria-label="Checkbox for following text input" name="distance" value = 100>
+                           <input type="radio" aria-label="Checkbox for following text input" name="distance" value = 100>
                            <a  class="jobTypeChkLabel">100 miles</a>
                         </div>
                         <input type="submit" value="Submit">
@@ -236,7 +235,11 @@
                   <div class="col-md-8 my-auto" align="center">
                      <button type="button" class="btn btn-info" style="margin: 10px">Apply Now</button>
                      <button type="button" class="btn btn-info" style="margin: 10px">Favorite</button>
-                     <button type="button" class="btn btn-info" style="margin: 10px">Company Page</button>
+					 
+					 <input type="hidden" name="companyUsername" value = "{{job.company.name}}">
+                     <button type="submit" class="btn btn-info" style="margin: 10px">
+						<a href="{% url 'userviewcompany' %}" style="text-decoration: none; color: white">Company Page</a><br/>
+					 </button>
                   </div>
                </div>
                <div class="row">

@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import PostingForm, UpdateJobForm
 from postjob.models import Jobform, Jobtype
 from datetime import timedelta, date, datetime
 import math
+from users.models import CompanyProfile as cp
 # Create your views here.
 
 def posting(request):
@@ -67,6 +68,11 @@ def jobsearch(request):
     minimum = request.GET.get('min_sal')
     duration = request.GET.get('posted_dur')
     distance = request.GET.get('distance')
+    companyUsername = None
+    companyUsername = request.GET.get('companyUsername')
+    print("company:         ", companyUsername)
+    request.session['companyUsername'] = companyUsername
+    companyUsername = None
     today = date.today()
     form = PostingForm(request.GET)
     
@@ -114,6 +120,9 @@ def jobsearch(request):
         job = Jobform.objects.get(id = job_id)
     else:
         job = results.order_by("id")[0]
+    
+    
+    
     return render(request, 'search.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form, "count":jobPostCount(results),'job': job,})
 
 def job_detail(request, job_id):
@@ -125,8 +134,19 @@ def job_detail(request, job_id):
 
 
 def searchpage(request, *args, **kwargs):
-    results = Jobform.objects.all()
-    return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
+	results = Jobform.objects.all()
+	print('here')
+	if request.method == 'POST' and 'company' in request.POST:
+		request.session['companyUsername'] = request.POST['company']
+		print(request.POST['company'])
+	
+	return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
+
+def userviewcompany(request):
+	print("username:      ", request.session.get('companyUsername'))
+	company = cp.objects.get(name = request.session.get('companyUsername'))
+	request.session['companyUsername'] = None
+	return render(request, "userViewCompany.html", {'company': company})
 
 
 
