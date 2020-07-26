@@ -91,7 +91,64 @@ $(function() {
         $(".menuHeader6").val($(this).text());
     });
 
+    
+
+    /* $('#partTimeChk').click(function(e){
+        if (e.target.checked) {
+          localStorage.checked = true;
+      } else {
+          localStorage.checked = false;
+      }
+    })
+    $( document ).ready(function() {
+        document.querySelector('#partTimeChk').checked = localStorage.checked
+    });
+
+    $('#internChk').click(function(e){
+        if (e.target.checked) {
+          localStorage.checked = true;
+      } else {
+          localStorage.checked = false;
+      }
+    })
+    $( document ).ready(function() {
+        document.querySelector('#internChk').checked = localStorage.checked
+    });
+
+    $('#contractChk').click(function(e){
+        if (e.target.checked) {
+          localStorage.checked = true;
+      } else {
+          localStorage.checked = false;
+      }
+    })
+    $( document ).ready(function() {
+        document.querySelector('#contractChk').checked = localStorage.checked
+    });
+
+    $('#tempChk').click(function(e){
+        if (e.target.checked) {
+          localStorage.checked = true;
+      } else {
+          localStorage.checked = false;
+      }
+    })
+    $( document ).ready(function() {
+        document.querySelector('#tempChk').checked = localStorage.checked
+    }); */
+
 });
+
+
+
+/* $("input:checkbox:not(:checked)").each(function() {
+    var column = "table ." + $(this).attr("name");
+    $(column).show();
+});
+$("input:checkbox").click(function(){
+    var column = "table ." + $(this).attr("name");
+    $(column).toggle();
+}); */
 
 // An auxiliary function for the double bar slider's change event that both indicates selection and displays slected range
 function salarySelectionEvent(min, max) {
@@ -102,7 +159,7 @@ function salarySelectionEvent(min, max) {
 }
 
 // A function that removes the selection indication for all filter options (and sets some options to default values)
-function clearFilters() {
+/* function clearFilters() {
     $(".headerActive").removeClass("headerActive");
     $(".dotActive").removeClass("dotActive");
     $(".menuHeader1").text("Job Type");
@@ -120,7 +177,7 @@ function clearFilters() {
     $("#contractChk").removeAttr("checked");
     $("#internChk").removeAttr("checked");
     $("#tempChk").removeAttr("checked");
-}
+} */
 
 // An auxiliary function for the double bar slider's change event that returns a number with comma seperation (in string form)
 function formatNumber(num) {
