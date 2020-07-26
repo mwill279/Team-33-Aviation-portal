@@ -55,6 +55,11 @@ urlpatterns = [
     
     path('trysearch/', user_views.trysearch, name='trysearch'),
     path('applyjob/', user_views.applyjob, name='applyjob'),
+    
+    path('company/',companypage_view, name='company_page'),
+
+
+    path('userviewcompany/',postjob_views.userviewcompany, name='userviewcompany'),
    
 ]
 
@@ -110,6 +115,8 @@ urlpatterns = [
     path('upload/', user_views.upload, name = 'userProfile-upload'),
     path('trysearch/', user_views.trysearch, name='trysearch'),
     path('applyjob/', user_views.applyjob, name='applyjob'),
+    
+    path('userviewcompany/',postjob_views.userviewcompany, name='userviewcompany'),
 ]
 
 if settings.DEBUG:
