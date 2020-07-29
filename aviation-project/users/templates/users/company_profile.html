@@ -33,12 +33,15 @@
 
 
                 <div style="position: absolute;bottom: 8px;right: 30px;">
-                    <form action="{% url 'posting' %}">
+                    <form action="">
                         <button type="submit" class="btn btn-success btn-lg" style=" border-style: none; border-radius: 0.2rem; background-color: #ff6d00; color: white;">Add Event</button>
                     </form>
+
                     
                 </div>
-                <div style="position: absolute;bottom: 8px;right: 170px;"><button type="button" class="btn btn-success btn-lg" style="border-radius: 0.2rem; background-color: #1de9b6; color: white; border-style: none;">Add Job</button></div>
+                <form action="{% url 'posting' %}">
+                <div style="position: absolute;bottom: 8px;right: 170px;"><button type="submit" class="btn btn-success btn-lg" style="border-radius: 0.2rem; background-color: #1de9b6; color: white; border-style: none;">Add Job</button></div>
+                </form>
 
             </div>
 

@@ -29,7 +29,7 @@ class Profile(models.Model):
 class CompanyProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-	#banner = models.ImageField(default='boeing_logo.jpg', upload_to='company_logos')
+	banner = models.ImageField(default='boeing_logo.jpg', upload_to='company_logos')
 	name = models.CharField('Company Name', max_length=40, blank=True)
 	phoneNumber = models.CharField(max_length=15, blank=True)
 	address = models.CharField('Address', max_length=40, blank=True)
