@@ -9,7 +9,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Users, CompanyProfile
+from .models import Users, CompanyProfile, Skill
 from .models import workExperience
 from .models import educationExperience
 from .models import applicationStatus
@@ -112,10 +112,9 @@ def addCompanyProfile(request):
 @login_required()
 @allowed_users(allowed_roles=['company_owner'])
 def company_profile(request):
-    jobs = Jobform.objects.all()
     u_form = UserUpdateForm(instance=request.user)
     cp_Update_form = CompanyUpdateForm(instance=request.user.companyprofile)
-    if request.method == 'POST' and 'apply' in request.POST:
+    if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         cp_Update_form = CompanyUpdateForm(request.POST, request.FILES, instance=request.user.companyprofile)
         if u_form.is_valid() and cp_Update_form.is_valid():
@@ -149,12 +148,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
-    # jobs = Jobform.objects.filter(user=request.user)
+    #jobs = Jobform.objects.filter(company=request.user)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
-        'jobs': jobs
+        #'jobs': jobs
     }
 
     return render(request, 'users/company_profile.html', context)
