@@ -1,8 +1,11 @@
 {% extends "searchBase.html" %}
 {% block content %}
+{% csrf_token %}
 <script>
+
 </script>
 <form method="GET" action="{%url 'search_page'%}" novalidate>
+
 <nav class="navbar navbar-light bg-white" style="margin-bottom: 40px">
    <div class="form-inline mx-auto">
       <div class="input-group" style="margin-right: 70px">
@@ -56,7 +59,7 @@
                            <input class="jobTypeChk" id="tempChk" type="checkbox" aria-label="Checkbox for following text input" name="Temporary">
                            <a  class="jobTypeChkLabel">Temporary</a>
                         </div>
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" onclick="saveFilters();"/>
                      </div>
                   </div>
 
@@ -221,6 +224,7 @@
                   </div>
                </div>
                <div class="row">
+               {{ no_jobs }}
                   <div class="col-md-4">
                      <h3>
                         {{job.company.name}}

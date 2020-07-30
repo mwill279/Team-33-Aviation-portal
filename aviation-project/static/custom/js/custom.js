@@ -179,6 +179,10 @@ function salarySelectionEvent(min, max) {
     $("#tempChk").removeAttr("checked");
 } */
 
+function saveFilters(){
+        console.log(document.getElementById("fullTimeChk").setAttribute("checked", "true"));
+}
+
 // An auxiliary function for the double bar slider's change event that returns a number with comma seperation (in string form)
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
