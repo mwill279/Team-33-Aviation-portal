@@ -10,6 +10,8 @@
    <link href="{% static 'scss/landing.scss' %}" rel="stylesheet" type="text/scss" />
    {% endcomment %}
    <link href="{% sass_src 'front/scss/landing/landing.scss' %}" rel="stylesheet" type="text/css" />
+   <script src='../static/front/js/landing.js' defer></script>
+
 
 </head>
 <div class="container-fluid">
@@ -25,12 +27,13 @@
          <div class="tab-content">
             <div class="row active" id="job" data-tab-content>
 
-                <form class="form-inline" method="GET" action="{%url 'jobsearch'%}">
+                {% comment %} <form class="form-inline" method="GET" action="{%url 'jobsearch'%}">
                 <div class="col-lg-3">
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for = "jobtitle"></label>
                         <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job">
-                    </div>
+                    </div> 
+
                </div>
                <div class="col-lg-3">
                     <div class="form-group">
@@ -53,7 +56,7 @@
                <div class="col-lg-3">
                     <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button>
                     </div>
-                </form>
+                </form> {% endcomment %}
                <!-- {% comment %} <div class="col-lg-5">
                   <input type="text" class="form-control" placeholder="Web Devloper" aria-label="Recipient's username" aria-describedby="basic-addon2">
                </div>
@@ -66,6 +69,41 @@
                <div class="col-sm-1">
                   <i class="fa fa-search searchIcon" aria-hidden="true"></i>
                </div> {% endcomment %} -->
+               
+
+               <form class="form-inline" method="GET" action="{%url 'search_page'%}" novalidate>
+                  <div class="col-lg-3" >
+                     <div class="form-group ">
+                        <div class='form-control lines'>
+                        {{PostingForm.title}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-3">
+                     <div class="form-group">
+                        <div class="form-control lines">
+                           <div id="locationField">
+                              {{ PostingForm.address }}
+                              {{ PostingForm.geolocation }}
+                              {{ PostingForm.media.js }}
+                           </div>
+                        </div>
+                     </div> 
+                     </div> 
+                     <div class="col-lg-3">
+                     <div class="form-group ">
+                        <label for="jobtype"></label>
+                        <select id="jobtype" class="form-control" name="jobtype" style="margin-right: -0px; border: .5px inset #495057">
+                           <option checkbox>Job Type</option>
+                           {% for jobtypes in jobtypes %}
+                           <option value="{{ jobtypes}}">{{ jobtypes }}</option>
+                           {% endfor %}
+                        </select>
+                     </div> 
+                     </div>
+
+               <button class="btn btn-secondary searchBtn2" type="submit"><i class="fa fa-search"></i> Search</button>
+               </form> 
             </div>
             
             <div class="row" id="candidate" data-tab-content>
@@ -76,8 +114,17 @@
                   </div>
                </div>
                <div class="col-lg-3">
+                  <div clas="form-group">
+                     <div class="form-field">
+                        {% comment %} <div class="iconLocation"><span><i class="fa fa-search "></i></span></div> {% endcomment %}
+                        <input type="text" class="form-control" placeholder="Location" aria-label="Recipient's username"
+                           aria-describedby="basic-addon2">
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-3">
                   <!-- {% comment %} <input type="text" class="form-control" placeholder="Category" aria-label="Recipient's username" aria-describedby="basic-addon2"> {% endcomment %} -->
-                  <div class="form-group" style = "margin-bottom: 0">
+                  <div class="form-group " style = "margin-bottom: 0">
                      <div class="form-field">
                         <div class="select-wrap">
                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -92,15 +139,6 @@
                         </div>
                         </div>
                      </div>
-               </div>
-               <div class="col-lg-3">
-                  <div clas="form-group">
-                     <div class="form-field">
-                        <div class="iconLocation"><span><i class="fa fa-search "></i></span></div>
-                        <input type="text" class="form-control" placeholder="Location" aria-label="Recipient's username"
-                           aria-describedby="basic-addon2">
-                     </div>
-                  </div>
                </div>
                <div class="col-lg-3">
 

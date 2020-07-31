@@ -1,13 +1,8 @@
+import json
 from django import forms
-#from django.forms import ModelForm
 from .models import Jobform
-
-
-
-# class PostingForm(forms.Form):
-#     title = forms.CharField(label='Title', max_length=100)
-#     description = forms.CharField(label='Description', max_length=100, widget=forms.Textarea)
-#     jobtype = forms.ChoiceField(label='Job Type', choices=[('Full Time', 'Full Time'), ('Part Time', 'Part Time'), ('Internship', 'Internship')])
+from django_google_maps import widgets as map_widgets
+from django_google_maps import fields as map_fields
 
 class DateInput(forms.DateInput):
     input_type = "date"
@@ -19,8 +14,6 @@ class DateTimeInput(forms.DateTimeInput):
     input_type = "datetime-local"
 
 class PostingForm(forms.ModelForm):
-
-    #jobtype = forms.ModelChoiceField(queryset=Jobtype.objects, empty_label=None,  widget=forms.RadioSelect)
     class Meta:
         model = Jobform
         fields = "__all__"
@@ -34,13 +27,42 @@ class PostingForm(forms.ModelForm):
             'deadlinetime': 'Deadline Time'
             }
         widgets = {
-            'title': forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. Senior Manager'}),
+            'title': forms.TextInput(attrs={'size':20, 'placeholder': 'e.g. Title'}),
             'description': forms.Textarea(attrs={'rows':10, 'cols':150}),
-            'zipcode': forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. 11111'}),
-            # 'post': DateTimeInput(),
-            # 'deadline': DateTimeInput(),
             'postdate': DateInput(),
             'posttime': TimeInput(),
             'deadlinedate': DateInput(),
             'deadlinetime': TimeInput(),
+            'address': map_widgets.GoogleMapsAddressWidget(attrs={'data-autocomplete-options': json.dumps({'types': ['geocode', 'establishment'], 'componentRestrictions': {'country': 'us'}}), 'size':50,}),
+            'geolocation': map_widgets.GoogleMapsAddressWidget(attrs = {'hidden':True}),
             }
+
+#
+#     #jobtype = forms.ModelChoiceField(queryset=Jobtype.objects, empty_label=None,  widget=forms.RadioSelect)
+#
+#     title = forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. Senior Manager'}),
+#     description = forms.Textarea(attrs={'rows':10, 'cols':150}),
+#     zipcode = forms.TextInput(attrs={'size':150, 'placeholder': 'e.g. 11111'}),
+#     # 'post': DateTimeInput(),
+#     # 'deadline': DateTimeInput(),
+#     postdate = DateInput(),
+#     posttime = TimeInput(),
+#     deadlinedate = DateInput(),
+#     deadlinetime = TimeInput(),
+#
+#     class Meta:
+#         model = Jobform
+#         fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']
+
+class UpdateJobForm(forms.ModelForm):
+    title = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. Senior Manager'}),
+    description = forms.Textarea(attrs={'rows': 10, 'cols': 150}),
+    zipcode = forms.TextInput(attrs={'size': 150, 'placeholder': 'e.g. 11111'}),
+    postdate = DateInput(),
+    posttime = TimeInput(),
+    deadlinedate = DateInput(),
+    deadlinetime = TimeInput(),
+
+    class Meta:
+        model = Jobform
+        fields = ['title', 'description', 'jobtype', 'postdate', 'deadlinedate', 'posttime', 'deadlinetime']

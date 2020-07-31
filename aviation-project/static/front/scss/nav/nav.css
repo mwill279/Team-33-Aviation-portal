@@ -1,48 +1,68 @@
 body {
-  transition: transform 0.3s ease; }
+  transition: 0.3s ease; }
 
 .navbar {
-  background-color: #2962ff; }
+  background-color: #f6f9ff; }
 
 #expandToggle.show-nav {
-  transition: transform 0.25s ease;
-  width: 10%; }
-
-.sideNav ul li:hover, .navToggle ul li:hover {
-  background-color: #1F52DD;
-  padding-left: -20px; }
+  transition-property: width;
+  width: 200px; }
 
 .expandToggle {
   margin-left: -16px;
   position: fixed;
-  height: 100%; }
+  height: 100%;
+  background-color: #17a2b8;
+  transition: transform 0.3s ease; }
   .expandToggle ul {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    background-color: #2962ff;
-    transition: transform 0.25s ease;
-    width: 200px;
-    list-style-type: none; }
+    transition: transform 0.3s ease;
+    transition-property: width;
+    width: 65px;
+    list-style-type: none;
+    margin-top: 17px; }
     .expandToggle ul .icon {
       color: white;
-      margin-right: 20px; }
+      margin-right: 40px;
+      font-size: 23px; }
       .expandToggle ul .icon span {
+        margin-left: 20px;
         font-size: 17px !important;
         font-family: 'Lato', sans-serif; }
   .expandToggle ul li {
-    padding-top: 20px;
-    padding-bottom: 20px; }
+    padding-top: 25px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap; }
+    .expandToggle ul li a {
+      margin-left: 20px; }
+  .expandToggle ul li:hover {
+    background-color: #108EA2; }
   .expandToggle ul li a {
     color: #fff;
-    text-decoration: none; }
+    text-decoration: none;
+    text-align: center;
+    align-items: center; }
   .expandToggle ul li a:hover {
     text-decoration: none; }
 
 .toggle {
-  background-color: white;
+  background-color: #17a2b8;
+  color: white;
   position: fixed;
+  padding: .6rem 1rem;
   z-index: 1000;
-  top: 20px;
-  left: 200px; }
+  font-size: 25px;
+  border: none;
+  top: 15px;
+  left: 5px;
+  border-radius: 2rem; }
+  .toggle :active {
+    text-decoration: none; }
 
 .container {
   padding: 15px;

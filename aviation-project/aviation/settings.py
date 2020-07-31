@@ -25,6 +25,8 @@ SECRET_KEY = 'rrx$k-_mbwtli=dl)t9!0ec8lp++m5c31lle1k06rch1mxad0l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+GOOGLE_MAPS_API_KEY = "AIzaSyCnsDSxDFykyo-hbESQOuY7A7wnavW-7Ps"
+
 ALLOWED_HOSTS = []
 
 
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'users.apps.UsersConfig',
-
+    'django_google_maps',
+    'mapbox_location_field',
     'crispy_forms',
     'social_django',
     'postjob',
@@ -99,13 +102,37 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 #     }
 # }
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'gis',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
+#         'HOST': 'ajbdb.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'aviation',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'password', #Put the password that you used for PostrgeSQL
-        'HOST': 'localhost',
+        'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
+        'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -154,7 +181,6 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -167,7 +193,7 @@ EMAIL_USE_TLS = True
 
 # this is a gmail account I temporarily created for this project
 EMAIL_HOST_USER = 'aviationjobboard@gmail.com'
-EMAIL_HOST_PASSWORD = 'ajbpass1029'
+EMAIL_HOST_PASSWORD = '' #I temporarily removed the password
 
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86598zr5xlzp1g'
@@ -182,4 +208,4 @@ STATICFILES_FINDERS = (
 
 )
 
-MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+LOGIN_REDIRECT_URL = 'home'

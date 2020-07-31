@@ -1,17 +1,18 @@
 {
   "ExpandedNodes": [
     "",
-    "\\aviation",
-    "\\aviation_job_board",
     "\\aviation_portal",
-    "\\static",
-    "\\static\\front",
-    "\\static\\front\\scss",
-    "\\static\\front\\scss\\landing",
+    "\\aviation_portal\\migrations",
+    "\\aviation_portal\\migrations\\__pycache__",
+    "\\templates",
+    "\\userProfile",
+    "\\userProfile\\templates",
+    "\\userProfile\\templates\\userProfile",
     "\\users",
     "\\users\\templates",
+    "\\users\\templates\\userProfile",
     "\\users\\templates\\users"
   ],
-  "SelectedNode": "\\users\\templates\\users\\login.html",
+  "SelectedNode": "\\users\\templates\\users\\review.html",
   "PreviewInSolutionExplorer": false
 }
