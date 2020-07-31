@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, CompanyRegisterForm, CompanyUpdateForm, CompanyProfileForm
+from .forms import UserRegisterForm, UserUpdateForm, CompanyRegisterForm, CompanyUpdateForm, CompanyProfileForm, ApplicationForm
 from django.core.files.storage import FileSystemStorage
 from pyresparser import ResumeParser
 from django.conf import settings
@@ -353,8 +353,10 @@ def trysearch(request):
 @login_required()
 @allowed_users(allowed_roles=['jobseeker'])
 def applyjob(request):
-    applications = applicationStatus.objects.filter(username = request.user.username)
-    return render(request, 'applyjob.html')
+    new_form = ApplicationForm
+    new_form.save()
+    new_form = ApplicationForm
+    return render(request, 'applyjob.html', {'form': new_form} )
 
 
 ######################################################################################################################################################################################
