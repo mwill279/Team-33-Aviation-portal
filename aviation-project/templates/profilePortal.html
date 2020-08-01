@@ -58,6 +58,7 @@
             <a class="nav-link" href="#">Contact</a>
           </li> {% endcomment %}
 
+        {% if request.get_full_path == "/search/" %}
       <div class="form-inline mx-auto">
       <div class="input-group" style="margin-right: 70px">
          <div class="input-group-prepend"> 
@@ -75,6 +76,7 @@
       </div>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
    </div>
+    {% endif %}
           {% if user.is_authenticated %}
             {% comment %} <li class="nav-item">
               <a class="nav-link" href="{% url 'userProfile-home' %}">Profile</a>

@@ -1,14 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404
 from .forms import PostingForm, UpdateJobForm
 from postjob.models import Jobform, Jobtype
 from datetime import timedelta, date, datetime
 import math
+from users.models import CompanyProfile as cp
 # Create your views here.
 
 def posting(request):
+    companyid = request.GET.get('company')
+    company = cp.objects.get(id=companyid)
     if request.method == 'POST':
         filled_form = PostingForm(request.POST)
+        filled_form.fields["company"].initial=company.id
         error = ''
         if filled_form.is_valid():
             if filled_form.cleaned_data['postdate'] > filled_form.cleaned_data['deadlinedate']:
@@ -19,12 +23,14 @@ def posting(request):
                 filled_form.save()
                 note = '%s Posting has been submitted!!' %(filled_form.cleaned_data['title'],)
                 new_form = PostingForm()
-                return render(request, 'post_job.html', {'postingform':new_form, 'note':note})
+                new_form.fields["company"].initial=company.id
+                return render(request, 'post_job.html', {'postingform':new_form, 'note':note, 'company':company,})
             else:
-                return render(request, 'post_job.html', {'postingform':filled_form, 'error':error})
+                return render(request, 'post_job.html', {'postingform':filled_form, 'error':error, 'company':company,})
     else: 
         form = PostingForm()
-        return render(request, 'post_job.html', {'postingform':form,})
+        form.fields["company"].initial=company.id
+        return render(request, 'post_job.html', {'postingform':form, 'company':company,})
 
 def calculate_miles(search_lat, search_lon, lat, lon):
     earth_radius = 6371
@@ -110,10 +116,17 @@ def jobsearch(request):
 
         listjobs = [r.id for r in results if calculate_miles(searchlat, searchlon, float(str(r.geolocation).split(",")[0]), float(str(r.geolocation).split(",")[1])) <= float(distance)]
         results = results.filter(id__in=listjobs)
-    if job_id is not None:
-        job = Jobform.objects.get(id = job_id)
+
+    if not results.exists():
+        raise Http404('There are no Open jobs that match this search')
     else:
-        job = results.order_by("id")[0]
+        if job_id is not None:
+            job = Jobform.objects.get(id = job_id)
+        else:
+            job = results.order_by("id")[0]
+    
+    
+    
     return render(request, 'search.html', {'results': results, 'jobtypes':jobtypes, 'PostingForm':form, "count":jobPostCount(results),'job': job,})
 
 def job_detail(request, job_id):
@@ -125,8 +138,21 @@ def job_detail(request, job_id):
 
 
 def searchpage(request, *args, **kwargs):
-    results = Jobform.objects.all()
-    return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
+	results = Jobform.objects.all()
+	print('here')
+	if request.method == 'POST' and 'company' in request.POST:
+		request.session['companyUsername'] = request.POST['company']
+		print(request.POST['company'])
+	
+	return render(request, "search.html", {'results': results, "count":jobPostCount(results)})
+
+def userviewcompany(request, company_id):
+    try:
+        company = cp.objects.get(id=company_id)
+    except company.DoesNotExist:
+        raise Http404('There are no Open jobs that match this search')
+    
+    return render(request, "userViewCompany.html", {'company': company})
 
 
 

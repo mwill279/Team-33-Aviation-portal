@@ -9,7 +9,7 @@ from django.conf import settings
 import os
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Users, CompanyProfile
+from .models import Users, CompanyProfile, Skill
 from .models import workExperience
 from .models import educationExperience
 from .models import applicationStatus
@@ -148,12 +148,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
-    # jobs = Jobform.objects.filter(user=request.user)
+    #jobs = Jobform.objects.filter(company=request.user)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
-        # 'jobs': jobs
+        #'jobs': jobs
     }
 
     return render(request, 'users/company_profile.html', context)
@@ -315,7 +315,7 @@ def jobseeker_profile_view(request):
         email = request.POST['email']
         phone = request.POST['phone']
         address = request.POST['address']
-        thisuser = Users.objects.filter(Username = request.user.username).update(name = fullname, nickName = nickname, Email = email, phoneNumber = phone, Address = address)
+        thisuser = Users.objects.filter(Username = request.user.username).update(name = fullname, nickName = nickname, Email = email, phoneNumber = phone, address = address)
         thatuser = User.objects.get(username = request.user.username, password = request.user.password)
         thatuser.email = email
         thatuser.save()
@@ -367,40 +367,6 @@ def applyjob(request):
 ######################################################################################################################################################################################
 ######################################################################################################################################################################################
 
-def changepassword(request):
-    if request.method == 'POST':
-        oldpassword = request.POST['oldpass']
-        newpass1 = request.POST['newpass1']
-        newpass2 = request.POST['newpass2']
-
-        if request.user.is_authenticated:
-            thisuser = User.objects.get(username = request.user.username, password = request.user.password)
-            #print(thisuser.username + "   " + thisuser.password)
-            if thisuser is not None:
-                print('user exists')
-                if newpass1 == newpass2:
-                    if len(newpass2) >= 6:
-                        if any(c.isalpha() for c in newpass2):
-                            #print('password matches')
-                            #thisuser.set_password(newpass2)
-                            thisuser.set_password(newpass2)
-                            thisuser.save()
-                            return redirect('/signin')
-                        else:
-                            messages.info(request, 'password must contain letter')
-                            return redirect('/changepassword')
-                    else:
-                        messages.info(request, 'password too short')
-                        return redirect('/changepassword')
-                else:
-                    messages.info(request, 'confirm password not match')
-                    return redirect('/changepassword')
-            else:
-                messages.info(request, 'password incorrect')
-                return redirect('/changepassword')
-    else:
-        return render(request, 'userProfile/changepassword.html')
-
 
 def addWorkingExperience(request):
     if request.method == 'POST':
@@ -447,64 +413,7 @@ def addEducationExperience(request):
 def about(request):
     return render (request, 'userProfile/profile2.html')
 
-def signup(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        name = request.POST['name']
-        nickname = request.POST['nickname']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        address = request.POST['address']
-        if User.objects.filter(username = username).exists():
-            print('username taken')
-            messages.info(request, 'username taken')
-            return redirect('/signup')
-        else:
-            if len(password) >= 6:
-                if any(c.isalpha() for c in password):
-                    authuser = User.objects.create_user(username = username, password = password, email = email)
-                    authuser.save()
-                    user = Users(Username = username, name = name, nickName = nickname, Email = email, phoneNumber = phone, Address = address)
-                    user.save()
-                    return redirect('/signin')
-                else:
-                    messages.info(request, 'password must contain letter')
-                    return redirect('/signup')
-            else:
-                messages.info(request, 'password too short')
-                return redirect('/signup')
-    else:
-        return render (request, 'userProfile/signup.html')
 
-# @unauthenticated_user
-def signin(request):
-    if request.method == 'POST':
-        un = request.POST['username']
-        pw = request.POST['password']
-        authuser = auth.authenticate(username = un, password = pw)
-
-        if authuser is not None:
-            auth.login(request, authuser)
-            return redirect('/userprofile')
-
-        else:
-            messages.info(request, 'password or username invalid')
-            return redirect('/signin')
-    else:
-        return render (request, 'userProfile/signin.html')
-
-def upload(request):
-    if request.method == 'POST':
-        name = request.POST.get('username')
-        avatar = request.FILES.get('avatar')
-
-        with open(avatar.name,'wb') as f:
-            for line in avatar:
-                f.write(line)
-        return HttpResponse('ok')
-
-    return render(request,'userProfile/upload.html')
 
 #
 # def redirect(request):

@@ -1,7 +1,9 @@
 {% extends "profilePortal.html"%}
 {% comment %} {% extends "searchBase.html" %} {% endcomment %}
 {% block content %}
+{% csrf_token %}
 <script>
+
 </script>
 
 <form method="GET" action="{%url 'search_page'%}" novalidate>
@@ -58,7 +60,7 @@
                            <input class="jobTypeChk" id="tempChk" type="checkbox" aria-label="Checkbox for following text input" name="Temporary">
                            <a  class="jobTypeChkLabel">Temporary</a>
                         </div>
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" onclick="saveFilters();"/>
                      </div>
                   </div>
 
@@ -223,6 +225,7 @@
                   </div>
                </div>
                <div class="row">
+               {{ no_jobs }}
                   <div class="col-md-4">
                      <h3>
                         {{job.company.name}}
@@ -237,7 +240,10 @@
                   <div class="col-md-8 my-auto" align="center">
                      <button type="button" class="btn btn-info" style="margin: 10px">Apply Now</button>
                      <button type="button" class="btn btn-info" style="margin: 10px">Favorite</button>
-                     <button type="button" class="btn btn-info" style="margin: 10px">Company Page</button>
+
+                     
+					 
+                     <a href = "{%url 'userviewcompany' job.company.id%}" class="btn btn-info" style="margin: 10px; text-decoration: none; color: white">Company Page</a><br/>
                   </div>
                </div>
                <div class="row">
