@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import CompanyProfile
+from .models import CompanyProfile, applicationInfo
 from django.contrib.auth.forms import UserCreationForm
 
 class UserRegisterForm(UserCreationForm):
@@ -32,7 +32,7 @@ class CompanyUpdateForm(forms.ModelForm):
 
     class Meta:
         model = CompanyProfile
-        fields = ['image', 'banner', 'name', 'phoneNumber', 'address',
+        fields = ['image', 'banner','name', 'phoneNumber', 'address',
                   'company_description']
 
 class CompanyProfileForm(forms.ModelForm):
@@ -45,3 +45,8 @@ class CompanyProfileForm(forms.ModelForm):
         model = CompanyProfile
         fields = ['name', 'phoneNumber', 'address',
                   'company_description']
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = applicationInfo
+        fields = "__all__"

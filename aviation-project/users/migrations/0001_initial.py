@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import django_google_maps.fields
 
 
 class Migration(migrations.Migration):
@@ -14,6 +15,18 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='applicationinfo',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('Email', models.CharField(max_length=40)),
+                ('Username', models.CharField(max_length=20)),
+                ('name', models.CharField(blank=True, max_length=40)),
+                ('address', django_google_maps.fields.AddressField(blank=True, max_length=200)),
+                ('geolocation', django_google_maps.fields.GeoLocationField(blank=True, max_length=100)),
+                ('phoneNumber', models.CharField(blank=True, max_length=15)),
+            ],
+        ),
         migrations.CreateModel(
             name='applicationStatus',
             fields=[
@@ -61,7 +74,12 @@ class Migration(migrations.Migration):
                 ('Email', models.CharField(max_length=40)),
                 ('Username', models.CharField(max_length=20)),
                 ('name', models.CharField(blank=True, max_length=40)),
+<<<<<<< HEAD
                 ('address', models.CharField(blank=True, max_length=40)),
+=======
+                ('address', django_google_maps.fields.AddressField(blank=True, max_length=200)),
+                ('geolocation', django_google_maps.fields.GeoLocationField(max_length=100)),
+>>>>>>> 07f8dfda2bde4f8cbd7106ff5bf89e16c426e0b0
                 ('phoneNumber', models.CharField(blank=True, max_length=15)),
                 ('nickName', models.CharField(blank=True, max_length=20)),
                 ('password', models.CharField(blank=True, max_length=40)),
@@ -85,7 +103,8 @@ class Migration(migrations.Migration):
                 ('banner', models.ImageField(default='boeing_logo.jpg', upload_to='company_logos')),
                 ('name', models.CharField(blank=True, max_length=40, verbose_name='Company Name')),
                 ('phoneNumber', models.CharField(blank=True, max_length=15)),
-                ('address', models.CharField(blank=True, max_length=40, verbose_name='Address')),
+                ('address', django_google_maps.fields.AddressField(blank=True, max_length=200)),
+                ('geolocation', django_google_maps.fields.GeoLocationField(max_length=100)),
                 ('company_description', models.CharField(blank=True, max_length=500, verbose_name="Company's Description")),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
