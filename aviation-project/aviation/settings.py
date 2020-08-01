@@ -113,8 +113,8 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 #         'PORT': '5432'
 #     }
 # }
-
-# DATABASES = {
+########################OLD AWS#########################
+# DATABASES = { 
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'postgres',
@@ -125,14 +125,25 @@ WSGI_APPLICATION = 'aviation.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
+#         'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
+#NEW AWS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'aviationpass', #Put the password that you used for PostrgeSQL
-        'HOST': 'ajb-db.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
+        'HOST': 'database-1.cw3uaamzkbuc.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
