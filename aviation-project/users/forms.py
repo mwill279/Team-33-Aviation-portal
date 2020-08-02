@@ -43,7 +43,7 @@ class CompanyProfileForm(forms.ModelForm):
 
     class Meta:
         model = CompanyProfile
-        fields = ['name', 'phoneNumber', 'address',
+        fields = ['name', 'banner', 'phoneNumber', 'address',
                   'company_description']
 
 class ApplicationForm(forms.ModelForm):

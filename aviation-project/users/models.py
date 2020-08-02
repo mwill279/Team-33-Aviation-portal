@@ -32,7 +32,7 @@ class CompanyProfile(models.Model):
 	banner = models.ImageField(default='boeing_logo.jpg', upload_to='company_logos')
 	name = models.CharField('Company Name', max_length=40, blank=True)
 	phoneNumber = models.CharField(max_length=15, blank=True)
-	Address = models.CharField(max_length=40, blank=True)
+	address = models.CharField(max_length=200, blank=True)
 	company_description = models.CharField('Company\'s Description', max_length=500, blank=True)
 
 	def __str__(self):
@@ -42,7 +42,7 @@ class Users (models.Model):
 	Email = models.CharField(max_length = 40)
 	Username = models.CharField(max_length = 20)
 	name = models.CharField(max_length = 40, blank = True)
-	Address = models.CharField(max_length=40, blank=True)
+	address = models.CharField(max_length=200, blank=True)
 	phoneNumber = models.CharField(max_length = 15, blank = True)
 	nickName = models.CharField(max_length = 20, blank = True)
 	password = models.CharField(max_length = 40, blank = True)
@@ -75,5 +75,5 @@ class applicationStatus (models.Model):
 class applicationInfo (models.Model):
 	Email = models.CharField(max_length = 40)
 	name = models.CharField(max_length = 40, blank = True)
-	Address = models.CharField(max_length=40, blank=True)
+	address = models.CharField(max_length=200, blank=True)
 	phoneNumber = models.CharField(max_length = 15, blank = True)
