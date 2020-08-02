@@ -22,6 +22,7 @@ perform certain actions/tasks depending on whether they are a "jobseeker" a pers
 in the aviation industry. We hope our project will enhance itself as its scales in size with the more users that are on our site adding to the job searching 
 and job posting experience.
 <br>
+<br>
 When a user first access our site he is an unauthorized user that can only view the home page and see the features that are available such as searching for jobs
 or searching for candidates. If the unauthorized user would like to access these features he first must decide what type of user he wants to belong to a "jobseeker"
 or a "company_owner". A jobseeker is recommended for those who want to search and apply for jobs, while a company_owner is for those business owning individuals who
@@ -29,4 +30,4 @@ want to post jobs. Jobseekers have the option to register for a new user or log 
 profile picture from their LinkedIn page. Once a user has been registered they're able to login and have their selected profile page and interface customized to
 them and the user group (jobseeker or company_owner) they belong to.
 <br>
-
+<br>
