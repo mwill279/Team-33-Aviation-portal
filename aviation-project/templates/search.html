@@ -1,12 +1,13 @@
-{% extends "searchBase.html" %}
+{% extends "profilePortal.html"%}
+{% comment %} {% extends "searchBase.html" %} {% endcomment %}
 {% block content %}
 {% csrf_token %}
 <script>
 
 </script>
-<form method="GET" action="{%url 'search_page'%}" novalidate>
 
-<nav class="navbar navbar-light bg-white" style="margin-bottom: 40px">
+<form method="GET" action="{%url 'search_page'%}" novalidate>
+{% comment %} <nav class="navbar navbar-light bg-white" style="margin-bottom: 40px">
    <div class="form-inline mx-auto">
       <div class="input-group" style="margin-right: 70px">
          <div class="input-group-prepend"> 
@@ -24,15 +25,15 @@
       </div>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
    </dic>
-</nav>
+</nav> {% endcomment %}
 <div class="container-fluid">
    <div class="row">
-      <div class="col-md-2 ">
-      </div>
-      <div class="col-md-8 ">
-         <div class="row" style="margin-bottom: 5px">
+      {% comment %} <div class="col-md-2 ">
+      </div> {% endcomment %}
+      <div class="col-md-8 " style="margin: 0 auto">
+         <div class="row" style="margin-bottom: 5px; margin-top:50px">
             <div class="col-md-12 " style="padding: 0">
-               <ul class="nav bg-white" style="padding: 5px; border-radius: 10px">
+               <ul class="nav bg-white" style="padding: 5px; border-radius: 10px; margin-bottom:15px">
                   <div class="dropdown">
                      <button class="btn dropDownMenu" type="button" id="job-type-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropDownMenuHeader menuHeader1">Job Type</div>

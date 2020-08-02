@@ -55,7 +55,6 @@ class workExperience (models.Model):
 	company = models.CharField(max_length = 30)
 	comment = models.CharField(max_length = 150)
 	Username = models.CharField(max_length = 20)
-
 	
 class educationExperience (models.Model):
 	title = models.CharField(max_length = 40)

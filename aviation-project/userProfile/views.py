@@ -134,9 +134,12 @@ def signin(request):
 		pw = request.POST['password']
 		authuser = auth.authenticate(username = un, password = pw)
 		
+		#login
 		if authuser is not None: 
 			auth.login(request, authuser)
+			message.success(request, 'You are now logged in')
 			return redirect('/userprofile')
+			# return redirect('dashboard')
 			
 		else:
 			messages.info(request, 'password or username invalid')

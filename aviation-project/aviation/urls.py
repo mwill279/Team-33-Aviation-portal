@@ -107,12 +107,12 @@ urlpatterns = [
     
     path('userprofile/', user_views.jobseeker_profile_view, name = 'userProfile-home'),
     path('about/', user_views.about, name = 'userProfile-about'),
-    path('signup/', user_views.signup, name = 'userProfile-signup'),
+    # path('signup/', user_views.signup, name = 'userProfile-signup'),
     path('addwork/', user_views.addWorkingExperience, name = 'userProfile-addwork'),
     path('addeducation/', user_views.addEducationExperience, name = 'userProfile-addeducation'),
-    path('signin/', user_views.signin, name = 'userProfile-signin'),
-    path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
-    path('upload/', user_views.upload, name = 'userProfile-upload'),
+    # path('signin/', user_views.signin, name = 'userProfile-signin'),
+    # path('changepassword/', user_views.changepassword, name = 'userProfile-changepassword'),
+    # path('upload/', user_views.upload, name = 'userProfile-upload'),
     path('trysearch/', user_views.trysearch, name='trysearch'),
     path('applyjob/', user_views.applyjob, name='applyjob'),
     

@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% load sass_tags %}
+
 {% load crispy_forms_tags %}
 {% block content %}
-
+<head>
+<link href="{% sass_src '../static/front/scss/company/company.scss' %}" rel="stylesheet" type="text/css" />
+</head>
 <style>
     .card {
 
