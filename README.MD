@@ -9,9 +9,7 @@ Developed By: <br>
 + **Sebastian Rodriguez**<br>
 + **Malachi Williams**<br>
 + **Tinghui Zhang**<br>
-<br>
-Product Owner: **Masoud Sadjadi**<br>
-
+Product Owner: Masoud Sadjadi<br>
 ---
 Florida International University<br>
 School of Computing and Information Sciences<br>
