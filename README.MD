@@ -17,4 +17,7 @@ School of Computing and Information Sciences<br>
 Senior Project<br>
 
 ## Description:
-Our project is a job board web application that will cater specifically to the airline industry. This site allows for two different types of users to perform
+Our project is a job board web application that will cater specifically to the aviation industry. This site allows for two different types of users to <br>
+perform certain actions/tasks depending on whether they are a "jobseeker" a person looking for a job, or a "company_owner" a person who own an a business <br>
+in the aviation industry. We hope our project will enhance itself as its scales in size with the more users that are on our site adding to the job searching <br> 
+and job posting experience
