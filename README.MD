@@ -47,6 +47,7 @@ abilities than a jobseeker, they're able to post jobs, and review the applicatio
 
 ## Prerequisites:
 You will need to have python installed, and have a working web browser (your preference). Next you will want to install the latest version of Django.
+PostgreSQL needs to also be installed with pgAdmin in order to handle the database.
 
 ## Installation:
 ```bash
