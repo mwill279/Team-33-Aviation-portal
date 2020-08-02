@@ -44,3 +44,8 @@ such information such as the company's name, address, phone number, etc. A compa
 be redirected to their company profile page, here they have the ability to update/edit their company page as they please. Also, company owner have different 
 abilities than a jobseeker, they're able to post jobs, and review the application from the jobseekers that applied to their jobs.
 <br>
+<br>
+##Prerequisites:
+You will need to have python installed, and have a working web browser (your preference). Next you will want to install the latest version of Django.
+<br>
+##Installation:
