@@ -17,6 +17,7 @@ School of Computing and Information Sciences<br>
 Senior Project<br>
 
 ## Description:
+---
 Our project is a job board web application that will cater specifically to the aviation industry. This site allows for two different types of users to
 perform certain actions/tasks depending on whether they are a "jobseeker" a person looking for a job, or a "company_owner" a person who own an a business
 in the aviation industry. We hope our project will enhance itself as its scales in size with the more users that are on our site adding to the job searching 
@@ -45,6 +46,8 @@ be redirected to their company profile page, here they have the ability to updat
 abilities than a jobseeker, they're able to post jobs, and review the application from the jobseekers that applied to their jobs.
 
 ##Prerequisites:
+---
 You will need to have python installed, and have a working web browser (your preference). Next you will want to install the latest version of Django.
 
 ##Installation:
+---
