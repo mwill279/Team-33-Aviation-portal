@@ -1,8 +1,8 @@
 # Job Portal Aviation
 
 Developed By: <br>
-+ **Carlos Debasa**<br>
 + **Eric Bazan**<br>
++ **Carlos Debasa**<br>
 + **Joel Echagarrua**<br>
 + **Dany Franco**<br>
 + **Ryan Pineyro**<br>
@@ -30,4 +30,17 @@ want to post jobs. Jobseekers have the option to register for a new user or log 
 profile picture from their LinkedIn page. Once a user has been registered they're able to login and have their selected profile page and interface customized to
 them and the user group (jobseeker or company_owner) they belong to.
 <br>
+<br>
+If a user decides to go the jobseeker route then they will be provided with the ability to have the site be the best job searching utility for them. Jobseekers
+upon logging in are sent to the job search page where they can search for any job, and are presented with many filter and sorting options to enhance their job
+searching experience. Once a jobseeker clicks on the job they'd like to view they can see the job as well as the information provided by the company owner that
+posted the job. Also, the jobseeker is provided with a few options that inlcude applying for the job, and/or viewing the company profile of the owner of that 
+business. In addition, if a jobseeker wants to update/edit their profile they can do so; changing such fields such as their profile pic, adding work experience,
+and editing their skills. Lastly, jobseekers are able to submit their resumes and have our third-party API scan and retrieve the skills from their resume.
+<br>
+<br>
+Furthermore,  if a user decides to take the alternative route and become a company owner he can do so, and his profile page will differ from a jobseeker and include
+such information such as the company's name, address, phone number, etc. A company owner page will differ from a jobseeker, once a company owner logs in they will
+be redirected to their company profile page, here they have the ability to update/edit their company page as they please. Also, company owner have different 
+abilities than a jobseeker, they're able to post jobs, and review the application from the jobseekers that applied to their jobs.
 <br>
