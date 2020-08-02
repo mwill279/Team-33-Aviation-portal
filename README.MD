@@ -49,3 +49,17 @@ abilities than a jobseeker, they're able to post jobs, and review the applicatio
 You will need to have python installed, and have a working web browser (your preference). Next you will want to install the latest version of Django.
 
 ## Installation:
+```bash
+pip install wheel libsass django-sass-processor django-google-maps django-mapbox-location-field django-crispy-forms social-auth-app-django psycopg2-binary pyresparser Pillow nltk
+```
+
+## Usage:
+```bash
+python manage.py runserver
+```
+
+## License
+This was a Florida International University Senior Project for Computer Science
+
+## Project Status
+May continue working on this project...
