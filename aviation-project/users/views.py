@@ -13,6 +13,7 @@ from .models import Users, CompanyProfile, Skill
 from .models import workExperience
 from .models import educationExperience
 from .models import applicationStatus
+from postjob.models import Jobform
 from django.shortcuts import get_object_or_404
 import datetime
 from .decorators import unauthenticated_user, allowed_users
@@ -148,12 +149,12 @@ def company_profile(request):
 
 
     company_profile = CompanyProfile.objects.get(user_id=request.user.id)
-    #jobs = Jobform.objects.filter(company=request.user)
+    jobs = Jobform.objects.filter(company=company_profile.id)
     context = {
         'u_form': u_form,
         'cp_Update_form': cp_Update_form,
         'company_profile': company_profile,
-        #'jobs': jobs
+        'jobs': jobs,
     }
 
     return render(request, 'users/company_profile.html', context)

@@ -8,11 +8,9 @@ from users.models import CompanyProfile as cp
 # Create your views here.
 
 def posting(request):
-    companyid = request.GET.get('company')
-    company = cp.objects.get(id=companyid)
+    
     if request.method == 'POST':
         filled_form = PostingForm(request.POST)
-        filled_form.fields["company"].initial=company.id
         error = ''
         if filled_form.is_valid():
             if filled_form.cleaned_data['postdate'] > filled_form.cleaned_data['deadlinedate']:
@@ -21,16 +19,14 @@ def posting(request):
                 error = error + 'Error the minimum salary has to be less than or equal to the maximum \n'
             if error == '':
                 filled_form.save()
-                note = '%s Posting has been submitted!!' %(filled_form.cleaned_data['title'],)
-                new_form = PostingForm()
-                new_form.fields["company"].initial=company.id
-                return render(request, 'post_job.html', {'postingform':new_form, 'note':note, 'company':company,})
+                return redirect('company_profile')
             else:
-                return render(request, 'post_job.html', {'postingform':filled_form, 'error':error, 'company':company,})
+                return render(request, 'post_job.html', {'postingform':filled_form, 'error':error,})
     else: 
+        companyid = request.GET.get('company')
         form = PostingForm()
-        form.fields["company"].initial=company.id
-        return render(request, 'post_job.html', {'postingform':form, 'company':company,})
+        form.fields["company"].initial=companyid
+        return render(request, 'post_job.html', {'postingform':form,})
 
 def calculate_miles(search_lat, search_lon, lat, lon):
     earth_radius = 6371
