@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rrx$k-_mbwtli=dl)t9!0ec8lp++m5c31lle1k06rch1mxad0l'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-GOOGLE_MAPS_API_KEY = "AIzaSyCnsDSxDFykyo-hbESQOuY7A7wnavW-7Ps"
+GOOGLE_MAPS_API_KEY = ""
 
 ALLOWED_HOSTS = []
 
@@ -203,12 +203,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # this is a gmail account I temporarily created for this project
-EMAIL_HOST_USER = 'aviationjobboard@gmail.com'
+EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = '' #I temporarily removed the password
 
 
-SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86598zr5xlzp1g'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'fCzfd2ZIMxZAsgH5'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = ''
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
 
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "static")
 
